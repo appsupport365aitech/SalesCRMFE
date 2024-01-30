@@ -1,4 +1,3 @@
-import { API_DOMAIN } from "@/constants/api";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
