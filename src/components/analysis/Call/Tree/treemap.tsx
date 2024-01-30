@@ -30,26 +30,25 @@ const SoleChart = ({ i, title, w, data }: any) => {
 };
 
 const Charts = ({ data1 }: any) => {
-
   const data = [
     [
       {
         data: [
           {
             x: "Call Purpose",
-            y: data1.call_purpose,
+            y: data1?.call_purpose,
           },
           {
             x: "Compnay Intro",
-            y: data1.company_intro,
+            y: data1?.company_intro,
           },
           {
             x: "Self Credentialing",
-            y: data1.self_credentialing,
+            y: data1?.self_credentialing,
           },
           {
             x: "Voice Mail",
-            y: data1.voice_mail,
+            y: data1?.voice_mail,
           },
         ],
       },
@@ -59,15 +58,15 @@ const Charts = ({ data1 }: any) => {
         data: [
           {
             x: "Real time cues",
-            y: data1.real_time_cues,
+            y: data1?.real_time_cues,
           },
           {
             x: "Post Call Analytics",
-            y: data1.post_call_analytics,
+            y: data1?.post_call_analytics,
           },
           {
             x: "Integration",
-            y: data1.integration,
+            y: data1?.integration,
           },
         ],
       },
@@ -77,15 +76,15 @@ const Charts = ({ data1 }: any) => {
         data: [
           {
             x: "Open Ended",
-            y: data1.open_ended,
+            y: data1?.open_ended,
           },
           {
             x: "Sales Coaching",
-            y: data1.sales_coaching,
+            y: data1?.sales_coaching,
           },
           {
             x: "Sales Visibility",
-            y: data1.sales_visibility,
+            y: data1?.sales_visibility,
           },
         ],
       },
@@ -95,23 +94,23 @@ const Charts = ({ data1 }: any) => {
         data: [
           {
             x: "Dialer",
-            y: data1.dialer,
+            y: data1?.dialer,
           },
           {
             x: "Revenue Potential",
-            y: data1.revenue_potential,
+            y: data1?.revenue_potential,
           },
           {
             x: "CRM",
-            y: data1.CRM,
+            y: data1?.CRM,
           },
           {
             x: "Web Conferencing",
-            y: data1.web_conferencing,
+            y: data1?.web_conferencing,
           },
           {
             x: "Decision Maker",
-            y: data1.decision_maker,
+            y: data1?.decision_maker,
           },
         ],
       },
@@ -121,27 +120,27 @@ const Charts = ({ data1 }: any) => {
         data: [
           {
             x: "Better Sales Visibility",
-            y: data1.better_sales_visibility,
+            y: data1?.better_sales_visibility,
           },
           {
             x: "Conversion rate",
-            y: data1.conversion_rate,
+            y: data1?.conversion_rate,
           },
           {
             x: "Improved Customer Experience",
-            y: data1.improved_customer_experience,
+            y: data1?.improved_customer_experience,
           },
           {
             x: "Ramp Time",
-            y: data1.ramp_time,
+            y: data1?.ramp_time,
           },
           {
             x: "Actionable Insights",
-            y: data1.actionable_insights,
+            y: data1?.actionable_insights,
           },
           {
             x: "Data Driven Coaching",
-            y: data1.data_driven_coaching,
+            y: data1?.data_driven_coaching,
           },
         ],
       },
@@ -151,31 +150,31 @@ const Charts = ({ data1 }: any) => {
         data: [
           {
             x: "Trial",
-            y: data1.trail,
+            y: data1?.trail,
           },
           {
             x: "Next Steps",
-            y: data1.next_steps,
+            y: data1?.next_steps,
           },
           {
             x: "Email",
-            y: data1.email,
+            y: data1?.email,
           },
           {
             x: "Zoom Demo",
-            y: data1.zoom_demo,
+            y: data1?.zoom_demo,
           },
           {
             x: "Meeting",
-            y: data1.meeting,
+            y: data1?.meeting,
           },
           {
             x: "Closure",
-            y: data1.closure,
+            y: data1?.closure,
           },
           {
             x: "Call",
-            y: data1.call,
+            y: data1?.call,
           },
         ],
       },
