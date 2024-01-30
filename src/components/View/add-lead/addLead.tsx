@@ -68,7 +68,10 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
   const submit = () => {
     setLoading(true);
     const payload = {
-      leadDetails: { ...leadData, created_by: localStorage.getItem("user-name") || "Sales User" },
+      leadDetails: {
+        ...leadData,
+        created_by: localStorage.getItem("user-name") || "Sales User",
+      },
       companyDetails: companyData,
       contactDetails: {
         contactData: contactData,
@@ -80,11 +83,16 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
         (contact) => Object.keys(contact).length > 0
       );
     // return;
-    axios.post(`${API_DOMAIN}/api/leads/create`, payload, { headers: { Authorization: accessToken } }).then((e) => {
-      setLoading(false);
-      router.reload();
-      cancel();
-    }).catch((e: any) => { });
+    axios
+      .post(`${API_DOMAIN}/api/leads/create`, payload, {
+        headers: { Authorization: accessToken },
+      })
+      .then((e) => {
+        setLoading(false);
+        // router.reload();
+        cancel();
+      })
+      .catch((e: any) => {});
   };
 
   return (
@@ -170,11 +178,11 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
               <option value="" selected>
                 -- Select Lead Owner --
               </option>
-              {
-                mastersData?.result?.map((item: any, index: number) => (
-                  <option value={item?._id} key={item?._id || index}>{item?.name}</option>
-                ))
-              }
+              {mastersData?.result?.map((item: any, index: number) => (
+                <option value={item?._id} key={item?._id || index}>
+                  {item?.name}
+                </option>
+              ))}
               {/* <option value="507f191e810c19729de860ea">Riya</option> */}
             </select>
           </div>
@@ -196,11 +204,11 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
               <option value="" selected>
                 -- Select Lead Manager --
               </option>
-              {
-                teamManagersData?.result?.map((item: any, index: number) => (
-                  <option value={item?._id} key={item?._id || index}>{item?.name}</option>
-                ))
-              }
+              {teamManagersData?.result?.map((item: any, index: number) => (
+                <option value={item?._id} key={item?._id || index}>
+                  {item?.name}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -273,7 +281,7 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
                   -- Select Lead Stage --
                 </option>
                 {leadData.leadStatus == "open" ||
-                  leadData.leadStatus == "Open" ? (
+                leadData.leadStatus == "Open" ? (
                   <>
                     <option value="Enquiry">Enquiry</option>
                     <option value="Interaction">Interaction</option>
