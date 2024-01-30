@@ -102,23 +102,23 @@ const CompanyProfile = ({ data1, refresh }: any) => {
             />
           </div>
         </div>
-        <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+        <p className=" border-b-2 w-[100%] pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Company Info
         </p>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium mr-4 w-[200px]">Company Name</p>
+          <p className="text-sm font-medium mr-4 w-[60%]">Company Name</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.companyId?.company_name}
           </p>
         </div>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium mr-4 w-[200px]">Company Address</p>
+          <p className="text-sm font-medium mr-4 w-[60%]">Company Address</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.companyId?.company_address}
           </p>
         </div>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium mr-4 w-[200px]"> Website Link</p>
+          <p className="text-sm font-medium mr-4 w-[60%]"> Website Link</p>
           <p
             onClick={() => {
               if (data?.result?.companyId?.company_website_url) {
@@ -134,7 +134,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
           </p>
         </div>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium mr-4 w-[200px]">Industry Type</p>
+          <p className="text-sm font-medium mr-4 w-[60%]">Industry Type</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.companyId?.company_product_category}
           </p>
@@ -142,7 +142,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
         {data?.result?.companyId?.company_socialMedia1 ||
         data?.result?.companyId?.company_socialMedia2 ? (
           <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-            <p className="text-sm font-medium mr-4 w-[200px]"> Social Media</p>
+            <p className="text-sm font-medium mr-4 w-[60%]"> Social Media</p>
             <p className="text-sm font-semibold text-black flex">
               {data?.result?.companyId?.company_socialMedia1 && (
                 <a href={data?.result?.companyId?.company_socialMedia1Url}>
@@ -181,7 +181,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
         ) : (
           ""
         )}
-        <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+        <p className=" border-b-2 w-[100%] pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Other Contact
         </p>
         {data?.result?.customerId?.contacts &&
@@ -228,7 +228,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
             }
           )}
 
-        <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+        <p className=" border-b-2 w-[100%] pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Company Description
         </p>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">

@@ -23,8 +23,8 @@ const AllocatedCalls = () => {
   const router = useRouter();
   const [columns, setColumns] = useState([
     {
-      width: 240,
-      left: 40,
+      width: 80,
+      left: 20,
       text: "Call ID",
       key: "call_id",
       checked: true,
@@ -517,7 +517,10 @@ const AllocatedCalls = () => {
               data?.map((item, index) => {
                 let row = [
                   {
-                    text: item?._id || "-",
+                    // text: item?._id || "-",
+                    text:
+                      parseInt(item?._id.replace(/\D/g, "").substr(0, 4)) ||
+                      "-",
                     link: `/calls/recorded-calls/${item?._id}/audio-call`,
                   },
                   {

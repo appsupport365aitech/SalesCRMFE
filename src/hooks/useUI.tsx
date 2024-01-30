@@ -8,7 +8,7 @@ function useUI() {
 
   useEffect(() => {
     if (typeof window !== undefined) {
-      setRole(auth.user.role || localStorage.getItem("user-role"))
+      setRole(auth.user.role || localStorage.getItem("user-role"));
     }
   }, [role]);
 
@@ -142,12 +142,12 @@ function useUI() {
           ],
           icon: "Phone",
         },
-        {
-          title: "Indicator",
-          route: "indicator",
-          list: [{ title: "Indicator-basic", route: "basic" }],
-          icon: "Indicators",
-        },
+        // {
+        //   title: "Indicator",
+        //   route: "indicator",
+        //   list: [{ title: "Indicator-basic", route: "basic" }],
+        //   icon: "Indicators",
+        // },
       ];
   }
 

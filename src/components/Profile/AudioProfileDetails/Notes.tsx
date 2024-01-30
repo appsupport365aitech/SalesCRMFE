@@ -10,14 +10,14 @@ import { baseUrl } from "@/utils/baseUrl";
 
 const Note = ({ title, content, date }: any) => {
   return (
-    <div className="mb-[30px] w-[96%] shrink-0 mt-[5px] min-h-[250px] px-[12px] py-[28px] pb-[40px] flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow ">
-      <div className="flex justify-between gap-24 pb-4">
-        <p className=" text-[18px] font-medium text-[#3F434A] capitalize">
+    <div className="mb-[30px] shrink-0 mt-[5px] min-h-[250px] px-[12px] py-[28px] pb-[40px] flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow w-[100%]">
+      <div className="flex justify-between pb-4 w-full">
+        <p className=" text-[18px] font-medium text-black capitalize">
           {title}
         </p>
         <p className="font-medium flex text-gray-600">{date}</p>
       </div>
-      <p className=" text-[14px] font-medium text-gray-500 p-3">{content}</p>
+      <p className=" text-[14px] font-medium text-black w-full">{content}</p>
     </div>
   );
 };
