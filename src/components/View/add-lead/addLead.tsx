@@ -89,7 +89,7 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
       })
       .then((e) => {
         setLoading(false);
-        // router.reload();
+        router.reload();
         cancel();
       })
       .catch((e: any) => {});
