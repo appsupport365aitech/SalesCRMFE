@@ -1,5 +1,6 @@
 import { API_DOMAIN } from "@/constants/api";
 import SimpleButton from "@/utils/Button/SimpleButton";
+import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -84,7 +85,7 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
       );
     // return;
     axios
-      .post(`${API_DOMAIN}/api/leads/create`, payload, {
+      .post(`${baseUrl}/api/leads/create`, payload, {
         headers: { Authorization: accessToken },
       })
       .then((e) => {
