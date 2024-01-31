@@ -219,7 +219,7 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
               <h2 className="font-medium">Company Name</h2>
               <select
                 onChange={(e) => setCompanyName(e.target.value)}
-                className="text-red-500"
+                className="text-red-500 px-2"
                 id="company"
               >
                 <option selected={companyName === ""} value=""></option>
@@ -228,18 +228,18 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
                     selected={callType === opItem?.company_name}
                     value={opItem?.company_name}
                     key={opItem?.company_name}
-                    className="text-center"
+                    className=""
                   >
                     {opItem?.company_name}
                   </option>
                 ))}
               </select>
             </div>
-            <div className="flex items-center w-56 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-fit gap-2 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Product/Service</h2>
               <select
                 onChange={(e) => setProduct(e.target.value)}
-                className="text-red-500"
+                className="text-red-500 px-2"
                 id="product"
               >
                 <option selected={product === ""} value=""></option>
@@ -291,11 +291,11 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
                 </option> */}
               </select>
             </div>
-            <div className="flex items-center gap-5 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-fit gap-2 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Call Owner</h2>
               <select
                 onChange={(e) => setCallOwner(e.target.value)}
-                className="text-red-500"
+                className="text-red-500 px-2"
                 id="callOwner"
               >
                 <option selected={callOwner === ""} value=""></option>
@@ -310,11 +310,11 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
                 ))}
               </select>
             </div>
-            <div className="flex items-center gap-5 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center gap-2 w-fit justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Call Type</h2>
               <select
                 onChange={(e) => setCallType(e.target.value)}
-                className="text-red-500"
+                className="text-red-500 px-2"
                 id="callType"
               >
                 <option selected={callType === ""} value=""></option>
@@ -329,11 +329,11 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
                 ))}
               </select>
             </div>
-            <div className="flex gap-4 items-center w-72 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center gap-2 w-fit justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Call Dispostion</h2>
               <select
                 onChange={(e) => setCallDisposition(e.target.value)}
-                className="text-red-500"
+                className="text-red-500 px-2"
                 id="callDispostion"
               >
                 <option selected={callDisposition === ""} value=""></option>
