@@ -8,14 +8,17 @@ import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
 import { baseUrl } from "@/utils/baseUrl";
 
-const Note = ({ title, content, date }: any) => {
+const Note = ({ title, content, date, time }: any) => {
   return (
-    <div className=" mb-[30px] w-[420px] shrink-0 mt-[5px] min-h-[200px] px-[12px] py-[28px] pb-[40px] flex flex-col bg-white border border-gray-200 rounded-lg shadow ">
+    <div className=" mb-[30px] w-full shrink-0 mt-[5px] min-h-[200px] px-[12px] py-[28px] pb-[40px] flex flex-col bg-white border border-gray-200 rounded-lg shadow ">
       <div className="flex justify-between pb-4">
         <p className=" text-[18px] font-medium text-[#3F434A] capitalize">
           {title}
         </p>
-        <p className="font-medium flex text-gray-600">{date}</p>
+        <div>
+          <p className="font-medium flex text-gray-600">{date}</p>
+          <p className="font-medium flex text-gray-600">{time}</p>
+        </div>
       </div>
       <p className="text-left  text-[14px] font-medium text-gray-500">
         {content}
@@ -138,6 +141,18 @@ const Notes = ({ data, refresh }: any) => {
     return "-";
   }
 
+  // function extractTime(dateTimeString: string): Date {
+  //   const date = new Date(dateTimeString);
+  //   const extractedTime = new Date(
+  //     date.getHours(),
+  //     date.getMinutes(),
+  //     date.getSeconds()
+  //   );
+
+  //   return extractedTime;
+  // }
+
+  console.log("raju", list);
   return (
     <>
       {notes && (
@@ -183,6 +198,7 @@ const Notes = ({ data, refresh }: any) => {
                   key={i}
                   content={item.content}
                   date={convertISODateToString(item.updatedAt)}
+                  // time={item.createdAt}
                 />
               );
             })}
