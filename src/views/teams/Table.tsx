@@ -203,7 +203,7 @@ const Table = ({
   selectedRows?: any;
 }) => {
   return (
-    <div className="w-[100%] overflow-y-hidden overflow-x-auto custom-scroll">
+    <div className="w-[100%] h-[500px] overflow-y-hidden overflow-x-auto custom-scroll">
       <RenderHeader
         selectAll={false}
         columns={columns}
