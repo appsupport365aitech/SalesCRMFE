@@ -80,13 +80,42 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
         contactData.customer_email !== undefined &&
         contactData.customer_gender !== undefined;
 
+  const isCurrentPageValid =
+    currentPage === 1
+      ? leadData.lead_title !== undefined &&
+        leadData.lead_description !== undefined &&
+        leadData.leadSource !== undefined &&
+        leadData.owners !== undefined &&
+        leadData.manager !== undefined &&
+        leadData.product_category !== undefined &&
+        leadData.leadStatus !== undefined &&
+        leadData.leadStage !== undefined
+      : currentPage === 2
+      ? companyData.company_name !== "" &&
+        companyData.company_description !== "" &&
+        companyData.company_address !== "" &&
+        companyData.company_website_url !== ""
+      : contactData.customer_name !== undefined &&
+        contactData.designation !== undefined &&
+        contactData.customer_contact !== undefined &&
+        contactData.customer_email !== undefined &&
+        contactData.customer_gender !== undefined;
+
   const goToNextPage = () => {
     if (isCurrentPageValid && currentPage < 3) {
       setCurrentPage((prevPage) => prevPage + 1);
     } else {
       alert("Please fill all the fields.");
+    } else {
+      alert("Please fill all the fields!");
     }
   };
+
+  // const goToPrevPage = () => {
+  //   if (currentPage > 1) {
+  //     setCurrentPage((prevPage) => prevPage - 1);
+  //   }
+  // };
 
   const submit = () => {
     if (isCurrentPageValid) {
@@ -1010,6 +1039,17 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
             cancel();
           }}
         />
+        {/* {currentPage !== 1 && (
+          <SimpleButton
+            theme={1}
+            text={"Previous"}
+            left={0}
+            right={0}
+            click={() => {
+              goToPrevPage();
+            }}
+          />
+        )} */}
         {currentPage === 3 ? (
           <SimpleButton
             theme={1}
