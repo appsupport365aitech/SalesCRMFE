@@ -7,6 +7,8 @@ import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
 import Notes from "./notesRecordt";
 import { baseUrl } from "@/utils/baseUrl";
+import { CiAt } from "react-icons/ci";
+import { LuHash } from "react-icons/lu";
 
 const Comment = ({ user, content, time, reply, last, replied }: any) => {
   const [repVis, setRepVis] = useState(false);
@@ -36,17 +38,15 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
     setText("");
   };
   return (
-    <div className="h-[280px] mb-4 rounded-xl w-[490px] border-[1px] border-[#ccc] py-[10px]">
-      <div className="flex items-center justify-between my-2 ml-4">
-        <h3 className="text-[16px] text-black  ml-4  font-medium">{user}</h3>
+    <div className=" mb-4 rounded-xl  border-[1px] border-[#ccc] py-[10px]">
+      <div className="flex items-center justify-between my-2 ml-7">
+        <h3 className="text-[16px] text-black  font-medium">{user}</h3>
         <p className="text-sm text-gray-600 mr-10 font-medium">{last}</p>
       </div>
-      <p className="block  font-medium  text-bg-red py-2 ml-7 text-xs font-small  hover:text-indigo-500">
-        *{time}
-      </p>
+
       <div className="flex items-center ">
         <p
-          className="ml-7 chked text-small font-medium text-black-500 "
+          className="ml-7 chked text-small font-base text-black-500 "
           dangerouslySetInnerHTML={{ __html: content }}
         ></p>
       </div>
@@ -54,7 +54,7 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
         onClick={() => {
           setRepVis((prev) => !prev);
         }}
-        className="py-2 text-gray-500 text-small font-medium ml-7"
+        className="py-2 text-red-500 text-small font-medium ml-7"
       >
         Reply
       </button>
@@ -66,21 +66,21 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
               onChange={(e: any) => {
                 setText(e.target.value);
               }}
-              placeholder="Write a comment"
+              placeholder="Write a reply"
               className="resize-none w-[92%] h-[160px] bg-[#fff] apperance-none block text-[16px] tracking-wide text-gray-600 border rounded-2xl ml-8 py-4 px-3 focus:outline-none"
             />
-            <div className="flex absolute gap-x-2 right-5 bottom-2">
+            <div className="flex absolute gap-x-2 right-10 bottom-2">
               <p
                 className="text-gray-600 font-semibold text-lg cursor-pointer"
                 onClick={() => setText((prev) => prev + "#")}
               >
-                #
+                <LuHash />
               </p>
               <p
                 className="text-gray-600 font-semibold text-lg cursor-pointer"
                 onClick={() => setText((prev) => prev + "@")}
               >
-                @
+                <CiAt />
               </p>
               <button
                 className=" font-semibold text-lg mt-[1px]"
@@ -146,13 +146,15 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
           {reply?.map((item: any, i: any) => {
             return (
               <>
-                <div className="flex items-center justify-between mt-2 ml-4">
-                  <h3 className="text-sm text-black  ml-8  font-medium ">-</h3>
+                <div className="flex items-center justify-between my-2 ml-4">
+                  <h3 className="text-sm text-black  ml-8  font-medium ">
+                    {user}
+                  </h3>
                   <p className="text-sm text-gray-600 mr-10  font-medium  ">
                     {item?.time}
                   </p>
                 </div>
-                <p className="ml-12 text-[#3F434A] font-small text-black-500  font-medium ">
+                <p className="ml-12 text-[#3F434A] font-small text-black-500 mb-4">
                   {item?.text}
                 </p>
               </>
@@ -226,7 +228,7 @@ const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
 
   return (
     <>
-      <div className="flex w-[100%] h-[800px] flex-col px-[20px]">
+      <div className="flex w-[100%] h-[600px] flex-col px-[20px]">
         <div className="relative">
           <textarea
             value={text}
@@ -234,20 +236,20 @@ const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
               setText(e.target.value);
             }}
             placeholder="Write a comment"
-            className="resize-none w-[100%] h-[160px] bg-[#fff] apperance-none block text-[16px] tracking-wide text-gray-600 border rounded-2xl py-4 px-3 focus:outline-none"
+            className="resize-none w-[100%] h-[160px] bg-[#fff] apperance-none block text-[16px] tracking-wide text-gray-600 rounded-2xl py-4 px-3 focus:outline-none"
           />
           <div className="flex absolute gap-x-2 right-5 bottom-2">
             <p
               className="text-gray-600 font-semibold text-lg cursor-pointer"
-              onClick={() => setText((prev) => prev + "#")}
+              onClick={() => setText((prev) => prev + "@")}
             >
-              #
+              <CiAt />
             </p>
             <p
               className="text-gray-600 font-semibold text-lg cursor-pointer"
-              onClick={() => setText((prev) => prev + "@")}
+              onClick={() => setText((prev) => prev + "#")}
             >
-              @
+              <LuHash />
             </p>
             <button
               className=" font-semibold text-lg mt-[1px]"
@@ -352,7 +354,7 @@ const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
           </p>
         </button>
         <hr className="border-t-4 border-gray-300 mt-4" />
-        <div className="my-4 overflow-y-auto custom-scroll-black ">
+        <div className="my-4 overflow-y-auto custom-scroll-black">
           {list?.map((item: any, i: any) => {
             return (
               <Comment
