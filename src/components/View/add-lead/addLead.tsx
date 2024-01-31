@@ -59,40 +59,73 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
     setMoreContact2(true);
     setShowMoreContactButton2(false);
   };
+  const isCurrentPageValid =
+    currentPage === 1
+      ? leadData.lead_title !== undefined &&
+        leadData.lead_description !== undefined &&
+        leadData.leadSource !== undefined &&
+        leadData.owners !== undefined &&
+        leadData.manager !== undefined &&
+        leadData.product_category !== undefined &&
+        leadData.leadStatus !== undefined &&
+        leadData.leadStage !== undefined
+      : currentPage === 2
+      ? companyData.company_name !== "" &&
+        companyData.company_description !== "" &&
+        companyData.company_address !== "" &&
+        companyData.company_website_url !== ""
+      : contactData.customer_name !== undefined &&
+        contactData.designation !== undefined &&
+        contactData.customer_contact !== undefined &&
+        contactData.customer_email !== undefined &&
+        contactData.customer_gender !== undefined;
+
   const goToNextPage = () => {
-    if (currentPage < 3) {
+    if (isCurrentPageValid && currentPage < 3) {
       setCurrentPage((prevPage) => prevPage + 1);
+    } else {
+      alert("Please fill all the fields!");
     }
   };
 
+  // const goToPrevPage = () => {
+  //   if (currentPage > 1) {
+  //     setCurrentPage((prevPage) => prevPage - 1);
+  //   }
+  // };
+
   const submit = () => {
-    setLoading(true);
-    const payload = {
-      leadDetails: {
-        ...leadData,
-        created_by: localStorage.getItem("user-name") || "Sales User",
-      },
-      companyDetails: companyData,
-      contactDetails: {
-        contactData: contactData,
-        moreContacts: [moreContactData1, moreContactData2],
-      },
-    };
-    payload.contactDetails.moreContacts =
-      payload.contactDetails.moreContacts.filter(
-        (contact) => Object.keys(contact).length > 0
-      );
-    // return;
-    axios
-      .post(`${baseUrl}/api/leads/create`, payload, {
-        headers: { Authorization: accessToken },
-      })
-      .then((e) => {
-        setLoading(false);
-        router.reload();
-        cancel();
-      })
-      .catch((e: any) => {});
+    if (isCurrentPageValid) {
+      setLoading(true);
+      const payload = {
+        leadDetails: {
+          ...leadData,
+          created_by: localStorage.getItem("user-name") || "Sales User",
+        },
+        companyDetails: companyData,
+        contactDetails: {
+          contactData: contactData,
+          moreContacts: [moreContactData1, moreContactData2],
+        },
+      };
+      payload.contactDetails.moreContacts =
+        payload.contactDetails.moreContacts.filter(
+          (contact) => Object.keys(contact).length > 0
+        );
+      // return;
+      axios
+        .post(`${baseUrl}/api/leads/create`, payload, {
+          headers: { Authorization: accessToken },
+        })
+        .then((e) => {
+          setLoading(false);
+          router.reload();
+          cancel();
+        })
+        .catch((e: any) => {});
+    } else {
+      alert("Please fill all the input fields.");
+    }
   };
 
   return (
@@ -973,7 +1006,7 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
           )}
         </>
       )}
-      <div className="w-[100%] mt-[70px] text-[#ffffff] flex justify-end">
+      <div className="w-[100%] mt-[70px] text-[#ffffff] flex justify-end gap-4">
         <SimpleButton
           theme={2}
           text={"Cancel"}
@@ -983,6 +1016,17 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
             cancel();
           }}
         />
+        {/* {currentPage !== 1 && (
+          <SimpleButton
+            theme={1}
+            text={"Previous"}
+            left={0}
+            right={0}
+            click={() => {
+              goToPrevPage();
+            }}
+          />
+        )} */}
         {currentPage === 3 ? (
           <SimpleButton
             theme={1}
