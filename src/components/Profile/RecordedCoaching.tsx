@@ -201,9 +201,15 @@ const Coaching = ({ data, refresh }: any) => {
   });
   const appDispatch = useAppDispatch();
   const [tab, setTab] = useState<any>(0);
+  const [tab2, setTab2] = useState<any>(0);
   const tabs = [
     { id: 0, title: "Auto" },
     { id: 1, title: "Manual" },
+  ];
+  const tabs2 = [
+    { id: 0, title: "Script Building Blocks" },
+    { id: 1, title: "Selling Skills" },
+    { id: 2, title: "Emotion Analysis" },
   ];
 
   const [scoreQuestions, setScoreQuestions] = useState([
@@ -380,11 +386,13 @@ const Coaching = ({ data, refresh }: any) => {
   const handleCallback = (payload: any) => {
     setTab(payload);
   };
-
+  const handleCallback2 = (payload: any) => {
+    setTab2(payload);
+  };
   const handleScoreSubmit = () => {
     const finalScore = scoreQuestions?.reduce((acc: any, item: any) => {
       if (item.value !== "" || item.value !== "NA") {
-        return acc + item.value;
+        return acc + Number(item.value);
       } else {
         return acc + 0;
       }
@@ -421,6 +429,38 @@ const Coaching = ({ data, refresh }: any) => {
       });
   };
 
+  const handleScoreReset = async () => {
+    try {
+      const resetScore = "0";
+      await axios.post(
+        `${baseUrl}api/qa/updateCallScore`,
+        {
+          score: resetScore,
+          callId: data?._id,
+        },
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      );
+      appDispatch(
+        setSuccess({
+          show: true,
+          success: "Score reset successfully.",
+        })
+      );
+      refresh();
+    } catch (error) {
+      appDispatch(
+        setError({
+          show: true,
+          error: "Score reset failed.",
+        })
+      );
+    }
+  };
+
   return (
     <div className="w-[100%]">
       {loading ? (
@@ -431,23 +471,25 @@ const Coaching = ({ data, refresh }: any) => {
             <h3 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
               Call Analysis
             </h3>
-            <div className="flex justify-between gap-[10px]">
-              <div className="w-[100%]">
-                <div className="w-[100%] flex justify-between">
-                  <span className="text-[gray]">Call Disposition</span>
+            <div className="flex justify-between gap-[10px] py-6">
+              <div className="w-[50%]">
+                <div className="w-[100%] flex font-medium">
+                  <span className="text-[gray] mb-2 w-[60%]">
+                    Call Disposition
+                  </span>
                   <span>{data?.activeCall?.call_disposition || "NA"}</span>
                 </div>
-                <div className="w-[100%] flex justify-between">
-                  <span className="text-[gray]">Call Type</span>
+                <div className="w-[100%] flex  font-medium">
+                  <span className="text-[gray] w-[60%]">Call Type</span>
                   <span>{data?.activeCall?.call_type || "-"}</span>
                 </div>
               </div>
               {tab === 1 && (
-                <div className="w-[120px] flex flex-col items-center px-[6px]">
-                  <span className="text-yellow">
+                <div className="w-[94px] h-[69px] px-[6px] bg-yellow-100 rounded-xl text-center pt-3">
+                  <p className="text-[#FF965D] text-[14px]">
                     {data?.score || "Not Scored"}
-                  </span>
-                  <span className="text-[16px] font-medium">Call Score</span>
+                  </p>
+                  <p className="text-[14px] font-medium">Call Score</p>
                 </div>
               )}
             </div>
@@ -457,27 +499,40 @@ const Coaching = ({ data, refresh }: any) => {
             callback={handleCallback}
             current={tab}
             list={tabs}
+            coachingButton
           />
           {tab === 0 && (
             <div className="flex flex-col gap-6 py-4">
-              <ScriptBuilding script={data1?.scriptBuilding} />
-              <Selling selling={data1?.sellingSkills} />
-              <Emotion data={data1?.emotion} />
+              <Navigator
+                borderBottom={false}
+                width={false}
+                callback={handleCallback2}
+                current={tab2}
+                list={tabs2}
+                coachingButton2
+              />
+              {tab2 === 0 && <ScriptBuilding script={data1?.scriptBuilding} />}
+              {tab2 === 1 && <Selling selling={data1?.sellingSkills} />}
+              {tab2 === 2 && <Emotion data={data1?.emotion} />}
             </div>
           )}
           {tab === 1 && userRole === "QA Analyst" && (
             <div>
               {scoreQuestions?.map((quesItem: any, index: number) => (
                 <div className="fieldset mt-[24px]" key={index}>
-                  <span className="text-[16px] font-bold mb-[16px]">
+                  <p className="text-[20px] font-bold mb-3">
                     {quesItem?.label}
-                  </span>
+                  </p>
                   <div>
                     {quesItem?.options?.map(
                       (optionItem: any, opIdx: number) => (
                         <div key={opIdx}>
-                          <label htmlFor={quesItem?.key + optionItem?.key}>
+                          <label
+                            htmlFor={quesItem?.key + optionItem?.key}
+                            className="flex items-baseline"
+                          >
                             <input
+                              className="border border-[#E8E9EB]"
                               type="radio"
                               id={quesItem?.key + optionItem?.key}
                               name={quesItem?.key}
@@ -489,14 +544,14 @@ const Coaching = ({ data, refresh }: any) => {
                                 )
                               }
                             />
-                            <span>
+                            <p className="ml-2 mb-2">
                               {optionItem?.value !== "NA" && (
-                                <span className="font-medium">
+                                <span className="font-medium mr-1">
                                   {optionItem?.value} marks:
                                 </span>
                               )}
                               {optionItem?.label}
-                            </span>
+                            </p>
                           </label>
                         </div>
                       )
@@ -516,12 +571,20 @@ const Coaching = ({ data, refresh }: any) => {
                     submit();
                   }}
                 /> */}
-                <button
-                  className="p-[10px] px-7 rounded-lg text-white text-[16px] bg-bg-red hover:bg-[#ff7d6d]"
-                  onClick={handleScoreSubmit}
-                >
-                  Submit
-                </button>
+                <div className="gap-2 flex items-center mt-4">
+                  <button
+                    className="p-[10px] px-7 rounded-lg text-[red] text-[16px] border border-[red] hover:bg-[#ff7d6d] hover:text-white"
+                    onClick={handleScoreReset}
+                  >
+                    Reset
+                  </button>
+                  <button
+                    className="p-[10px] px-7 rounded-lg text-white text-[16px] bg-bg-red hover:bg-[#ff7d6d]"
+                    onClick={handleScoreSubmit}
+                  >
+                    Calculate Score
+                  </button>
+                </div>
               </div>
             </div>
           )}
