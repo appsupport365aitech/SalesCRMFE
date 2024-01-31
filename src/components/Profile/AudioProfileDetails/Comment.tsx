@@ -7,8 +7,6 @@ import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
 import Notes from "./notesRecordt";
 import { baseUrl } from "@/utils/baseUrl";
-import { CiAt } from "react-icons/ci";
-import { LuHash } from "react-icons/lu";
 
 const Comment = ({ user, content, time, reply, last, replied }: any) => {
   const [repVis, setRepVis] = useState(false);
@@ -74,13 +72,13 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
                 className="text-gray-600 font-semibold text-lg cursor-pointer"
                 onClick={() => setText((prev) => prev + "#")}
               >
-                <LuHash />
+                #
               </p>
               <p
                 className="text-gray-600 font-semibold text-lg cursor-pointer"
                 onClick={() => setText((prev) => prev + "@")}
               >
-                <CiAt />
+                @
               </p>
               <button
                 className=" font-semibold text-lg mt-[1px]"
@@ -243,13 +241,13 @@ const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
               className="text-gray-600 font-semibold text-lg cursor-pointer"
               onClick={() => setText((prev) => prev + "@")}
             >
-              <CiAt />
+              @
             </p>
             <p
               className="text-gray-600 font-semibold text-lg cursor-pointer"
               onClick={() => setText((prev) => prev + "#")}
             >
-              <LuHash />
+              #
             </p>
             <button
               className=" font-semibold text-lg mt-[1px]"
