@@ -643,7 +643,6 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItem
             width={200}
             left={20}
-            // text={"345345354335"}
             text={CallData?.callData?.[0]?.callId.substring(0, 4) || "-"}
             color={"#000"}
             click={true}
