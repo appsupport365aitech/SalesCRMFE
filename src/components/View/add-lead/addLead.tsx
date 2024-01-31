@@ -59,7 +59,7 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
     setMoreContact2(true);
     setShowMoreContactButton2(false);
   };
-  const isCurrentPageValid =
+  const IsCurrentPageValid =
     currentPage === 1
       ? leadData.lead_title !== undefined &&
         leadData.lead_description !== undefined &&
@@ -81,7 +81,7 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
         contactData.customer_gender !== undefined;
 
   const goToNextPage = () => {
-    if (isCurrentPageValid && currentPage < 3) {
+    if (IsCurrentPageValid && currentPage < 3) {
       setCurrentPage((prevPage) => prevPage + 1);
     } else {
       alert("Please fill all the fields!");
@@ -95,7 +95,7 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
   // };
 
   const submit = () => {
-    if (isCurrentPageValid) {
+    if (IsCurrentPageValid) {
       setLoading(true);
       const payload = {
         leadDetails: {

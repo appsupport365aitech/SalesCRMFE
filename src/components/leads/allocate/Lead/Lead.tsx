@@ -67,7 +67,7 @@ const LeadItem = ({
 
   return (
     <div
-      className={`flex items-center  h-[20px] shrink-0`}
+      className={`flex items-center  h-[fit] shrink-0`}
       style={{ width: width, marginLeft: left }}
     >
       {link ? (
@@ -838,7 +838,7 @@ const LeadContainer = ({
             route={`/sales/open/${id}/lead-profile`}
           />
           <LeadItem
-            width={120}
+            width={200}
             left={0}
             color={"#000"}
             text={LeadData1.lead_title}
