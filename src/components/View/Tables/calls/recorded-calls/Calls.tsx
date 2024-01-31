@@ -109,6 +109,8 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
               convertDatetimeToCustomFormat(e.updatedAt)
             );
             const leadid = e.leadId.length > 0 ? e.leadId[0].leadId : "-";
+            const callId = e.leadId.length > 0 ? e.callData[0].callId : "-";
+
             const call_title: any = e;
             const title =
               call_title?.active_calls?.length > 0
@@ -117,6 +119,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
             return (
               idss.includes(search) ||
               leadid.includes(search) ||
+              callId.includes(search) ||
               title.includes(search)
             );
           });
