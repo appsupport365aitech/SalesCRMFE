@@ -520,18 +520,15 @@ const Coaching = ({ data, refresh }: any) => {
           {tab === 1 && userRole === "QA manager" && (
             <div>
               {scoreQuestions?.map((quesItem: any, index: number) => (
-                <div className="fieldset mt-[24px]" key={index}>
-                  <p className="text-[20px] font-bold mb-3">
+                <div className="mt-[16px]" key={index}>
+                  <p className="text-[20px] font-bold mb-2">
                     {quesItem?.label}
                   </p>
                   <div>
                     {quesItem?.options?.map(
                       (optionItem: any, opIdx: number) => (
-                        <div key={opIdx}>
-                          <label
-                            htmlFor={quesItem?.key + optionItem?.key}
-                            className="flex items-baseline"
-                          >
+                        <div key={opIdx} className="flex">
+                          <label htmlFor={quesItem?.key + optionItem?.key}>
                             <input
                               className="border border-[#E8E9EB]"
                               type="radio"
@@ -545,15 +542,15 @@ const Coaching = ({ data, refresh }: any) => {
                                 )
                               }
                             />
-                            <p className="ml-2 mb-2">
-                              {optionItem?.value !== "NA" && (
-                                <span className="font-medium mr-1">
-                                  {optionItem?.value} marks:
-                                </span>
-                              )}
-                              {optionItem?.label}
-                            </p>
                           </label>
+                          <div className="flex justify-start ml-2  mb-1">
+                            {optionItem?.value !== "NA" && (
+                              <p className="font-medium w-[80px]">
+                                {optionItem?.value} marks:
+                              </p>
+                            )}
+                            <p className="w-full">{optionItem?.label}</p>
+                          </div>
                         </div>
                       )
                     )}
