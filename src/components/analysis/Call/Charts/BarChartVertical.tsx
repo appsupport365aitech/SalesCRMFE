@@ -46,7 +46,7 @@ const BarChartVertical = ({
           <BarChart
             xAxis={[{ scaleType: "band", data: xLabels }]}
             series={[{ data: barData, color: "#FE5143" }]}
-            width={550}
+            width={800}
             height={310}
             sx={
               {

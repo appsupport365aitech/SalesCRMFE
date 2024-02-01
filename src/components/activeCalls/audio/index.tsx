@@ -604,7 +604,7 @@ const Audio = ({ data, data1, data2 }: any) => {
                   height={10}
                 />
                 <p className="text-gray-600 text-[14px]">
-                  Call owner: {data?.CallerName}
+                  Call owner: {data?.activeCall?.owner?.name}
                 </p>
               </div>
               <div className="w-full gap-2 flex items-center mt-[6px]">
@@ -616,7 +616,7 @@ const Audio = ({ data, data1, data2 }: any) => {
                   height={10}
                 />
                 <p className="text-gray-600 text-[14px]">
-                  Participant: {data?.AnsweredBy}
+                  Participant: {data?.activeCall?.call_new_participant_name}
                 </p>
               </div>
             </div>

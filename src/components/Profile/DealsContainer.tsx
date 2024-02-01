@@ -246,7 +246,7 @@ const Deals = ({ data, type }: any) => {
             className={
               openDeals?.length >= 4
                 ? "h-52 overflow-y-scroll pl-4 w-full"
-                : "pl-20"
+                : "pl-4 w-full"
             }
           >
             {openDeals &&
