@@ -48,6 +48,8 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
 
     return secondsDifference;
   }
+  console.log("data1", data1);
+  console.log("data", data);
 
   return (
     <div>
@@ -134,17 +136,17 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
           <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
             <p className="text-sm font-medium w-[50%] mr-4">Call Owner</p>
             <p className="text-sm font-semibold text-black">
-              {data1?.owners?.[0]?.name ?? "-"}
+              {data?.activeCall?.owner?.name ?? "-"}
             </p>
           </div>
           <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
             <p className="text-sm font-medium w-[50%] mr-4">Call Participant</p>
             <div className="">
               <p className="text-sm font-semibold text-black">
-                {data1?.customerId?.customer_name ?? "-"}
+                {data?.activeCall?.call_new_participant_name ?? "-"}
               </p>
               <p className="text-sm font-semibold text-grey">
-                {data1?.customerId?.customer_designation ?? "-"}
+                {data?.activeCall?.call_new_participant_designation ?? "-"}
               </p>
             </div>
           </div>
