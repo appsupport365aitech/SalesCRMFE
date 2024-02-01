@@ -38,7 +38,9 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
   return (
     <div className=" mb-4 rounded-xl  border-[1px] border-[#ccc] py-[10px]">
       <div className="flex items-center justify-between my-2 ml-7">
-        <h3 className="text-[16px] text-black  font-medium">{user}</h3>
+        <h3 className="text-[16px] text-black  font-medium">
+          {parseInt(user.replace(/\D/g, "").substr(0, 4))}
+        </h3>
         <p className="text-sm text-gray-600 mr-10 font-medium">{last}</p>
       </div>
 
@@ -146,7 +148,7 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
               <>
                 <div className="flex items-center justify-between my-2 ml-4">
                   <h3 className="text-sm text-black  ml-8  font-medium ">
-                    {user}
+                    {parseInt(user.replace(/\D/g, "").substr(0, 4))}
                   </h3>
                   <p className="text-sm text-gray-600 mr-10  font-medium  ">
                     {item?.time}
