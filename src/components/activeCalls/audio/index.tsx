@@ -620,8 +620,16 @@ const Audio = ({ data, data1, data2 }: any) => {
                 </p>
               </div>
             </div>
-            <Tracker title={data?.CallerName} list={list} color={"#4091FF"} />
-            <Tracker title={data?.AnsweredBy} list={list} color={"#FE5143"} />
+            <Tracker
+              title={data?.activeCall?.owner?.name}
+              list={list}
+              color={"#4091FF"}
+            />
+            <Tracker
+              title={data?.activeCall?.call_new_participant_name}
+              list={list}
+              color={"#FE5143"}
+            />
             {/* <Tracker title={"Topics"} list={list} color={"#434343"} /> */}
           </div>
           <div className="bg-white rounded-lg pb-4">
