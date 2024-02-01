@@ -158,7 +158,7 @@ const Transcript = ({
                   <p
                     className="text-[#304FFD] shrink-0 w-[48px] font-medium text-[15px] tracking-wide"
                     style={{
-                      color: item.title === "A" ? "#fe5143" : "#909193",
+                      color: item.title === "A" ? "#4091FF" : "#FE5143",
                     }}
                     // dangerouslySetInnerHTML={{
                     //   // __html: `00:05 ${item.title}:`,
@@ -172,7 +172,7 @@ const Transcript = ({
                   <p
                     className="text-[#304FFD] shrink-0 w-[48px] font-medium text-[15px] tracking-wide"
                     style={{
-                      color: item.title === "A" ? "#fe5143" : "#909193",
+                      color: item.title === "A" ? "#4091FF" : "#FE5143",
                     }}
                     // dangerouslySetInnerHTML={{
                     //   // __html: `00:05 ${item.title}:`,
