@@ -456,7 +456,10 @@ const CallsPage = () => {
         data?.map((item: any, index: number) => {
           let row = [
             {
-              text: item?._id || "-",
+              text:
+                parseInt(
+                  item?._id.replace(/\D/g, "").substr(0, 4)
+                ).toString() || "-",
               id: item?._id,
               link: `/calls/recorded-calls/${item?._id}/audio-call`,
             },

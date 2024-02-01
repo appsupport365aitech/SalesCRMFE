@@ -110,9 +110,13 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
               convertDatetimeToCustomFormat(e.updatedAt)
             );
             const leadid = e.leadId?.leadId;
+            const callId = parseInt(
+              e.leadId?.callId.replace(/\D/g, "").substr(0, 4)
+            ).toString();
             return (
               idss?.includes(search) ||
               leadid?.includes(search) ||
+              callId.includes(search) ||
               e?.call_title?.includes(search)
             );
           });

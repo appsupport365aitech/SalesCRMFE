@@ -10,7 +10,7 @@ const DateFilter = ({
   onUpdate?: any;
 }) => {
   return (
-    <div className="flex items-center w-[auto] justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <div className="flex items-center w-[auto] justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
       <h2 className="font-medium">{filterData?.label}</h2>
       <input type="date" className="" value={filterData?.value} />
     </div>
@@ -27,7 +27,7 @@ const DateRangeFilter = ({
   return (
     <div className="mt-1">
       <h2 className="font-semibold text-black">{filterData?.label}</h2>
-      <div className="flex items-center gap-[10px] w-[auto] justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <div className="flex items-center gap-[10px] w-[auto] justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <input
           type="date"
           id="fromDate"
@@ -64,10 +64,11 @@ const SliderFilter = ({
   onUpdate?: any;
 }) => {
   return (
-    <div>
+    <div className="leading-4">
       <h2 className="font-medium text-black">{filterData?.label}</h2>
-      <div className="text-black">
+      <div className="text-black w-56">
         <input
+          className="bg-red-500"
           type="range"
           min={filterData?.min?.value}
           max={filterData?.max?.value}
@@ -91,7 +92,7 @@ const SelectFilter = ({
   onUpdate?: any;
 }) => {
   return (
-    <div className="flex items-center w-fit gap-2 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-[fit-content] ">
+    <div className="flex items-center w-fit gap-2 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-[fit-content] ">
       <h2 className="font-medium">{filterData?.label}&nbsp;</h2>
       <select
         onChange={(e) => onUpdate(filterData, e.target.value)}
@@ -119,7 +120,7 @@ const SelectFilter = ({
 
 const Filters = ({ filters, onUpdate }: { filters?: any; onUpdate?: any }) => {
   return (
-    <div className="w[100%] flex items-end gap-[12px] h-[auto] flex-wrap shrink-1">
+    <div className="w[100%] flex items-end gap-[20px] h-[auto] flex-wrap shrink-1">
       {Object.keys(filters)?.map((filterKey: any, index: number) => {
         switch (filters[filterKey]?.type) {
           case "DATE":

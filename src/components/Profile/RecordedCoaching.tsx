@@ -363,6 +363,7 @@ const Coaching = ({ data, refresh }: any) => {
       });
     });
   };
+  console.log("sdr", scoreQuestions);
 
   useEffect(() => {
     try {
@@ -516,7 +517,7 @@ const Coaching = ({ data, refresh }: any) => {
               {tab2 === 2 && <Emotion data={data1?.emotion} />}
             </div>
           )}
-          {tab === 1 && userRole === "QA Analyst" && (
+          {tab === 1 && userRole === "QA manager" && (
             <div>
               {scoreQuestions?.map((quesItem: any, index: number) => (
                 <div className="fieldset mt-[24px]" key={index}>

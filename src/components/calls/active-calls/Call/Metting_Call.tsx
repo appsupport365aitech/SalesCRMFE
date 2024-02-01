@@ -669,6 +669,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
     }
     return participants;
   };
+  console.log(CallData);
 
   return (
     <>
@@ -696,7 +697,11 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItem
             width={240}
             left={20}
-            text={CallData?._id ? CallData?._id : "-"}
+            text={
+              parseInt(
+                CallData?.callData?.[0]?.callId.replace(/\D/g, "").substr(0, 4)
+              ).toString() || "-"
+            }
             // text={convertDatetimeToCustomFormat(CallData.updatedAt)}
             color={"#000"}
             click={true}

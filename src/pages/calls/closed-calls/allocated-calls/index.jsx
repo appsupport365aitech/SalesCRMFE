@@ -682,7 +682,7 @@ const AllocatedCallsCC = ({ data }) => {
       />
       <div className="bg-[#ffe3e170] mx-6 pt-8 rounded-xl w-[96%] min-h-[90vh] pl-[40px] pr-[40px] mt-[30px]">
         <div className="flex items-center justify-between">
-          <div className="w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] p-2  flex items-center">
+          <div className="w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] p-2 mb-4 flex items-center">
             <input
               type="text"
               className="w-[100%] text-black bg-white outline-none"
