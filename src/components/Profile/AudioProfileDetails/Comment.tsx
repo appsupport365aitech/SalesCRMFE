@@ -181,6 +181,7 @@ const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
   useEffect(() => {
     setList(data?.comments);
   }, [data]);
+  console.log("data", data);
 
   function getCurrentTimeInHoursAndMinutes() {
     let now = new Date();
@@ -217,6 +218,7 @@ const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
   const UpdateCalls = () => {
     setTimeout(() => {
       const urri = `${baseUrl}api/calling/find-by-id?id=${data?._id}`;
+
       axios
         .get(urri, { headers: { Authorization: accessToken } })
         .then((e) => {})
