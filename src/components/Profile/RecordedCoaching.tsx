@@ -549,7 +549,15 @@ const Coaching = ({ data, refresh }: any) => {
                                 {optionItem?.value} marks:
                               </p>
                             )}
-                            <p className="w-full">{optionItem?.label}</p>
+                            <p
+                              className={
+                                optionItem?.label === "Not applicable."
+                                  ? "font-medium w-full"
+                                  : "w-full"
+                              }
+                            >
+                              {optionItem?.label}
+                            </p>
                           </div>
                         </div>
                       )
