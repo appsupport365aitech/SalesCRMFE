@@ -453,7 +453,7 @@ const SalesOpen = ({
           />
         </Backdrop>
       )}
-      <Navigation
+      {/* <Navigation
         title={""}
         leftChildren={
           <DropDown3 text="Actions" id={0} dropdown={true} dark={true}>
@@ -537,13 +537,19 @@ const SalesOpen = ({
             ],
           },
         ]}
-      />
+      /> */}
       <LeadsContainer
         view={view}
         records={data?.totalRecords}
         list={Dummy}
         setSelectedRows={setSelectedRows}
         reload={reload}
+        renderDropdownList={renderDropdownList()}
+        viewButtinClick={viewButtinClick}
+        AddLead={AddLead}
+        addExport={addExport}
+        data={data?.result}
+        ref={ref}
       />
     </div>
   );

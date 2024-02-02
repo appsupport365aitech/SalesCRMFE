@@ -11,6 +11,9 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { PaymentOutlined } from "@mui/icons-material";
 import { baseUrl } from "@/utils/baseUrl";
+import Navigation from "@/components/app/Navigation";
+import DropDown3 from "@/utils/Button/DropDown3";
+import { CSVLink } from "react-csv";
 
 const LeadsTable = React.lazy(
   () => import("@/components/View/Tables/allocate/LeadsSearch")
@@ -24,6 +27,11 @@ const LeadsContainer = ({
   list,
   setSelectedRows,
   reload,
+  renderDropdownList,
+  AddLead,
+  addExport,
+  ref,
+  data,
 }: any) => {
   const [qaid, setQaid] = useState(
     window !== undefined ? localStorage.getItem("user-id") : ""
@@ -106,12 +114,60 @@ const LeadsContainer = ({
   }, [status, stage, product, leadSource, startDate, endDate, accessToken]);
 
   return (
-    <div className="w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] relative mb-[40px]">
+    <div className="mt-10 w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] relative mb-[40px]">
       <div className="w-[100%] flex items-center  px-[8px] ">
         <div className="w-[100%] flex flex-col gap-4 my-4">
-          <div className="flex gap-5">
+          <div className="flex gap-5 items-center">
             <Search change={onChange} view={view} />
-            <div className="ACTIONS-WRAPPER"></div>
+            <div className="">
+              <Navigation
+                title={""}
+                leftChildren={
+                  <DropDown3 text="Actions" id={0} dropdown={true} dark={true}>
+                    {renderDropdownList}
+                  </DropDown3>
+                }
+                buttons={[
+                  {
+                    text: "Add Lead",
+                    dropdown: true,
+                    id: 1,
+                    icon: "Plus",
+                    click: { AddLead },
+                    light: false,
+                    dark: false,
+                    list: [
+                      { title: "Using Form", Icon: "Text" },
+                      { title: "Import Leads", Icon: "Download" },
+                      // { title: "Using Prompt", Icon: "Text" },
+                    ],
+                  },
+                  {
+                    text: "",
+                    dropdown: true,
+                    id: 1,
+                    icon: "Download",
+                    light: true,
+                    dark: false,
+                    click: { addExport },
+                    list: [
+                      // { title: "Print", Icon: "Printer" },
+                      { title: "Excel", Icon: "Excel" },
+                      // { title: "PDF", Icon: "PDF" },
+                      {
+                        title: "CSV",
+                        Icon: "CSV",
+                        wrapper: (
+                          <CSVLink data={data} className="" ref={ref}>
+                            CSV
+                          </CSVLink>
+                        ),
+                      },
+                    ],
+                  },
+                ]}
+              />
+            </div>
           </div>
           <div className="flex items-center gap-5 flex-wrap">
             {/* <div className="flex items-center w-36 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
