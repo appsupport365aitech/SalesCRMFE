@@ -139,7 +139,7 @@ const SalesClose = ({ data }: any) => {
           <AddLeadForm cancel={cancelForms} />
         </Backdrop>
       )}
-      <Navigation
+      {/* <Navigation
         title={""}
         buttons={[
           // {
@@ -204,8 +204,16 @@ const SalesClose = ({ data }: any) => {
             ],
           },
         ]}
+      /> */}
+      <LeadsContainer
+        view={view}
+        records={data.totalRecords}
+        list={Dummy}
+        viewButtinClick={viewButtinClick}
+        addExport={addExport}
+        data={data.result}
+        ref={ref}
       />
-      <LeadsContainer view={view} records={data.totalRecords} list={Dummy} />
     </div>
   );
 };

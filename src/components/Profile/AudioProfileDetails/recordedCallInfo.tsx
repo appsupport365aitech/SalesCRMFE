@@ -66,7 +66,13 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
 
       <div className="pl-[30px]">
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Call Id - {type === "MEETING" ? data?._id : data?.activeCall?.callId}
+          Call Id -{" "}
+          {type === "MEETING"
+            ? parseInt(data?._id.replace(/\D/g, "").substr(0, 4)).toString() ||
+              "-"
+            : parseInt(
+                data?.activeCall?.callId.replace(/\D/g, "").substr(0, 4)
+              ).toString() || "-"}
         </p>
         <div className="text-[#8A9099] flex  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[50%] mr-4">LEAD ID</p>

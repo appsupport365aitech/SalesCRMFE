@@ -173,60 +173,6 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
     }
   };
 
-  const ViewDownloadButton = () => {
-    return (
-      <div>
-        <Navigation
-          title={""}
-          buttons={[
-            {
-              text: "View",
-              dropdown: true,
-              id: 0,
-              click: viewButtinClick,
-              light: false,
-              dark: true,
-              list: [
-                {
-                  title: "Table View",
-                  Icon: "List 2",
-                },
-                {
-                  title: "Kanban View",
-                  Icon: "Grid",
-                },
-              ],
-              value: 0,
-            },
-            {
-              text: "",
-              dropdown: true,
-              id: 1,
-              icon: "Download",
-              light: true,
-              dark: false,
-              click: addExport,
-              list: [
-                // { title: "Print", Icon: "Printer" },
-                { title: "Excel", Icon: "Excel" },
-                // { title: "PDF", Icon: "PDF" },
-                {
-                  title: "CSV",
-                  Icon: "CSV",
-                  wrapper: (
-                    <CSVLink data={data?.result} className="" ref={ref}>
-                      CSV
-                    </CSVLink>
-                  ),
-                },
-              ],
-            },
-          ]}
-        />
-      </div>
-    );
-  };
-
   return (
     <div className="relative w-[100%] min-h-[90vh] px-[10px]">
       {/* <Navigation  /> */}
@@ -325,12 +271,16 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
           },
         ]}
       /> */}
-      <ViewDownloadButton />
+
       <LeadsContainer
         view={view}
         records={data?.totalRecords}
         list={Dummy}
         reload={reload}
+        viewButtinClick={viewButtinClick}
+        addexport={addExport}
+        data={data?.result}
+        ref={ref}
       />
     </div>
   );
