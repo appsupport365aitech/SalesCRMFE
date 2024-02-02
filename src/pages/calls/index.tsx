@@ -458,7 +458,7 @@ const CallsPage = () => {
             {
               text:
                 parseInt(
-                  item?._id.replace(/\D/g, "").substr(0, 4)
+                  item?.callData?.[0]?.callId.replace(/\D/g, "").substr(0, 4)
                 ).toString() || "-",
               id: item?._id,
               link: `/calls/recorded-calls/${item?._id}/audio-call`,
