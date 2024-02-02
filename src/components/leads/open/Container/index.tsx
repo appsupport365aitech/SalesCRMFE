@@ -24,7 +24,7 @@ const LeadsContainer = ({
   view,
   records,
   viewButtinClick,
-  addExport,
+  addexport,
   data,
   ref,
   reload,
@@ -118,7 +118,7 @@ const LeadsContainer = ({
                   text: "View",
                   dropdown: true,
                   id: 0,
-                  click: { viewButtinClick },
+                  click: viewButtinClick,
                   light: false,
                   dark: true,
                   list: [
@@ -141,7 +141,7 @@ const LeadsContainer = ({
                   icon: "Download",
                   light: true,
                   dark: false,
-                  click: { addExport },
+                  click: addexport,
                   list: [
                     { title: "Excel", Icon: "Excel" },
                     {

@@ -133,7 +133,7 @@ const LeadsContainer = ({
                     dropdown: true,
                     id: 1,
                     icon: "Plus",
-                    click: { AddLead },
+                    click: AddLead,
                     light: false,
                     dark: false,
                     list: [
@@ -149,7 +149,7 @@ const LeadsContainer = ({
                     icon: "Download",
                     light: true,
                     dark: false,
-                    click: { addExport },
+                    click: addExport,
                     list: [
                       // { title: "Print", Icon: "Printer" },
                       { title: "Excel", Icon: "Excel" },

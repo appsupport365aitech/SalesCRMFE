@@ -180,7 +180,7 @@ const LeadsContainer = ({
                   text: "View",
                   dropdown: true,
                   id: 0,
-                  click: { viewButtinClick },
+                  click: viewButtinClick,
                   light: false,
                   dark: true,
                   list: [
@@ -200,7 +200,7 @@ const LeadsContainer = ({
                   dropdown: true,
                   id: 1,
                   icon: "Plus",
-                  click: { AddLead },
+                  click: AddLead,
                   light: false,
                   dark: false,
                   list: [

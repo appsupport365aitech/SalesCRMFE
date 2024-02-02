@@ -116,7 +116,7 @@ const LeadsContainer = ({
                   text: "View",
                   dropdown: true,
                   id: 0,
-                  click: { viewButtinClick },
+                  click: viewButtinClick,
                   light: false,
                   dark: true,
                   list: [
@@ -138,7 +138,7 @@ const LeadsContainer = ({
                   icon: "Download",
                   light: true,
                   dark: false,
-                  click: { addExport },
+                  click: addExport,
                   list: [
                     // { title: "Print", Icon: "Printer" },
                     { title: "Excel", Icon: "Excel" },

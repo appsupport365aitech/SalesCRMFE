@@ -190,7 +190,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
           />
         </Backdrop>
       )}
-      <Navigation
+      {/* <Navigation
         title={""}
         buttons={[
           // {
@@ -270,7 +270,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
             ],
           },
         ]}
-      />
+      /> */}
 
       <LeadsContainer
         view={view}
@@ -278,7 +278,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
         list={Dummy}
         reload={reload}
         viewButtinClick={viewButtinClick}
-        addExport={addExport}
+        addexport={addExport}
         data={data?.result}
         ref={ref}
       />
