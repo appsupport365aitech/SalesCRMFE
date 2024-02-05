@@ -122,11 +122,11 @@ const LeadsContainer = ({
                   list: [
                     {
                       title: "Table View",
-                      Icon: "List 2",
+                      Icon: "TableView",
                     },
                     {
                       title: "Kanban View",
-                      Icon: "Grid",
+                      Icon: "KanbanView",
                     },
                   ],
                   value: 0,
