@@ -1,0 +1,22 @@
+<svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20.5039 3H3.50391C2.67548 3 2.00391 3.67157 2.00391 4.5V19.5C2.00391 20.3284 2.67548 21 3.50391 21H20.5039C21.3323 21 22.0039 20.3284 22.0039 19.5V4.5C22.0039 3.67157 21.3323 3 20.5039 3Z"
+                    stroke= "gray"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M2.00391 7.00049H22.0039M10.0039 12.0005H18.0039M10.0039 16.0005H18.0039M6.00391 12.0005H7.00391M6.00391 16.0005H7.00391"
+                    stroke="gray"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
