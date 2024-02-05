@@ -164,9 +164,9 @@ const LeadsContainer = ({
 
   return (
     <div className="mt-10 w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] relative mb-[40px]">
-      <div className="w-[100%] flex items-center  px-[8px] mb-4">
-        <div className="w-[100%] flex flex-col gap-4 my-4">
-          <div className="flex gap-5 items-center">
+      <div className="flex items-center px-[8px] mb-4">
+        <div className="my-4">
+          <div className="flex justify-between items-center">
             <Search change={onChange} view={view} />
             <Navigation
               title={""}
@@ -235,7 +235,7 @@ const LeadsContainer = ({
               ]}
             />
           </div>
-          <div className="flex items-center gap-5 flex-wrap">
+          <div className="flex items-end gap-5 flex-wrap">
             {/* <div className="flex items-center w-36 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Status</h2>
               <select
@@ -364,7 +364,7 @@ const LeadsContainer = ({
               </select>
             </div>
             <div className="">
-              <span className="text-gray-500">
+              <span className="text-black font-semibold pl-1">
                 Allocated Start and End Date
               </span>
               <DatePicker

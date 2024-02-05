@@ -4,7 +4,7 @@ import { getBasicIcon } from "../AssetsHelper";
 
 const DatePicker = ({ startDate, setStartDate, endDate, setEndDate }: any) => {
   return (
-    <div className="flex items-center space-x-2 bg-white dark:bg-gray-700 border-2 p-1.5 rounded-xl">
+    <div className="flex items-center space-x-2 bg-white dark:bg-gray-700 border-2 p-1 rounded-lg">
       <div>
         <input
           value={startDate}
