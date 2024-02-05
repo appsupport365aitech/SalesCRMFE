@@ -235,12 +235,12 @@ const Deals = ({ data, type }: any) => {
             Open Deals
           </h5>
           {/* <p className="text-center text-[#000]">-</p> */}
-          <div className="mt-[20px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center justify-between mx-2">
-            <p className="">Lead Id</p>
-            <p className="">Product/Service</p>
-            <p className="">Lead Stage</p>
-            <p className="">Last Activity</p>
-            <p className="">Activity History</p>
+          <div className="mt-[20px] flex text-[#8A9099] text-[14px] leading-[21px] items-center justify-between text-center">
+            <p className="w-[140px] font-semibold">Lead Id</p>
+            <p className="w-[180px] font-semibold">Product/Service</p>
+            <p className="w-[160px] font-semibold">Lead Stage</p>
+            <p className="w-[200px] font-semibold">Last Activity</p>
+            <p className="w-[200px] font-semibold">Activity History</p>
           </div>
           <div
             className={
@@ -251,24 +251,31 @@ const Deals = ({ data, type }: any) => {
           >
             {openDeals &&
               openDeals.map((deal: any, index: number) => (
-                <div key={index} className="mt-[10px] mx-[13px] ">
-                  <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex justify-between items-center bg-[#ffffff] rounded-xl">
+                <div
+                  key={index}
+                  className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5 "
+                >
+                  <div className="text-[14px] py-[5px] text-[#8A9099] leading-[21px] flex justify-between items-center bg-[#ffffff] rounded-xl px-2 ">
                     <div className="">
-                      <p className="text-[#3F434A]">{deal?.leadId || "-"}</p>
+                      <p className="text-[#3F434A] w-[140px]">
+                        {deal?.leadId || "-"}
+                      </p>
                     </div>
                     <div className="">
-                      <p>{deal?.product_category}</p>
+                      <p className="w-[180px]">{deal?.product_category}</p>
                     </div>
                     <div className="">
-                      <p>{deal?.leadStage ? deal?.leadStage : "-"}</p>
+                      <p className="w-[160px]">
+                        {deal?.leadStage ? deal?.leadStage : "-"}
+                      </p>
                     </div>
                     <div className="">
-                      <p>
+                      <p className="w-[160px]">
                         {deal?.lastActivity?.subject
                           ? deal?.leadData?.subject
                           : "-"}
                       </p>
-                      <p>
+                      <p className="w-[160px]">
                         {deal?.lastActivity?.createdAt
                           ? deal?.leadData?.createdAt
                           : "-"}
@@ -359,12 +366,12 @@ const Deals = ({ data, type }: any) => {
             Closed Deals
           </h5>
           {/* <p className="text-center text-[#000]">-</p> */}
-          <div className="mt-[20px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
-            <p className="w-[140px]">Lead Id</p>
-            <p className="w-[180px]">Product/Service</p>
-            <p className="w-[160px]">Lead Stage</p>
-            <p className="w-[200px]">Last Activity</p>
-            <p className="w-[200px]">Activity History</p>
+          <div className="mt-[20px] flex text-[#8A9099] text-[14px] leading-[21px] items-center justify-between text-center">
+            <p className="w-[140px] font-semibold">Lead Id</p>
+            <p className="w-[180px] font-semibold">Product/Service</p>
+            <p className="w-[160px] font-semibold">Lead Stage</p>
+            <p className="w-[200px] font-semibold">Last Activity</p>
+            <p className="w-[200px] font-semibold">Activity History</p>
           </div>
 
           <div
@@ -376,7 +383,7 @@ const Deals = ({ data, type }: any) => {
                   key={index}
                   className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5"
                 >
-                  <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#ffffff] rounded-xl">
+                  <div className="text-[14px] py-[5px] text-[#8A9099] leading-[21px] flex justify-between items-center bg-[#ffffff] rounded-xl px-2">
                     <div className="w-[140px]">
                       <p className="text-[#3F434A]">{deal?.leadId || "-"}</p>
                     </div>
@@ -495,10 +502,10 @@ const Deals = ({ data, type }: any) => {
             Interest History
           </h5>
           {/* <p className="text-center text-[#000]">-</p> */}
-          <div className="mt-[20px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
-            <p className="w-[180px]">Product/Service</p>
-            <p className="w-[140px]">Lead Id</p>
-            <p className="w-[200px]">Last Activity</p>
+          <div className="mt-[20px] flex text-[#8A9099] text-[14px] leading-[21px] items-center justify-between text-center">
+            <p className="w-[180px] font-semibold">Product/Service</p>
+            <p className="w-[140px] font-semibold">Lead Id</p>
+            <p className="w-[200px] font-semibold">Last Activity</p>
           </div>
           <div
             className={interest?.length >= 4 ? "h-52 overflow-y-scroll" : ""}
@@ -509,7 +516,7 @@ const Deals = ({ data, type }: any) => {
                   key={index}
                   className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5"
                 >
-                  <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#ffffff] rounded-xl">
+                  <div className="text-[14px] py-[5px] text-[#8A9099] leading-[21px] flex justify-between items-center bg-[#ffffff] rounded-xl px-2">
                     <div className="w-[180px]">
                       <p className="ml-2">
                         {deal?.companyData?.[0]?.company_product_category ||
