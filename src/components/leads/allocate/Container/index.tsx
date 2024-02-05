@@ -116,8 +116,8 @@ const LeadsContainer = ({
   return (
     <div className="mt-10 w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] relative mb-[40px]">
       <div className="w-[100%] flex items-center  px-[8px] ">
-        <div className="w-[100%] flex flex-col gap-4 my-4">
-          <div className="flex gap-5 items-center">
+        <div className="">
+          <div className="flex items-center">
             <Search change={onChange} view={view} />
             <div className="">
               <Navigation
