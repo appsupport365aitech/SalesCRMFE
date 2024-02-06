@@ -14,7 +14,7 @@ const DropDown = ({
 }: any) => {
   return (
     <div
-      className={`px-[8px] pt-[8px] pb-[3px] flex flex-col min-h-[30px] rounded-[10px] bg-white absolute  drop-shadow-2xl z-10 right-0 
+      className={`px-[8px] pt-[8px] pb-[3px] flex flex-col min-h-[30px] rounded-[10px] bg-white absolute  drop-shadow-2xl z-10 left-0 
         max-h-[200px]
         overflow-y-auto
         hide-scrollbar
