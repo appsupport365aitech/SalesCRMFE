@@ -237,53 +237,55 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
           (item: any) => item === null
         ) && (
         )} */}
-        <div>
-          <p className=" border-b-2 w-[100%] pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-            Other Contacts
-          </p>
-          {data?.result?.customerId?.contacts &&
-            data?.result?.customerId?.contacts?.map(
-              (contact: any, index: number) => {
-                if (contact && Object.keys(contact).length !== 0) {
-                  return (
-                    <ul
-                      key={index}
-                      role="list"
-                      className="grid gap-x-8 pt-2 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-                    >
-                      <li>
-                        <div className="flex items-center gap-x-2 mr-4">
-                          <Image
-                            className="h-12 w-12 rounded-full "
-                            src={getRoundedAvatar(6, 30)}
-                            alt=""
-                            width={54}
-                            height={48}
-                            style={{
-                              objectFit: "contain",
-                            }}
-                          />
-                          <div>
-                            <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                              {contact?.customer_name}
-                            </h4>
-                            <a
-                              href=""
-                              className="block text-sm font-small text-gray-500 hover:text-indigo-500"
-                            >
-                              {contact?.designation}
-                            </a>
+        {data?.result?.customerId?.contacts > 0 && (
+          <div>
+            <p className=" border-b-2 w-[100%] pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+              Other Contacts
+            </p>
+            {data?.result?.customerId?.contacts &&
+              data?.result?.customerId?.contacts?.map(
+                (contact: any, index: number) => {
+                  if (contact && Object.keys(contact).length !== 0) {
+                    return (
+                      <ul
+                        key={index}
+                        role="list"
+                        className="grid gap-x-8 pt-2 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+                      >
+                        <li>
+                          <div className="flex items-center gap-x-2 mr-4">
+                            <Image
+                              className="h-12 w-12 rounded-full "
+                              src={getRoundedAvatar(6, 30)}
+                              alt=""
+                              width={54}
+                              height={48}
+                              style={{
+                                objectFit: "contain",
+                              }}
+                            />
+                            <div>
+                              <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                                {contact?.customer_name}
+                              </h4>
+                              <a
+                                href=""
+                                className="block text-sm font-small text-gray-500 hover:text-indigo-500"
+                              >
+                                {contact?.designation}
+                              </a>
+                            </div>
                           </div>
-                        </div>
-                      </li>
-                    </ul>
-                  );
-                } else {
-                  return null;
+                        </li>
+                      </ul>
+                    );
+                  } else {
+                    return null;
+                  }
                 }
-              }
-            )}
-        </div>
+              )}
+          </div>
+        )}
         {/* <div className="mx-auto w-[100%] border-b border-gray-300 my-6"></div> */}
       </div>
     </>
