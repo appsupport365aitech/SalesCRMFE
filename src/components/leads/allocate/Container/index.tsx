@@ -219,13 +219,19 @@ const LeadsContainer = ({
                 id="countries"
               >
                 <option selected={product === ""} value=""></option>
-                <option selected={product === "P1"} value="P1">
-                  P1
+                <option
+                  selected={product === "Email automation"}
+                  value="Email automation"
+                >
+                  Email automation
                 </option>
-                <option selected={product === "P2"} value="P2">
-                  P2
+                <option
+                  selected={product === "social media automation"}
+                  value="social media automation"
+                >
+                  social media automation
                 </option>
-                <option selected={product === "P3"} value="P3">
+                {/* <option selected={product === "P3"} value="P3">
                   P3
                 </option>
                 <option selected={product === "Product A"} value="Product A">
@@ -239,7 +245,7 @@ const LeadsContainer = ({
                 </option>
                 <option selected={product === "Product D"} value="Product D">
                   Product D
-                </option>
+                </option> */}
               </select>
             </div>
             <div className="flex items-center gap-2 w-fit justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
