@@ -198,6 +198,8 @@ const AllocatedCallsCC = ({ data }) => {
     productService: {
       label: "Product/Service",
       options: [
+        { key: "Email automation", label: "Email automation" },
+        { key: "social media automation", label: "social media automation" },
         { key: "P1", label: "P1" },
         { key: "P2", label: "P2" },
         { key: "P3", label: "P3" },

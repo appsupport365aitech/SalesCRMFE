@@ -251,7 +251,13 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
             />
           </div>
           <div className="flex items-center gap-5 flex-wrap">
-            <div className="flex items-center gap-2 w-fit justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                companyName !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Company Name</h2>
               <select
                 onChange={(e) => setCompanyName(e.target.value)}
@@ -271,7 +277,13 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
                 ))}
               </select>
             </div>
-            <div className="flex items-center w-fit gap-2 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                product !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Product/Service</h2>
               <select
                 onChange={(e) => setProduct(e.target.value)}
@@ -279,6 +291,18 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
                 id="countries"
               >
                 <option selected={product === ""} value=""></option>
+                <option
+                  selected={product === "Email automation"}
+                  value="Email automation"
+                >
+                  Email automation
+                </option>
+                <option
+                  selected={product === "social media automation"}
+                  value="social media automation"
+                >
+                  social media automation
+                </option>
                 <option selected={product === "P1"} value="P1">
                   P1
                 </option>
@@ -327,7 +351,13 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
                 </option>
               </select>
             </div>
-            <div className="flex items-center w-fit gap-2 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                callOwner !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Meeting Owner</h2>
               <select
                 onChange={(e) => setCallOwner(e.target.value)}
@@ -346,7 +376,13 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
                 ))}
               </select>
             </div>
-            <div className="flex items-center w-fit gap-2 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                callType !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Meeting Type</h2>
               <select
                 onChange={(e) => setCallType(e.target.value)}
@@ -365,7 +401,13 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
                 ))}
               </select>
             </div>
-            <div className="flex items-center w-fit gap-2 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                location !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Location</h2>
               <select
                 onChange={(e) => setLocation(e.target.value)}

@@ -192,7 +192,13 @@ const LeadsContainer = ({
                 </option>
               </select>
             </div> */}
-            <div className="flex gap-2 w-fit items-center justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                stage !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Stage</h2>
               <select
                 onChange={(e) => setStage(e.target.value)}
@@ -211,7 +217,13 @@ const LeadsContainer = ({
                 </option>
               </select>
             </div>
-            <div className="flex items-center gap-2 w-fit justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                product !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Product/Service</h2>
               <select
                 onChange={(e) => setProduct(e.target.value)}
@@ -231,7 +243,13 @@ const LeadsContainer = ({
                 >
                   social media automation
                 </option>
-                {/* <option selected={product === "P3"} value="P3">
+                <option selected={product === "P1"} value="P1">
+                  P1
+                </option>
+                <option selected={product === "P2"} value="P2">
+                  P2
+                </option>
+                <option selected={product === "P3"} value="P3">
                   P3
                 </option>
                 <option selected={product === "Product A"} value="Product A">
@@ -245,10 +263,16 @@ const LeadsContainer = ({
                 </option>
                 <option selected={product === "Product D"} value="Product D">
                   Product D
-                </option> */}
+                </option>
               </select>
             </div>
-            <div className="flex items-center gap-2 w-fit justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                leadSource !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Lead Source</h2>
               <select
                 onChange={(e) => setLeadSource(e.target.value)}

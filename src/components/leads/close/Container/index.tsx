@@ -106,7 +106,7 @@ const LeadsContainer = ({
   return (
     <div className="mt-10 w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] relative mb-[40px]">
       <div className="w-[100%] flex items-center px-[8px] ">
-        <div className="w-[100%] flex flex-col gap-4 my-4">
+        <div className="w-[100%] flex flex-col my-4">
           <div className="flex gap-5 items-center">
             <Search change={onChange} view={view} />
             <Navigation
@@ -178,7 +178,13 @@ const LeadsContainer = ({
                 </option>
               </select>
             </div>
-            <div className="flex items-center gap-2 w-fit justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                stage !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Stage</h2>
               <select
                 onChange={(e) => setStage(e.target.value)}
@@ -197,7 +203,13 @@ const LeadsContainer = ({
                 </option>
               </select>
             </div>
-            <div className="flex items-center gap-2 w-fit justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                product !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Product/Service</h2>
               <select
                 onChange={(e) => setProduct(e.target.value)}
@@ -205,6 +217,18 @@ const LeadsContainer = ({
                 id="countries"
               >
                 <option selected={product === ""} value=""></option>
+                <option
+                  selected={product === "Email automation"}
+                  value="Email automation"
+                >
+                  Email automation
+                </option>
+                <option
+                  selected={product === "social media automation"}
+                  value="social media automation"
+                >
+                  social media automation
+                </option>
                 <option selected={product === "P1"} value="P1">
                   P1
                 </option>
@@ -228,7 +252,13 @@ const LeadsContainer = ({
                 </option>
               </select>
             </div>
-            <div className="flex items-center gap-2 w-fit justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                leadSource !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Lead Source</h2>
               <select
                 onChange={(e) => setLeadSource(e.target.value)}
