@@ -92,7 +92,13 @@ const SelectFilter = ({
   onUpdate?: any;
 }) => {
   return (
-    <div className="flex items-center w-fit gap-2 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-[fit-content] ">
+    <div
+      className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 border border-gray-300${
+        filterData?.value !== ""
+          ? "border border-red-500"
+          : "border border-gray-300"
+      }`}
+    >
       <h2 className="font-medium">{filterData?.label}&nbsp;</h2>
       <select
         onChange={(e) => onUpdate(filterData, e.target.value)}

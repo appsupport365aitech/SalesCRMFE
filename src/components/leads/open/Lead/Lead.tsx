@@ -67,7 +67,7 @@ const LeadItem = ({
 
   return (
     <div
-      className={`flex items-center  h-[20px] shrink-0`}
+      className={`flex items-center py-1 h-fit shrink-0`}
       style={{ width: width, marginLeft: left }}
     >
       {link ? (

@@ -46,39 +46,38 @@ const BarChartVertical = ({
           <BarChart
             xAxis={[{ scaleType: "band", data: xLabels }]}
             series={[{ data: barData, color: "#FE5143" }]}
-            width={800}
+            width={650}
             height={310}
-            sx={
-              {
-                //change left yAxis label styles
-                // "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
-                //   strokeWidth: "0.4",
-                //   fill: "#ff0000"
-                // },
-                // change all labels fontFamily shown on both xAxis and yAxis
-                // "& .MuiChartsAxis-tickContainer .MuiChartsAxis-tickLabel": {
-                //   fontFamily: "Roboto",
-                // },
-                // change bottom label styles
-                // "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel": {
-                //   strokeWidth: "0.5",
-                //   fill: "#0000FF",
-                //   textWrap: "wrap",
-                //   width: "40px !important",
-                //   overflow: "hidden !important"
-                // },
-                // bottomAxis Line Styles
-                // "& .MuiChartsAxis-bottom .MuiChartsAxis-line": {
-                //   stroke: "#0000FF",
-                //   strokeWidth: 0.4
-                // },
-                // leftAxis Line Styles
-                // "& .MuiChartsAxis-left .MuiChartsAxis-line": {
-                //   stroke: "#00000FF",
-                //   strokeWidth: 0.4
-                // }
-              }
-            }
+            sx={{
+              //change left yAxis label styles
+              // "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
+              //   strokeWidth: "0.4",
+              //   fill: "#ff0000"
+              // },
+              // change all labels fontFamily shown on both xAxis and yAxis
+              // "& .MuiChartsAxis-tickContainer .MuiChartsAxis-tickLabel": {
+              //   fontFamily: "Roboto",
+              // },
+              // change bottom label styles
+              // "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel": {
+              //   strokeWidth: "0.5",
+              //   fill: "#0000FF",
+              //   textWrap: "wrap",
+              //   width: "40px !important",
+              //   overflow: "hidden !important"
+              // },
+              // bottomAxis Line Styles
+              // "& .MuiChartsAxis-bottom .MuiChartsAxis-line": {
+              //   stroke: "#0000FF",
+              //   strokeWidth: 0.4
+              // },
+              // leftAxis Line Styles
+              // "& .MuiChartsAxis-left .MuiChartsAxis-line": {
+              //   stroke: "#00000FF",
+              //   strokeWidth: 0.4
+              // }
+              width: "full",
+            }}
           />
         )}
       </div>
