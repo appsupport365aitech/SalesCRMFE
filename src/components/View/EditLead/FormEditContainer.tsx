@@ -23,6 +23,38 @@ const FormEditContainer = ({
   const [activeTitle, setActiveTitle] = useState(
     window.location.pathname.split("/").pop()
   );
+  const [showMoreContactButton1, setShowMoreContactButton1] = useState(true);
+  const [moreContact1, setMoreContact1] = useState(false);
+  const [moreContactData1, setMoreContactData1] = React.useState<any>({});
+  const handleMoreContactButton1 = () => {
+    setMoreContact1(true);
+    setShowMoreContactButton1(false);
+  };
+  const AddText = ({ key, top, title, width, change, required }: any) => {
+    return (
+      <div
+        className="w-[100%] "
+        style={{
+          width: width ? width : "100%",
+          marginTop: top,
+        }}
+      >
+        <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
+          {title}
+        </p>
+        <input
+          name={key}
+          onChange={(e: any) => {
+            change(e.target.value);
+          }}
+          required={required}
+          type="text"
+          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+        />
+      </div>
+    );
+  };
+
   // company-profile lead-profile client-profile
   function CallBack(childData: any) {
     setActiveTitle(childData);
@@ -914,7 +946,157 @@ const FormEditContainer = ({
                             Add as Primary Client POC
                           </label>
                         </div>
+                        <div>
+                          {/* raju */}
+                          {showMoreContactButton1 && (
+                            <div>
+                              <button
+                                onClick={handleMoreContactButton1}
+                                className="text-blue-700 my-4"
+                              >
+                                Add More Contact
+                              </button>
+                            </div>
+                          )}
+                          {moreContact1 && (
+                            <>
+                              <h1 className="text-[#3f434a] text-[20px] mt-4 mb-[20px] tracking-[1px]">
+                                More Contact Info
+                              </h1>
+                              <AddText
+                                top={"10px"}
+                                change={(e: any) => {
+                                  setMoreContactData1({
+                                    ...moreContactData1,
+                                    customer_name: e,
+                                  });
+                                }}
+                                title="Name*"
+                              />
+                              <AddText
+                                top={"10px"}
+                                change={(e: any) => {
+                                  setMoreContactData1({
+                                    ...moreContactData1,
+                                    designation: e,
+                                  });
+                                }}
+                                title="Designation*"
+                              />
+                              <AddText
+                                top={"10px"}
+                                change={(e: any) => {
+                                  setMoreContactData1({
+                                    ...moreContactData1,
+                                    customer_contact: e,
+                                  });
+                                }}
+                                title="Contact Number*"
+                              />
+                              <AddText
+                                top={"10px"}
+                                change={(e: any) => {
+                                  setMoreContactData1({
+                                    ...moreContactData1,
+                                    customer_email: e,
+                                  });
+                                }}
+                                title="Email*"
+                              />
+                              <div className="w-[100%] my-4">
+                                <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
+                                  Gender*
+                                </p>
+                                <select
+                                  className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                                  onChange={(e: any) => {
+                                    setMoreContactData1({
+                                      ...moreContactData1,
+                                      customer_gender: e.target.value,
+                                    });
+                                  }}
+                                >
+                                  <option value="" selected>
+                                    -- Select Gender --
+                                  </option>
+                                  <option value="Male">Male</option>
+                                  <option value="Female">Female</option>
+                                  <option value="Other">Other</option>
+                                </select>
+                              </div>
+
+                              <div className="w-[100%] my-4">
+                                <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
+                                  Social Media 1
+                                </p>
+                                <select
+                                  className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                                  onChange={(e: any) => {
+                                    setMoreContactData1({
+                                      ...moreContactData1,
+                                      customer_socialMedia1: e.target.value,
+                                    });
+                                  }}
+                                >
+                                  <option value="" selected>
+                                    -- Select a Social Media --
+                                  </option>
+                                  <option value="Facebook">Facebook</option>
+                                  <option value="Twitter">Twitter</option>
+                                  <option value="Instagram">Instagram</option>
+                                  <option value="Whatsapp">Whatsapp</option>
+                                </select>
+                              </div>
+
+                              <AddText
+                                top={"10px"}
+                                title="Social Media 1 URL"
+                                change={(e: any) => {
+                                  setMoreContactData1({
+                                    ...moreContactData1,
+                                    customer_socialMedia1Url: e,
+                                  });
+                                }}
+                              />
+
+                              <div className="w-[100%] my-4">
+                                <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
+                                  Social Media 2
+                                </p>
+                                <select
+                                  className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                                  onChange={(e: any) => {
+                                    setMoreContactData1({
+                                      ...moreContactData1,
+                                      customer_socialMedia2: e.target.value,
+                                    });
+                                  }}
+                                >
+                                  <option value="" selected>
+                                    -- Select a Social Media --
+                                  </option>
+                                  <option value="Facebook">Facebook</option>
+                                  <option value="Twitter">Twitter</option>
+                                  <option value="Instagram">Instagram</option>
+                                  <option value="Whatsapp">Whatsapp</option>
+                                </select>
+                              </div>
+
+                              <AddText
+                                top={"10px"}
+                                title="Social Media 2 URL"
+                                change={(e: any) => {
+                                  setMoreContactData1({
+                                    ...moreContactData1,
+                                    customer_socialMedia2Url: e,
+                                  });
+                                }}
+                              />
+                            </>
+                          )}
+                        </div>
                       </div>
+
                       <div className="mt-16 ">
                         <div className="absolute right-[190px] bottom-[10px] flex">
                           <SimpleButton
