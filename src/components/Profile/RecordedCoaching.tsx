@@ -15,16 +15,16 @@ const Chart = ({ title, percent }: any) => {
           style={{ height: percent }}
         ></div>
       </div>
-      <div className="text-[10px] leading-[13px] min-h-[40px] flex items-center justify-center tracking-sm font-medium text-[#8A9099] text-center absolute bottom-[-25px]">
+      <p className="w-[100%] text-[8.5px] leading-[13px] min-h-[40px] flex items-center justify-center font-medium text-[#8A9099] text-center absolute bottom-[-25px]">
         {title}
-      </div>
+      </p>
     </div>
   );
 };
 
 const ChartContainer = ({ children }: any) => {
   return (
-    <div className="w-[100%] h-[220px] mt-[40px] flex">
+    <div className="w-full h-[220px] mt-[40px] flex">
       <div className="w-[4%] h-[100%] flex flex-col justify-between items-center text-[#8A9099]">
         <p>100</p>
         <p>75</p>
@@ -32,7 +32,7 @@ const ChartContainer = ({ children }: any) => {
         <p>25</p>
         <p className="mb-[20px]">0</p>
       </div>
-      <div className="w-[92%] h-[100%] flex justify-between pr-[30px] pl-[30px]">
+      <div className="w-full h-[100%] flex justify-between pr-[30px] pl-[30px]">
         {children}
       </div>
     </div>
