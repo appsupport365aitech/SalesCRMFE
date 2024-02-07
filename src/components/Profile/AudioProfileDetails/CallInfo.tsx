@@ -4,6 +4,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
 import Image from "next/image";
+import { string } from "prop-types";
 import React, { useState, useEffect } from "react";
 
 const CallInfo = ({ check, info, data, data1 }: any) => {
@@ -86,55 +87,56 @@ const CallInfo = ({ check, info, data, data1 }: any) => {
         {data1?.call_title}
       </h4>
       <div className="pl-[30px]">
-        <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Call Id - {convertDatetimeToCustomFormat(data1?.updatedAt)}
+        <p className=" border-b-2 w-full pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+          Call Id -{" "}
+          {String(convertDatetimeToCustomFormat(data1?.updatedAt)).slice(0, 4)}
         </p>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">LEAD ID</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-2">LEAD ID</p>
           <p className="text-sm font-semibold text-black">
             {data1?.leadId?.leadId}
           </p>
         </div>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Lead Title</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-2">Lead Title</p>
           <p className="text-sm font-semibold text-black">
             {data1?.leadId?.lead_title}
           </p>
         </div>
 
-        <p className="border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[22px] text-[20px] font-medium">
+        <p className="border-b-2 w-full pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[22px] text-[20px] font-medium">
           INFO
         </p>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium"> Company Name</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-2"> Company Name</p>
           <p className="text-sm font-semibold text-black">
             {data1?.companyId?.company_name}
           </p>
         </div>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Client POC</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-2">Client POC</p>
           <p className="text-sm font-semibold text-black">
             {data1?.customerId?.customer_name || data1?.customerId?.name || "-"}
           </p>
         </div>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Product/Service</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-2">Product/Service</p>
           <p className="text-sm font-semibold text-black">
             {data1?.companyId?.company_product_category}
           </p>
         </div>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Lead Stage</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-2">Lead Stage</p>
           <p className="text-sm font-semibold text-black">
             {data1?.leadId?.leadStage}
           </p>
         </div>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Call Type</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-2">Call Type</p>
           <p className="text-sm font-semibold text-black">{data1?.call_type}</p>
         </div>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Call Description</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-2">Call Description</p>
           <p className="text-sm font-semibold text-black">
             {data1?.call_discription}
           </p>
@@ -143,36 +145,44 @@ const CallInfo = ({ check, info, data, data1 }: any) => {
       <div className=" mt-[10px] w-[600px] h-[1px] px-[30px]"></div>
       <div className="pl-[30px]">
         <div className="mt-[25px]">
-          <p className="border-b-2 w-3/4 pb-2 border-red-400 text-[#3F434A] text-[20px] font-medium leading-[22px]">
+          <p className="border-b-2 w-full pb-2 border-red-400 text-[#3F434A] text-[20px] font-medium leading-[22px]">
             CALL PARTICIPANTS
           </p>
-          <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-            <p className="text-sm font-medium">Call Owner</p>
-            <p className="text-sm font-semibold text-black">
-              {owner ? owner.name : "-"}
-            </p>
-            <p className="text-sm font-semibold text-grey">
-              {owner?.roles?.[0]?.name || "-"}
-            </p>
+          <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+            <p className="text-sm font-medium w-[40%] mr-2">Call Owner</p>
+            <div>
+              <p className="text-sm font-semibold text-black">
+                {owner ? owner.name : "-"}
+              </p>
+              <p className="text-sm font-semibold text-grey">
+                {owner?.roles?.[0]?.name || "-"}
+              </p>
+            </div>
           </div>
-          <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-            <p className="text-sm font-medium">Call Participant</p>
-            <p className="text-sm font-semibold text-black">
-              {data1?.participants?.customer_name}
-            </p>
-            <p className="text-sm font-semibold text-grey">
-              {data1?.participants?.customer_designation}
-            </p>
+          <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+            <p className="text-sm font-medium w-[40%] mr-2">Call Participant</p>
+            <div>
+              <p className="text-sm font-semibold text-black">
+                {data1?.participants?.customer_name}
+              </p>
+              <p className="text-sm font-semibold text-grey">
+                {data1?.participants?.customer_designation}
+              </p>
+            </div>
           </div>
-          <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-            <p className="text-sm font-medium">New Participant</p>
-            <p className="text-sm font-semibold text-black">
-              {data1?.call_new_participant_name ?? "-"}
-            </p>
-            <p className="text-sm font-semibold text-grey">
-              {data1?.call_new_participant_designation ?? "-"}
-            </p>
-          </div>
+          {data1?.call_new_participant_name && (
+            <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+              <p className="text-sm font-medium w-[40%] mr-2">
+                New Participant
+              </p>
+              <p className="text-sm font-semibold text-black">
+                {data1?.call_new_participant_name ?? "-"}
+              </p>
+              <p className="text-sm font-semibold text-grey">
+                {data1?.call_new_participant_designation ?? "-"}
+              </p>
+            </div>
+          )}
         </div>
       </div>
       <div className=" mt-[20px] w-[600px] h-[1px] px-[30px]"></div>
