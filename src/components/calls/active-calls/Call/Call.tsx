@@ -671,9 +671,10 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             left={20}
             // text={CallData.callId}
             text={
-              parseInt(
-                CallData?.callId.replace(/\D/g, "").substr(0, 4)
-              ).toString() || "-"
+              String(convertDatetimeToCustomFormat(CallData.updatedAt)).slice(
+                0,
+                4
+              ) || "-"
             }
             color={"#000"}
             click={true}
