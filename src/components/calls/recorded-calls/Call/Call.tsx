@@ -616,6 +616,16 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
 
     return formattedTime;
   };
+  function convertDatetimeToCustomFormat(dateStr: any) {
+    // Convert the string to a Date object
+    const dt: any = new Date(dateStr);
+
+    // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
+    const referenceDate: any = new Date("1400-01-01T00:00:00Z");
+    const secondsDifference = Math.floor((dt - referenceDate) / 1000);
+
+    return secondsDifference;
+  }
 
   return (
     <>
@@ -645,9 +655,11 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             left={20}
             // text={"345345354335"}
             text={
-              parseInt(
-                CallData?.callData?.[0]?.callId.replace(/\D/g, "").substr(0, 4)
-              ).toString() || "-"
+              String(
+                convertDatetimeToCustomFormat(
+                  CallData?.callData?.[0]?.call_date
+                )
+              ).slice(0, 4) || "-"
             }
             color={"#000"}
             click={true}

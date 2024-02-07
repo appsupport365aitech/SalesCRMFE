@@ -40,6 +40,16 @@ const CallsPage = () => {
     { id: 2, title: "Closed Calls" },
   ]);
   const [accessToken, setAccessToken] = useState<any>("");
+  function convertDatetimeToCustomFormat(dateStr: any) {
+    // Convert the string to a Date object
+    const dt: any = new Date(dateStr);
+
+    // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
+    const referenceDate: any = new Date("1400-01-01T00:00:00Z");
+    const secondsDifference = Math.floor((dt - referenceDate) / 1000);
+
+    return secondsDifference;
+  }
 
   useEffect(() => {
     if (window !== undefined) {
@@ -460,9 +470,9 @@ const CallsPage = () => {
           let row = [
             {
               text:
-                parseInt(
-                  item?.callData?.[0]?.callId.replace(/\D/g, "").substr(0, 4)
-                ).toString() || "-",
+                String(
+                  convertDatetimeToCustomFormat(item?.callData?.[0]?.call_date)
+                ).slice(0, 4) || "-",
               id: item?._id,
               link: `/calls/recorded-calls/${item?._id}/audio-call`,
             },
