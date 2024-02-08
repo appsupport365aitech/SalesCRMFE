@@ -17,7 +17,7 @@ const HomeLayout = ({ children }: any) => {
   const router = useRouter();
   const noSidebarFor = ["/login", "/forgot-password", "/reset-password"];
   return (
-    <div className="w-full min-h-screen bg-[#f5f5f5] flex" id="Home">
+    <div className="w-full min-h-screen bg-white flex" id="Home">
       {!noSidebarFor.includes(router.pathname) && <Sidebar />}
       <div
         className="overflow-auto h-screen"

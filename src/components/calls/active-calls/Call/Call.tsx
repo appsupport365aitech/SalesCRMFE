@@ -641,6 +641,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
   const formattedTime = `${twelveHourFormat}${minutes != undefined ? ":" : ""}${
     minutes != undefined ? minutes : ""
   } ${period}`;
+  console.log("rg", CallData?.callId);
 
   return (
     <>
@@ -669,7 +670,12 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             width={100}
             left={20}
             // text={CallData.callId}
-            text={CallData?.callId}
+            text={
+              String(convertDatetimeToCustomFormat(CallData.updatedAt)).slice(
+                0,
+                4
+              ) || "-"
+            }
             color={"#000"}
             click={true}
             route={`${pathname}/${id}/calling`}

@@ -801,7 +801,7 @@ const LeadContainer = ({
   return (
     <>
       <div
-        className="flex relative h-[auto]"
+        className="flex relative h-fit"
         style={{
           zIndex: 100,
         }}

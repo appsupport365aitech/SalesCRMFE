@@ -604,7 +604,7 @@ const Audio = ({ data, data1, data2 }: any) => {
                   height={10}
                 />
                 <p className="text-gray-600 text-[14px]">
-                  Call owner: {data?.CallerName}
+                  Call owner: {data?.activeCall?.owner?.name}
                 </p>
               </div>
               <div className="w-full gap-2 flex items-center mt-[6px]">
@@ -616,12 +616,20 @@ const Audio = ({ data, data1, data2 }: any) => {
                   height={10}
                 />
                 <p className="text-gray-600 text-[14px]">
-                  Participant: {data?.AnsweredBy}
+                  Participant: {data?.activeCall?.call_new_participant_name}
                 </p>
               </div>
             </div>
-            <Tracker title={data?.CallerName} list={list} color={"#4091FF"} />
-            <Tracker title={data?.AnsweredBy} list={list} color={"#FE5143"} />
+            <Tracker
+              title={data?.activeCall?.owner?.name}
+              list={list}
+              color={"#4091FF"}
+            />
+            <Tracker
+              title={data?.activeCall?.call_new_participant_name}
+              list={list}
+              color={"#FE5143"}
+            />
             {/* <Tracker title={"Topics"} list={list} color={"#434343"} /> */}
           </div>
           <div className="bg-white rounded-lg pb-4">

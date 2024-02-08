@@ -48,6 +48,8 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
 
     return secondsDifference;
   }
+  console.log("data1", data1);
+  console.log("data", data);
 
   return (
     <div>
@@ -64,17 +66,24 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
 
       <div className="pl-[30px]">
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Call Id - {type === "MEETING" ? data?._id : data?.activeCall?.callId}
+          Call Id -{" "}
+          {type === "MEETING"
+            ? String(
+                convertDatetimeToCustomFormat(data?.activeCall?.call_date)
+              ).slice(0, 4) || "-"
+            : String(
+                convertDatetimeToCustomFormat(data?.activeCall?.call_date)
+              ).slice(0, 4) || "-"}
         </p>
         <div className="text-[#8A9099] flex  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[50%] mr-4">LEAD ID</p>
-          <p className="text-sm font-semibold text-black">
+          <p className="text-sm font-semibold text-black w-[50%]">
             {data1?.leadId || "-"}
           </p>
         </div>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[50%] mr-4">Lead Title</p>
-          <p className="text-sm font-semibold text-black">
+          <p className="text-sm font-semibold text-black w-[50%]">
             {data1?.lead_title || "-"}
           </p>
         </div>
@@ -83,29 +92,31 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
         </p>
         <div className="text-[#8A9099]  flex  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[50%] mr-4"> Company Name</p>
-          <p className="text-sm font-semibold text-black">
+          <p className="text-sm font-semibold text-black w-[50%]">
             {data1?.companyId?.company_name ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[50%] mr-4">Client POC</p>
-          <p className="text-sm font-semibold text-black">
+          <p className="text-sm font-semibold text-black w-[50%]">
             {data1?.customerId?.customer_name ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[50%] mr-4">Product/Service</p>
-          <p className="text-sm font-semibold text-black">
+          <p className="text-sm font-semibold text-black w-[50%]">
             {data1?.companyId?.company_product_category}
           </p>
         </div>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[50%] mr-4">Lead Stage</p>
-          <p className="text-sm font-semibold text-black">{data1?.leadStage}</p>
+          <p className="text-sm font-semibold text-black w-[50%]">
+            {data1?.leadStage}
+          </p>
         </div>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[50%] mr-4">Call Type</p>
-          <p className="text-sm font-semibold text-black">
+          <p className="text-sm font-semibold text-black w-[50%]">
             {type === "MEETING"
               ? data?.type
               : data?.activeCall?.call_type ?? "-"}
@@ -113,7 +124,7 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
         </div>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[50%] mr-4">Call Description</p>
-          <p className="text-sm font-semibold text-black">
+          <p className="text-sm font-semibold text-black w-[50%]">
             {type === "MEETING"
               ? data?.description
               : data?.activeCall?.call_discription ?? "-"}
@@ -134,17 +145,17 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
           <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
             <p className="text-sm font-medium w-[50%] mr-4">Call Owner</p>
             <p className="text-sm font-semibold text-black">
-              {data1?.owners?.[0]?.name ?? "-"}
+              {data?.activeCall?.owner?.name ?? "-"}
             </p>
           </div>
           <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
             <p className="text-sm font-medium w-[50%] mr-4">Call Participant</p>
             <div className="">
               <p className="text-sm font-semibold text-black">
-                {data1?.customerId?.customer_name ?? "-"}
+                {data?.activeCall?.call_new_participant_name ?? "-"}
               </p>
               <p className="text-sm font-semibold text-grey">
-                {data1?.customerId?.customer_designation ?? "-"}
+                {data?.activeCall?.call_new_participant_designation ?? "-"}
               </p>
             </div>
           </div>

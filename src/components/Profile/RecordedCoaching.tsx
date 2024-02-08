@@ -15,16 +15,16 @@ const Chart = ({ title, percent }: any) => {
           style={{ height: percent }}
         ></div>
       </div>
-      <div className="text-[10px] leading-[13px] min-h-[40px] flex items-center justify-center tracking-sm font-medium text-[#8A9099] text-center absolute bottom-[-25px]">
+      <p className="w-[100%] text-[8.5px] leading-[13px] min-h-[40px] flex items-center justify-center font-medium text-[#8A9099] text-center absolute bottom-[-25px]">
         {title}
-      </div>
+      </p>
     </div>
   );
 };
 
 const ChartContainer = ({ children }: any) => {
   return (
-    <div className="w-[100%] h-[220px] mt-[40px] flex">
+    <div className="w-full h-[220px] mt-[40px] flex">
       <div className="w-[4%] h-[100%] flex flex-col justify-between items-center text-[#8A9099]">
         <p>100</p>
         <p>75</p>
@@ -32,7 +32,7 @@ const ChartContainer = ({ children }: any) => {
         <p>25</p>
         <p className="mb-[20px]">0</p>
       </div>
-      <div className="w-[92%] h-[100%] flex justify-between pr-[30px] pl-[30px]">
+      <div className="w-full h-[100%] flex justify-between pr-[30px] pl-[30px]">
         {children}
       </div>
     </div>
@@ -363,6 +363,7 @@ const Coaching = ({ data, refresh }: any) => {
       });
     });
   };
+  console.log("sdr", scoreQuestions);
 
   useEffect(() => {
     try {
@@ -516,21 +517,18 @@ const Coaching = ({ data, refresh }: any) => {
               {tab2 === 2 && <Emotion data={data1?.emotion} />}
             </div>
           )}
-          {tab === 1 && userRole === "QA Analyst" && (
+          {tab === 1 && userRole === "QA manager" && (
             <div>
               {scoreQuestions?.map((quesItem: any, index: number) => (
-                <div className="fieldset mt-[24px]" key={index}>
-                  <p className="text-[20px] font-bold mb-3">
+                <div className="mt-[16px]" key={index}>
+                  <p className="text-[20px] font-bold mb-2">
                     {quesItem?.label}
                   </p>
                   <div>
                     {quesItem?.options?.map(
                       (optionItem: any, opIdx: number) => (
-                        <div key={opIdx}>
-                          <label
-                            htmlFor={quesItem?.key + optionItem?.key}
-                            className="flex items-baseline"
-                          >
+                        <div key={opIdx} className="flex">
+                          <label htmlFor={quesItem?.key + optionItem?.key}>
                             <input
                               className="border border-[#E8E9EB]"
                               type="radio"
@@ -544,15 +542,23 @@ const Coaching = ({ data, refresh }: any) => {
                                 )
                               }
                             />
-                            <p className="ml-2 mb-2">
-                              {optionItem?.value !== "NA" && (
-                                <span className="font-medium mr-1">
-                                  {optionItem?.value} marks:
-                                </span>
-                              )}
+                          </label>
+                          <div className="flex justify-start ml-2  mb-1">
+                            {optionItem?.value !== "NA" && (
+                              <p className="font-medium w-[80px]">
+                                {optionItem?.value} marks:
+                              </p>
+                            )}
+                            <p
+                              className={
+                                optionItem?.label === "Not applicable."
+                                  ? "font-medium w-full"
+                                  : "w-full"
+                              }
+                            >
                               {optionItem?.label}
                             </p>
-                          </label>
+                          </div>
                         </div>
                       )
                     )}

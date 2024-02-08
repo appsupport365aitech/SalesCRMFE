@@ -298,7 +298,7 @@ const SalesOpen = ({
         <div className={`rounded-[8px] overflow-hidden w-[150px]`}>
           <button
             className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
-              showSubDD === 0 && "bg-[#eee]"
+              showSubDD === 0 && "bg-[#eee] rounded-lg"
             }`}
             onClick={() => setShowSubDD(showSubDD !== 0 ? 0 : -1)}
           >
@@ -306,7 +306,7 @@ const SalesOpen = ({
           </button>
           <button
             className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
-              showSubDD === 1 && "bg-[#eee]"
+              showSubDD === 1 && "bg-[#eee] rounded-lg"
             }`}
             onClick={() => setShowSubDD(1)}
           >
@@ -314,7 +314,7 @@ const SalesOpen = ({
           </button>
           <button
             className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
-              showSubDD === 2 && "bg-[#eee]"
+              showSubDD === 2 && "bg-[#eee] rounded-lg"
             }`}
             onClick={() => setShowSubDD(2)}
           >
@@ -323,11 +323,11 @@ const SalesOpen = ({
         </div>
         <div>
           {showSubDD === 0 && (
-            <div className="w-[100%] bg-[#eee]">
-              <div className="flex items-center p-[6px] border-solid border-1 border-black bg-white">
+            <div className="w-[100%] bg-[#eee] rounded-lg p-1">
+              <div className="flex items-center p-[6px] border-solid border border-[#eee] rounded-t-lg bg-white ">
                 <input
                   type="text"
-                  className="w-[160px] bg-white outline-none text-black"
+                  className="w-[160px] bg-white outline-none text-black font-xs"
                   placeholder="Search..."
                   value={searchAssignTo}
                   onInput={(e: any) => handleSearchAllocateTo(e.target.value)}
@@ -387,11 +387,11 @@ const SalesOpen = ({
             </div>
           )}
           {showSubDD === 1 && (
-            <ul className="bg-[#eee] flex flex-col gap-[4px]">
+            <ul className="bg-[#eee] flex flex-col gap-[4px] rounded-lg p-2">
               <li className="">
                 <label
                   htmlFor={"Open"}
-                  className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer"
+                  className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer gap-2"
                 >
                   <span>Open</span>
                   <input
@@ -423,12 +423,12 @@ const SalesOpen = ({
             </ul>
           )}
           {showSubDD === 2 && (
-            <ul className="bg-[#eee] flex flex-col gap-[4px]">
+            <ul className="bg-[#eee] flex flex-col gap-[4px] rounded-lg p-2">
               {openStages?.map((stageItem: any, index: number) => (
                 <li className="" key={index}>
                   <label
                     htmlFor={stageItem?.id}
-                    className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer"
+                    className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer gap-2"
                   >
                     <span>{stageItem?.label}</span>
                     <input
@@ -470,7 +470,7 @@ const SalesOpen = ({
           />
         </Backdrop>
       )}
-      <Navigation
+      {/* <Navigation
         title={""}
         leftChildren={
           <DropDown3 text="Actions" id={0} dropdown={true} dark={true}>
@@ -554,13 +554,18 @@ const SalesOpen = ({
             ],
           },
         ]}
-      />
+      /> */}
       <LeadsContainer
         view={view}
         records={data.totalRecords}
         list={Dummy}
         setSelectedRows={setSelectedRows}
         reload={reload}
+        renderDropdownList={renderDropdownList()}
+        AddLead={AddLead}
+        addExport={addExport}
+        ref={ref}
+        data={data.result}
       />
     </div>
   );

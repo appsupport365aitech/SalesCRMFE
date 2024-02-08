@@ -11,6 +11,9 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { PaymentOutlined } from "@mui/icons-material";
 import { baseUrl } from "@/utils/baseUrl";
+import Navigation from "@/components/app/Navigation";
+import DropDown3 from "@/utils/Button/DropDown3";
+import { CSVLink } from "react-csv";
 
 const LeadsTable = React.lazy(
   () => import("@/components/View/Tables/allocated/LeadsSearch")
@@ -24,6 +27,12 @@ const LeadsContainer = ({
   list,
   setSelectedRows,
   reload,
+  renderDropdownList,
+  viewButtinClick,
+  AddLead,
+  addExport,
+  data,
+  ref,
 }: any) => {
   const [qaid, setQaid] = useState(
     window !== undefined ? localStorage.getItem("user-id") : ""
@@ -154,14 +163,80 @@ const LeadsContainer = ({
   ]);
 
   return (
-    <div className="w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] relative mb-[40px]">
-      <div className="w-[100%] flex items-center  px-[8px] mb-4">
-        <div className="w-[100%] flex flex-col gap-4 my-4">
-          <div className="flex gap-5">
+    <div className="mt-10 w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] relative mb-[40px]">
+      <div className="flex items-center px-[8px] mb-4">
+        <div className="my-4">
+          <div className="flex justify-between items-center">
             <Search change={onChange} view={view} />
+            <Navigation
+              title={""}
+              leftChildren={
+                <DropDown3 text="Actions" id={0} dropdown={true} dark={true}>
+                  {renderDropdownList}
+                </DropDown3>
+              }
+              buttons={[
+                {
+                  text: "View",
+                  dropdown: true,
+                  id: 0,
+                  click: viewButtinClick,
+                  light: false,
+                  dark: true,
+                  list: [
+                    {
+                      title: "Table View",
+                      Icon: "TableView",
+                    },
+                    {
+                      title: "Kanban View",
+                      Icon: "KanbanView",
+                    },
+                  ],
+                  value: 0,
+                },
+                {
+                  text: "Add Lead",
+                  dropdown: true,
+                  id: 1,
+                  icon: "Plus",
+                  click: AddLead,
+                  light: false,
+                  dark: false,
+                  list: [
+                    { title: "Using Form", Icon: "Text" },
+                    { title: "Import Leads", Icon: "Download" },
+                    // { title: "Using Prompt", Icon: "Text" },
+                  ],
+                },
+                {
+                  text: "",
+                  dropdown: true,
+                  id: 1,
+                  icon: "Download",
+                  light: true,
+                  dark: false,
+                  click: addExport,
+                  list: [
+                    // { title: "Print", Icon: "Printer" },
+                    { title: "Excel", Icon: "Excel" },
+                    // { title: "PDF", Icon: "PDF" },
+                    {
+                      title: "CSV",
+                      Icon: "CSV",
+                      wrapper: (
+                        <CSVLink data={data} className="" ref={ref}>
+                          CSV
+                        </CSVLink>
+                      ),
+                    },
+                  ],
+                },
+              ]}
+            />
           </div>
-          <div className="flex items-center gap-5 flex-wrap">
-            {/* <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <div className="flex items-end gap-5 flex-wrap">
+            {/* <div className="flex items-center w-36 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Status</h2>
               <select
                 onChange={(e) => {
@@ -183,7 +258,13 @@ const LeadsContainer = ({
                 </option>
               </select>
             </div> */}
-            <div className="flex gap-2 w-fit items-center justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                stage !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Stage</h2>
               <select
                 onChange={(e) => setStage(e.target.value)}
@@ -202,7 +283,13 @@ const LeadsContainer = ({
                 </option>
               </select>
             </div>
-            <div className="flex items-center gap-2 w-fit justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                product !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Product/Service</h2>
               <select
                 onChange={(e) => setProduct(e.target.value)}
@@ -210,6 +297,18 @@ const LeadsContainer = ({
                 id="countries"
               >
                 <option selected={product === ""} value=""></option>
+                <option
+                  selected={product === "Email automation"}
+                  value="Email automation"
+                >
+                  Email automation
+                </option>
+                <option
+                  selected={product === "social media automation"}
+                  value="social media automation"
+                >
+                  social media automation
+                </option>
                 <option selected={product === "P1"} value="P1">
                   P1
                 </option>
@@ -233,7 +332,13 @@ const LeadsContainer = ({
                 </option>
               </select>
             </div>
-            <div className="flex items-center gap-2 w-fit justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                leadSource !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Lead Source</h2>
               <select
                 onChange={(e) => setLeadSource(e.target.value)}
@@ -289,7 +394,7 @@ const LeadsContainer = ({
               </select>
             </div>
             <div className="">
-              <span className="text-gray-500">
+              <span className="text-black font-semibold pl-1">
                 Allocated Start and End Date
               </span>
               <DatePicker
@@ -299,7 +404,13 @@ const LeadsContainer = ({
                 setEndDate={setEndDate}
               />
             </div>
-            <div className="flex items-center gap-2 w-fit justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                leadAllocatedTo !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Lead Allocated To</h2>
               <select
                 onChange={(e) => setLeadAllocatedTo(e.target.value)}
@@ -318,7 +429,13 @@ const LeadsContainer = ({
                 ))}
               </select>
             </div>
-            <div className="flex items-center gap-2 w-fit justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div
+              className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                leadAllocatedBy !== ""
+                  ? "border border-red-500"
+                  : "border border-gray-300"
+              }`}
+            >
               <h2 className="font-medium">Lead Allocated By</h2>
               <select
                 onChange={(e) => setLeadAllocatedBy(e.target.value)}

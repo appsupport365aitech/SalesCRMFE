@@ -6,10 +6,10 @@ const Navigation = ({ buttons, title, leftBtns, leftChildren }: any) => {
   console.log(buttons);
   const arr = [];
   return (
-    <div className="w-[100%] min-h-[100px] flex items-center justify-between">
-      <div className="flex items-center gap-[30px]">
-        <h1 className="w-[50%] text-[#3F434A] font-medium text-3xl">{title}</h1>
-        <div className="w-[50%] flex justify-end ">
+    <div className="w-fit min-h-[100px] flex items-center">
+      <div className="flex items-center">
+        <h1 className="w-[40%] text-[#3F434A] font-medium text-3xl">{title}</h1>
+        <div className="w-[40%] flex">
           {leftBtns?.map((item: any, i: number) => {
             return (
               <Button
@@ -30,7 +30,7 @@ const Navigation = ({ buttons, title, leftBtns, leftChildren }: any) => {
         </div>
       </div>
       {buttons?.length > 0 && (
-        <div className="w-[50%] flex justify-end ">
+        <div className="w-fit flex justify-end ">
           {leftChildren}
 
           {buttons.map((item: any, i: any) => {

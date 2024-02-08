@@ -98,6 +98,7 @@ const AudioProfileContainer = ({
               height={25}
             />
             {data?.Duration}
+            {/* {data?.activeCall?.call_duration} */}
           </div>
         </div>
       )}
