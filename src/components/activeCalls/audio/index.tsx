@@ -616,7 +616,7 @@ const Audio = ({ data, data1, data2 }: any) => {
                   height={10}
                 />
                 <p className="text-gray-600 text-[14px]">
-                  Participant: {data?.activeCall?.call_new_participant_name}
+                  Participant: {data?.activeCall?.participants?.customer_name}
                 </p>
               </div>
             </div>

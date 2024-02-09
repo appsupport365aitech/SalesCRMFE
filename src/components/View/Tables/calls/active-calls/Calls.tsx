@@ -106,17 +106,15 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
             setItems(allItems);
           }
           const filtered = data.filter((e: any) => {
-            const idss: any = String(
-              convertDatetimeToCustomFormat(e.updatedAt)
-            );
             const leadid = e.leadId?.leadId;
-            // const callId = parseInt(
-            //   e.leadId?.callId.replace(/\D/g, "").substr(0, 4)
-            // ).toString();
+            const callId = (e?._id || "")
+              .split("")
+              .filter((dig: any) => /\d/.test(dig))
+              .join("")
+              .slice(-4);
             return (
-              idss?.includes(search) ||
               leadid?.includes(search) ||
-              // callId.includes(search) ||
+              callId.includes(search) ||
               e?.call_title?.includes(search)
             );
           });

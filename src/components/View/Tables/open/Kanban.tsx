@@ -26,12 +26,15 @@ const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
   //     return data;
   //   };
   const [loading, setLoading] = React.useState(false);
+  const [qaid, setQaid] = useState(
+    window !== undefined ? localStorage.getItem("user-id") : ""
+  );
   useEffect(() => {
     try {
       setLoading(true);
       const getItems = async () => {
         const res = await axios.get(
-          `${baseUrl}api/leads/find-all?leadStatus=Open&${queryStr}`,
+          `${baseUrl}api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}${queryStr}`,
           {
             headers: {
               Authorization: accessToken,

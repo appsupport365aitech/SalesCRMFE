@@ -58,7 +58,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
   const [endDate, setEndDate] = useState("");
   const [search, setSearch] = useState("");
   const [companyName, setCompanyName] = useState("");
-  const [product, setProduct] = useState(" ");
+  const [product, setProduct] = useState("");
   const [callOwner, setCallOwner] = useState("");
   const [callType, setCallType] = useState("");
   const [callDisposition, setCallDisposition] = useState("");

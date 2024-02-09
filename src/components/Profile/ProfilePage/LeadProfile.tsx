@@ -159,7 +159,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
           />
         </Backdrop>
       )}
-      <div className="w-[100%]">
+      <div className="w-[100%] ">
         <div className="flex -space-x-2 overflow-hidden w-[100%]">
           <div className="flex items-center w-[100%] justify-between pb-[10px] ">
             <div className="flex items-center gap-5 w-[100%]">
@@ -192,69 +192,71 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
             />
           </div>
         </div>
-        <p className="border-b-2 w-[100%] pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Company Info
-        </p>
-        <div className="text-[#8A9099] flex items-center  gap-4 mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium w-[40%]">Company Name</p>
-          <p className="text-sm font-semibold text-black">
-            {data?.companyId?.company_name}
+        <div>
+          <p className="border-b-2 w-[100%] pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+            Company Info
           </p>
-        </div>
-        <div className="text-[#8A9099] flex items-center gap-4 mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium w-[40%]"> Website Link</p>
-          <p
-            onClick={() => {
-              if (data?.companyId?.company_website_url) {
-                window.open(data?.companyId?.company_website_url, "_blank");
-              }
-            }}
-            className="text-sm font-semibold text-black"
-          >
-            {data?.companyId?.company_website_url}
-          </p>
-        </div>
-        <div className="text-[#8A9099] flex items-center gap-4 mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium w-[40%]">Industry Type</p>
-          <p className="text-sm font-semibold text-black">
-            {data?.companyId?.company_product_category}
-          </p>
-        </div>
-        {data?.companyId?.company_socialMedia1 ? (
-          <div className="text-[#8A9099] flex justify-between gap-4 w-9/12  mt-[7px] leading-[21px]">
-            <p className="text-sm font-medium w-[40%]"> Social Media</p>
-            <p className="text-sm font-semibold text-black flex">
-              {data?.companyId?.company_socialMedia1 && (
-                <a href={data?.companyId?.company_socialMedia1Url}>
-                  <Image
-                    src={getBasicIcon(data?.companyId?.company_socialMedia1)}
-                    className={`w-[20px] svg-grey mr-2`}
-                    alt=""
-                    width={20}
-                    height={20}
-                    style={{
-                      objectFit: "contain",
-                    }}
-                  />
-                </a>
-              )}
-              {data?.companyId?.company_socialMedia2 && (
-                <a href={data?.companyId?.company_socialMedia2Url}>
-                  <Image
-                    src={getBasicIcon(data?.companyId?.company_socialMedia2)}
-                    className={`w-[20px] svg-grey mr-2`}
-                    alt=""
-                    width={20}
-                    height={20}
-                    style={{
-                      objectFit: "contain",
-                    }}
-                  />
-                </a>
-              )}
+          <div className="text-[#8A9099] flex items-center  gap-4 mt-[7px] leading-[21px]">
+            <p className="text-sm font-medium w-[40%]">Company Name</p>
+            <p className="text-sm font-semibold text-black">
+              {data?.companyId?.company_name}
             </p>
           </div>
-        ) : null}
+          <div className="text-[#8A9099] flex items-center gap-4 mt-[7px] leading-[21px]">
+            <p className="text-sm font-medium w-[40%]"> Website Link</p>
+            <p
+              onClick={() => {
+                if (data?.companyId?.company_website_url) {
+                  window.open(data?.companyId?.company_website_url, "_blank");
+                }
+              }}
+              className="text-sm font-semibold text-black"
+            >
+              {data?.companyId?.company_website_url}
+            </p>
+          </div>
+          <div className="text-[#8A9099] flex items-center gap-4 mt-[7px] leading-[21px]">
+            <p className="text-sm font-medium w-[40%]">Industry Type</p>
+            <p className="text-sm font-semibold text-black">
+              {data?.companyId?.company_product_category}
+            </p>
+          </div>
+          {data?.companyId?.company_socialMedia1 ? (
+            <div className="text-[#8A9099] flex justify-between gap-4 w-9/12  mt-[7px] leading-[21px]">
+              <p className="text-sm font-medium w-[40%]"> Social Media</p>
+              <p className="text-sm font-semibold text-black flex">
+                {data?.companyId?.company_socialMedia1 && (
+                  <a href={data?.companyId?.company_socialMedia1Url}>
+                    <Image
+                      src={getBasicIcon(data?.companyId?.company_socialMedia1)}
+                      className={`w-[20px] svg-grey mr-2`}
+                      alt=""
+                      width={20}
+                      height={20}
+                      style={{
+                        objectFit: "contain",
+                      }}
+                    />
+                  </a>
+                )}
+                {data?.companyId?.company_socialMedia2 && (
+                  <a href={data?.companyId?.company_socialMedia2Url}>
+                    <Image
+                      src={getBasicIcon(data?.companyId?.company_socialMedia2)}
+                      className={`w-[20px] svg-grey mr-2`}
+                      alt=""
+                      width={20}
+                      height={20}
+                      style={{
+                        objectFit: "contain",
+                      }}
+                    />
+                  </a>
+                )}
+              </p>
+            </div>
+          ) : null}
+        </div>
 
         <p className=" border-b-2 w-[100%] pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Lead Info
@@ -427,40 +429,42 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
             {data?.customerId?.customer_email || data?.customerId?.email}
           </p>
         </div>
-        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium w-[40%]">Social Media</p>
-          <div className="flex">
-            {data?.customerId?.customer_socialMedia1 && (
-              <a href={data?.customerId?.customer_socialMedia1Url}>
-                <Image
-                  src={getBasicIcon(data?.customerId?.customer_socialMedia1)}
-                  className={`w-[20px] svg-grey mr-2`}
-                  alt=""
-                  width={20}
-                  height={20}
-                  style={{
-                    objectFit: "contain",
-                  }}
-                />
-              </a>
-            )}
-            {data?.customerId?.customer_socialMedia2 && (
-              <a href={data?.customerId?.customer_socialMedia2Url}>
-                <Image
-                  src={getBasicIcon(data?.customerId?.customer_socialMedia2)}
-                  className={`w-[20px] svg-grey mr-2`}
-                  alt=""
-                  width={20}
-                  height={20}
-                  style={{
-                    objectFit: "contain",
-                  }}
-                />
-              </a>
-            )}
+        {data?.customerId?.customer_socialMedia1 && (
+          <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
+            <p className="text-sm font-medium w-[40%]">Social Media</p>
+            <div className="flex">
+              {data?.customerId?.customer_socialMedia1 && (
+                <a href={data?.customerId?.customer_socialMedia1Url}>
+                  <Image
+                    src={getBasicIcon(data?.customerId?.customer_socialMedia1)}
+                    className={`w-[20px] svg-grey mr-2`}
+                    alt=""
+                    width={20}
+                    height={20}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                </a>
+              )}
+              {data?.customerId?.customer_socialMedia2 && (
+                <a href={data?.customerId?.customer_socialMedia2Url}>
+                  <Image
+                    src={getBasicIcon(data?.customerId?.customer_socialMedia2)}
+                    className={`w-[20px] svg-grey mr-2`}
+                    alt=""
+                    width={20}
+                    height={20}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                </a>
+              )}
+            </div>
           </div>
-        </div>
-        {data?.customerId?.contacts && (
+        )}
+        {data?.customerId?.contacts.length > 0 && (
           <div>
             <p className=" border-b-2 w-[100%] pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
               Other Contact

@@ -68,12 +68,13 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Call Id -{" "}
           {type === "MEETING"
-            ? String(
-                convertDatetimeToCustomFormat(data?.activeCall?.call_date)
-              ).slice(0, 4) || "-"
-            : String(
-                convertDatetimeToCustomFormat(data?.activeCall?.call_date)
-              ).slice(0, 4) || "-"}
+            ? String(convertDatetimeToCustomFormat(data?.activeCall?._id)) ||
+              "-"
+            : data?.activeCall?._id
+                .split("")
+                .filter((dig: any) => /\d/.test(dig))
+                .join("")
+                .slice(-4) || "-"}
         </p>
         <div className="text-[#8A9099] flex  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[50%] mr-4">LEAD ID</p>
@@ -105,7 +106,7 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[50%] mr-4">Product/Service</p>
           <p className="text-sm font-semibold text-black w-[50%]">
-            {data1?.companyId?.company_product_category}
+            {data?.activeCall?.call_type}
           </p>
         </div>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
@@ -152,7 +153,7 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
             <p className="text-sm font-medium w-[50%] mr-4">Call Participant</p>
             <div className="">
               <p className="text-sm font-semibold text-black">
-                {data?.activeCall?.call_new_participant_name ?? "-"}
+                {data?.activeCall?.participants?.customer_name ?? "-"}
               </p>
               <p className="text-sm font-semibold text-grey">
                 {data?.activeCall?.call_new_participant_designation ?? "-"}

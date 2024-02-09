@@ -966,7 +966,7 @@ const LeadContainer = ({
             width={150}
             left={20}
             textLeft={10}
-            text={"Allocated Leads"}
+            text={"Leads To Allocate"}
           />
           <LeadItem
             width={150}
