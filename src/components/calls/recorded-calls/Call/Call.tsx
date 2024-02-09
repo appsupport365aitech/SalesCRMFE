@@ -653,7 +653,13 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItem
             width={200}
             left={20}
-            text={CallData?.callData?.[0]?.callId.substring(0, 4) || "-"}
+            text={
+              CallData?.callData?.[0]?._id
+                .split("")
+                .filter((dig: any) => /\d/.test(dig))
+                .join("")
+                .slice(-4) || "-"
+            }
             color={"#000"}
             click={true}
             route={`${pathname}/${id}/audio-call`}
