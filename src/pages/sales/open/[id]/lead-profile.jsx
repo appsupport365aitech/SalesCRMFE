@@ -230,7 +230,7 @@ const Profile = () => {
             />
           </Backdrop>
         )}
-        <div className="w-[100%] flex gap-[25px] mb-[100px] ">
+        <div className="w-[100%] flex gap-[25px] mb-[100px]">
           <div className="w-[400px] min-h-[70vh] bg-[#ffe3e170] rounded-xl shrink-0 p-[20px]">
             <ProfilePage
               updated={UpdateData}

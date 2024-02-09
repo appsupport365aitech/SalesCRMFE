@@ -159,7 +159,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
           />
         </Backdrop>
       )}
-      <div className="w-[100%]">
+      <div className="w-[100%] ">
         <div className="flex -space-x-2 overflow-hidden w-[100%]">
           <div className="flex items-center w-[100%] justify-between pb-[10px] ">
             <div className="flex items-center gap-5 w-[100%]">
