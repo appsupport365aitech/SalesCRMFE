@@ -168,37 +168,111 @@ const Coaching = ({ data, refresh }: any) => {
   const [userRole, setUserRole] = useState(
     window !== undefined ? localStorage.getItem("user-role") : ""
   );
-  const [loading, setLoading] = React.useState(true);
+
+  const [accessToken, setAccessToken] = useState<any>(
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Yjg5NTc3MGQ4YjAzNDlkYWNlOWNiNyIsImlhdCI6MTcwNzY0NjgzMiwiZXhwIjoxNzA3NzMzMjMyfQ.wpuxHOcmaZ5geXX_mnfTkPaf_ya_b7IU0038zH8ewaA"
+  );
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+
+  const [loading, setLoading] = React.useState(false);
   const [checked, setChecked] = React.useState(true);
-  const [data1, setData] = useState({
-    scriptBuilding: {
-      "Lead Qualification": 0,
-      "Need Discovery": 0,
-      "Product Knowledge": 0,
-      "Price Discussion": 0,
-      Closing: 0,
-      Opening: 0,
-      "Key Value Proposition": 0,
-    },
-    sellingSkills: {
-      "Consultative Selling": 0,
-      Empathy: 0,
-      "Listening Skills": 0,
-      Confidence: 0,
-      "Urgency Creation": 0,
-      "Positive Energy": 0,
-      "Rapport Building": 0,
-      Politeness: 0,
-    },
-    emotion: {
-      Joy: 0,
-      Trust: 0,
-      Politeness: 0,
-      Satisfaction: 0,
-      Curiosity: 0,
-      Assertiveness: 0,
-    },
-  });
+  const [scriptBuildingData, setScriptBuildingData] = useState({});
+  const [sellingSkillsData, setSellingSkillsData] = useState({});
+  const [emotionData, setEmotionData] = useState({});
+  // const [data1, setData] = useState({
+  //   scriptBuilding: {
+  //     "Lead Qualification": 0,
+  //     "Need Discovery": 0,
+  //     "Product Knowledge": 0,
+  //     "Price Discussion": 0,
+  //     Closing: 0,
+  //     Opening: 0,
+  //     "Key Value Proposition": 0,
+  //   },
+  //   sellingSkills: {
+  //     "Consultative Selling": 0,
+  //     Empathy: 0,
+  //     "Listening Skills": 0,
+  //     Confidence: 0,
+  //     "Urgency Creation": 0,
+  //     "Positive Energy": 0,
+  //     "Rapport Building": 0,
+  //     Politeness: 0,
+  //   },
+  //   emotion: {
+  //     Joy: 0,
+  //     Trust: 0,
+  //     Politeness: 0,
+  //     Satisfaction: 0,
+  //     Curiosity: 0,
+  //     Assertiveness: 0,
+  //   },
+  // });
+
+  const getScriptBuildingData = () => {
+    try {
+      setLoading(true);
+      axios
+        .get(`${baseUrl}api/dashboard/indicator/scriptBuildingBlocks`, {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
+        .then((response) => {
+          setScriptBuildingData(response.data.result);
+        })
+
+        .catch((error) => {
+          console.error("Error fetching script building data:", error);
+        });
+      setLoading(false);
+    } catch (error) {}
+  };
+
+  const getSellingSkillsData = () => {
+    try {
+      setLoading(true);
+      axios
+        .get(`${baseUrl}api/dashboard/indicator/sellingSkills`, {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
+        .then((e) => {
+          setSellingSkillsData(e.data.result);
+        })
+        .catch((e) => {});
+      setLoading(false);
+    } catch (error) {}
+  };
+  const getEmotionData = () => {
+    try {
+      setLoading(true);
+      axios
+        .get(`${baseUrl}api/dashboard/indicator/emotionAnalysis`, {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
+        .then((e) => {
+          setEmotionData(e.data.result);
+        })
+        .catch((e) => {});
+      setLoading(false);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getScriptBuildingData();
+    getSellingSkillsData();
+    getEmotionData();
+  }, [accessToken]);
+
   const appDispatch = useAppDispatch();
   const [tab, setTab] = useState<any>(0);
   const [tab2, setTab2] = useState<any>(0);
@@ -341,14 +415,6 @@ const Coaching = ({ data, refresh }: any) => {
     },
   ]);
 
-  const [accessToken, setAccessToken] = useState<any>("");
-
-  useEffect(() => {
-    if (window !== undefined) {
-      setAccessToken(localStorage.getItem("access-token"));
-    }
-  }, []);
-
   const updateScoreItem = (checked: any, quesItemIdx: any, val: any) => {
     setScoreQuestions((currScoreQues: any) => {
       return currScoreQues?.map((scoreQuesItem: any, index: number) => {
@@ -365,24 +431,24 @@ const Coaching = ({ data, refresh }: any) => {
   };
   console.log("sdr", scoreQuestions);
 
-  useEffect(() => {
-    try {
-      if (checked) {
-        axios
-          .get(`${baseUrl}api/indicator/getIndicatorValues?userId=${userId}`, {
-            headers: {
-              Authorization: accessToken,
-            },
-          })
-          .then((e) => {
-            setData(e.data);
-            setLoading(false);
-          })
-          .catch((e) => {});
-        setChecked(false);
-      }
-    } catch (error) {}
-  }, [accessToken]);
+  // useEffect(() => {
+  //   try {
+  //     if (checked) {
+  //       axios
+  //         .get(`${baseUrl}api/indicator/getIndicatorValues?userId=${userId}`, {
+  //           headers: {
+  //             Authorization: accessToken,
+  //           },
+  //         })
+  //         .then((e) => {
+  //           setData(e.data);
+  //           setLoading(false);
+  //         })
+  //         .catch((e) => {});
+  //       setChecked(false);
+  //     }
+  //   } catch (error) {}
+  // }, [accessToken]);
 
   const handleCallback = (payload: any) => {
     setTab(payload);
@@ -512,9 +578,9 @@ const Coaching = ({ data, refresh }: any) => {
                 list={tabs2}
                 coachingButton2
               />
-              {tab2 === 0 && <ScriptBuilding script={data1?.scriptBuilding} />}
-              {tab2 === 1 && <Selling selling={data1?.sellingSkills} />}
-              {tab2 === 2 && <Emotion data={data1?.emotion} />}
+              {tab2 === 0 && <ScriptBuilding script={scriptBuildingData} />}
+              {tab2 === 1 && <Selling selling={sellingSkillsData} />}
+              {tab2 === 2 && <Emotion data={emotionData} />}
             </div>
           )}
           {tab === 1 && userRole === "QA manager" && (
