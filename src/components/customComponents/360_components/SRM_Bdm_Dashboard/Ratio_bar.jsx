@@ -8,11 +8,14 @@ const xLabels = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"];
 
 const TalkRatio = ({ talkRatioData }) => {
   React.useEffect(() => {
-    talkRatioData?.forEach((item, index) => {
-      xLabels[index] = item.day;
-      uData[index] = item.speakerA;
-      pData[index] = item.speakerB;
-    });
+    if (!talkRatioData.lengh > 0) return;
+    else {
+      talkRatioData?.forEach((item, index) => {
+        xLabels[index] = item.day;
+        uData[index] = item.speakerA;
+        pData[index] = item.speakerB;
+      });
+    }
   }, [talkRatioData]);
   return (
     <Card className=" h-[400px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
