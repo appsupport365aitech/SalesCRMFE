@@ -263,10 +263,9 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
               <option value="" selected>
                 -- Select Product/Service --
               </option>
-              <option value="Email automation">Email automation</option>
-              <option value="social media automation">
-                social media automation
-              </option>
+              <option value="20 lakh cover">20 lakh cover</option>
+              <option value="50 lakh cover">50 lakh cover</option>
+              <option value="1 crore cover">1 crore cover</option>
               {/* <option value="P3">P3</option>
               <option value="Product A">Product A</option>
               <option value="Product B">Product B</option>
