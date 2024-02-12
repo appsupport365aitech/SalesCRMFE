@@ -67,7 +67,7 @@ const LeadItem = ({
 
   return (
     <div
-      className={`flex items-center  h-fit py-1 shrink-0`}
+      className={`flex items-center  h-[fit] shrink-0`}
       style={{ width: width, marginLeft: left }}
     >
       {link ? (
@@ -838,7 +838,7 @@ const LeadContainer = ({
             route={`/sales/open/${id}/lead-profile`}
           />
           <LeadItem
-            width={120}
+            width={200}
             left={0}
             color={"#000"}
             text={LeadData1.lead_title}
@@ -966,7 +966,7 @@ const LeadContainer = ({
             width={150}
             left={20}
             textLeft={10}
-            text={"Allocated Leads"}
+            text={"Leads To Allocate"}
           />
           <LeadItem
             width={150}

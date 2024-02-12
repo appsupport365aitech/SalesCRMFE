@@ -653,13 +653,12 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItem
             width={200}
             left={20}
-            // text={"345345354335"}
             text={
-              String(
-                convertDatetimeToCustomFormat(
-                  CallData?.callData?.[0]?.call_date
-                )
-              ).slice(0, 4) || "-"
+              CallData?.callData?.[0]?._id
+                .split("")
+                .filter((dig: any) => /\d/.test(dig))
+                .join("")
+                .slice(-4) || "-"
             }
             color={"#000"}
             click={true}

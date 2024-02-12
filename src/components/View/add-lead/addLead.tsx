@@ -59,7 +59,7 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
     setMoreContact2(true);
     setShowMoreContactButton2(false);
   };
-  const isCurrentPageValid =
+  const IsCurrentPageValid =
     currentPage === 1
       ? leadData.lead_title !== undefined &&
         leadData.lead_description !== undefined &&
@@ -70,10 +70,10 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
         leadData.leadStatus !== undefined &&
         leadData.leadStage !== undefined
       : currentPage === 2
-      ? companyData.company_name !== undefined &&
-        companyData.company_description !== undefined &&
-        companyData.company_address !== undefined &&
-        companyData.company_website_url !== undefined
+      ? companyData.company_name !== "" &&
+        companyData.company_description !== "" &&
+        companyData.company_address !== "" &&
+        companyData.company_website_url !== ""
       : contactData.customer_name !== undefined &&
         contactData.designation !== undefined &&
         contactData.customer_contact !== undefined &&
@@ -81,15 +81,21 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
         contactData.customer_gender !== undefined;
 
   const goToNextPage = () => {
-    if (isCurrentPageValid && currentPage < 3) {
+    if (IsCurrentPageValid && currentPage < 3) {
       setCurrentPage((prevPage) => prevPage + 1);
     } else {
-      alert("Please fill all the fields.");
+      alert("Please fill all the fields!");
     }
   };
 
+  // const goToPrevPage = () => {
+  //   if (currentPage > 1) {
+  //     setCurrentPage((prevPage) => prevPage - 1);
+  //   }
+  // };
+
   const submit = () => {
-    if (isCurrentPageValid) {
+    if (IsCurrentPageValid) {
       setLoading(true);
       const payload = {
         leadDetails: {
@@ -118,7 +124,7 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
         })
         .catch((e: any) => {});
     } else {
-      alert("Please fill the required field.");
+      alert("Please fill all the input fields.");
     }
   };
 
@@ -1012,6 +1018,17 @@ const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
             cancel();
           }}
         />
+        {/* {currentPage !== 1 && (
+          <SimpleButton
+            theme={1}
+            text={"Previous"}
+            left={0}
+            right={0}
+            click={() => {
+              goToPrevPage();
+            }}
+          />
+        )} */}
         {currentPage === 3 ? (
           <SimpleButton
             theme={1}

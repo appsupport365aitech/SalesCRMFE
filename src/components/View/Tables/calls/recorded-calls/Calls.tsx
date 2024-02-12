@@ -111,9 +111,11 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
             const leadid = e.leadId.length > 0 ? e.leadId[0].leadId : "-";
             const callId =
               e.leadId.length > 0
-                ? parseInt(
-                    e.callData[0].callId.replace(/\D/g, "").substr(0, 4)
-                  ).toString()
+                ? e?.callData[0]?._id
+                    .split("")
+                    .filter((dig: any) => /\d/.test(dig))
+                    .join("")
+                    .slice(-4)
                 : "-";
 
             const call_title: any = e;
