@@ -574,7 +574,6 @@ const Audio = ({ data, data1, data2 }: any) => {
       // callit();
     }
   }, []);
-  console.log("raju", data);
 
   return (
     <>

@@ -85,8 +85,12 @@ const AudioProfile = () => {
   };
 
   useEffect(() => {
-    getData();
-  }, [accessToken, id]);
+    if (!accessToken) {
+      return;
+    } else {
+      getData();
+    }
+  }, [accessToken]);
 
   const takeAction = (e, e1) => {
     if (e1 === 0) {
