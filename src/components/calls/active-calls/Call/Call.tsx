@@ -707,7 +707,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             color={"#000"}
           />
           <CallItemMultiple
-            width={130}
+            width={200}
             left={20}
             upperText={CallData?.companyId?.company_name}
             bottomText={CallData?.companyId?.company_address}

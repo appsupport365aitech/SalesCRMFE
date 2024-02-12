@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Chart as ChartJS,
@@ -11,6 +11,8 @@ import {
 } from "chart.js";
 import { Radar } from "react-chartjs-2";
 import { Card } from "@mui/material";
+import { baseUrl } from "@/utils/baseUrl";
+import axios from "axios";
 
 ChartJS.register(
   RadialLinearScale,
@@ -21,27 +23,50 @@ ChartJS.register(
   Legend
 );
 const EmotionalAnalysisComp = () => {
+  const [accessToken, setAccessToken] = useState("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+
+  const [emotionData, setEmotionData] = useState({});
+
   const data = {
-    labels: [
-      "Assertiveness",
-      "Joy",
-      "Trust",
-      "Politeness",
-      "Satisfaction",
-      "Curiosity",
-      "Confidence",
-      "Empathy",
-    ],
+    labels: Object.keys(emotionData),
     datasets: [
       {
         label: "# of Votes",
-        data: [25, 50, 30, 40, 10, 15],
+        data: Object.values(emotionData),
         backgroundColor: "#fe5143",
         borderColor: "rgba(254, 81, 67, 0.3)",
         borderWidth: 1,
       },
     ],
   };
+
+  const getEmotionData = async () => {
+    try {
+      await axios
+        .get(`${baseUrl}api/dashboard/indicator/emotionAnalysis`, {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
+        .then((e) => {
+          setEmotionData(e.data.result);
+        })
+        .catch((e) => {});
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    if (!accessToken) return;
+    else {
+      getEmotionData();
+    }
+  }, [accessToken]);
 
   return (
     <Card

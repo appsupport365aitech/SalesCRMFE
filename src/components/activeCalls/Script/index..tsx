@@ -380,6 +380,7 @@ const ScriptList = ({
   );
 };
 const ScriptView = ({ data }: { data: any }) => {
+  console.log(data);
   return (
     <>
       <embed

@@ -145,7 +145,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
 
     return `${hours}:${minutes} ${day} ${month} ${year}`;
   }
-  console.log("raju", data?.companyId?.company_socialMedia1);
+
   return (
     <>
       {edit && (

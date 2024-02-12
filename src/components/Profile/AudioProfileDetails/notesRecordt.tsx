@@ -152,7 +152,6 @@ const Notes = ({ data, refresh }: any) => {
   //   return extractedTime;
   // }
 
-  console.log("raju", list);
   return (
     <>
       {notes && (

@@ -219,7 +219,6 @@ const Deals = ({ data, type }: any) => {
       })
       .catch((error) => console.error("Error fetching data: ", error));
   }, [accessToken, data]);
-
   return (
     <div className="">
       <Navigator
