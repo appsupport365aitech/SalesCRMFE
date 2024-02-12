@@ -309,7 +309,7 @@ const LeadsContainer = ({
                 >
                   social media automation
                 </option>
-                <option selected={product === "P1"} value="P1">
+                {/* <option selected={product === "P1"} value="P1">
                   P1
                 </option>
                 <option selected={product === "P2"} value="P2">
@@ -329,7 +329,7 @@ const LeadsContainer = ({
                 </option>
                 <option selected={product === "Product D"} value="Product D">
                   Product D
-                </option>
+                </option> */}
               </select>
             </div>
             <div
