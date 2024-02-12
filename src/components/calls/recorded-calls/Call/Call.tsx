@@ -61,7 +61,7 @@ const CallItem = ({
 
   return (
     <div
-      className={`flex items-center  h-[20px] shrink-0`}
+      className={`flex items-center  h-fit py-1 shrink-0`}
       style={{ width: width, marginLeft: left, cursor: img && "pointer" }}
       onClick={() => {
         if (img) {
@@ -651,7 +651,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             showProp={detailShow}
           />
           <CallItem
-            width={200}
+            width={120}
             left={20}
             text={
               CallData?.callData?.[0]?._id
@@ -665,7 +665,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
-            width={130}
+            width={160}
             left={20}
             color={"#000"}
             // text={"Discussion on PX features"}
@@ -675,7 +675,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           />
           <CallItem
             width={200}
-            left={10}
+            left={20}
             text={
               CallData?.leadId?.length > 0 ? CallData?.leadId?.[0]?.leadId : "-"
             }
