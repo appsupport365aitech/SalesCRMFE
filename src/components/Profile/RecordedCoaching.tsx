@@ -169,9 +169,7 @@ const Coaching = ({ data, refresh }: any) => {
     window !== undefined ? localStorage.getItem("user-role") : ""
   );
 
-  const [accessToken, setAccessToken] = useState<any>(
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Yjg5NTc3MGQ4YjAzNDlkYWNlOWNiNyIsImlhdCI6MTcwNzY0NjgzMiwiZXhwIjoxNzA3NzMzMjMyfQ.wpuxHOcmaZ5geXX_mnfTkPaf_ya_b7IU0038zH8ewaA"
-  );
+  const [accessToken, setAccessToken] = useState<any>("");
 
   useEffect(() => {
     if (window !== undefined) {
@@ -268,9 +266,14 @@ const Coaching = ({ data, refresh }: any) => {
   };
 
   useEffect(() => {
-    getScriptBuildingData();
-    getSellingSkillsData();
-    getEmotionData();
+    if (!accessToken) return;
+    else {
+      if (userRole == "SDR" || userRole == "Manager") {
+        getScriptBuildingData();
+        getSellingSkillsData();
+        getEmotionData();
+      }
+    }
   }, [accessToken]);
 
   const appDispatch = useAppDispatch();
