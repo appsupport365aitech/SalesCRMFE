@@ -9,7 +9,6 @@ const NavigationWithEditAndDeleteButtons = ({
   title,
   leftBtns,
 }: any) => {
-  console.log(leftBtns, "arijit");
   const arr = [];
   return (
     <div className="w-[100%] min-h-[100px] flex items-center justify-between">

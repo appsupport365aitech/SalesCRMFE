@@ -797,8 +797,6 @@ const LeadContainer = ({
     setShowDescModal(false);
   };
 
-  console.log(LeadData1, "arijitpatra");
-
   return (
     <>
       <div

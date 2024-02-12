@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import EmotionalAnalysisComp from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Emotional_Analysis";
 import TreeMap from "@/components/analysis/Call/Tree";
 import TalkRatio from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Ratio_bar";
@@ -23,6 +23,8 @@ import {
 import GroupBarChartVertical from "@/components/analysis/Call/Charts/GroupBarChartVertical";
 import NavigationWithSwitchIcon from "@/components/app/NavigationWithSwitchIcon";
 import NoOfInterruptionsChart from "@/components/analysis/Call/Charts/NoOfInterruptions";
+import axios from "axios";
+import { baseUrl } from "@/utils/baseUrl";
 
 const CommunicationInteraction = ({
   tabData,
@@ -39,6 +41,99 @@ const CommunicationInteraction = ({
   noOfInterruptions?: any;
   noOfSwitches?: any;
 }) => {
+  const [userRole, setUserRole] = useState(
+    window !== undefined ? localStorage.getItem("user-role") : ""
+  );
+
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+  const [longestMonologueDataSDR, setLongestMonologueDataSDR] = useState<any>(
+    []
+  );
+  const [longestMonologueDataManager, setLongestMonologueDataManager] =
+    useState<any>([]);
+
+  const [sdrId, setSdrId] = useState("");
+
+  const getLongestMonologueDataForManager = () => {
+    let url = `${baseUrl}api/dashboard/getUserLongestMonologue`;
+    if (sdrId.length > 0) {
+      url = `${baseUrl}api/dashboard/getUserLongestMonologue?userId=${sdrId}`;
+    }
+    try {
+      axios
+        .get(url, {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
+        .then((response) => {
+          setLongestMonologueDataManager(response.data.result);
+        })
+        .catch((error) => {
+          console.error("Error fetching script building data:", error);
+        });
+    } catch (error) {}
+  };
+
+  const getLongestMonologueDataForSdr = () => {
+    try {
+      axios
+        .get(`${baseUrl}api/dashboard/getLongestMonologue`, {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
+        .then((response) => {
+          setLongestMonologueDataSDR(response.data.result);
+        })
+
+        .catch((error) => {
+          console.error("Error fetching script building data:", error);
+        });
+    } catch (error) {}
+  };
+
+  const data: any = {};
+
+  if (userRole == "SDR") {
+    longestMonologueDataSDR?.forEach((item: any) => {
+      data[item.label.replace(/\s+/g, "_").toLowerCase()] = item.value;
+    });
+  } else if (userRole == "Manager") {
+    longestMonologueDataManager.forEach((item: any) => {
+      data[item.label.replace(/\s+/g, "_").toLowerCase()] = item.value;
+    });
+  }
+
+  useEffect(() => {
+    if (!accessToken) return;
+    else {
+      if (userRole == "SDR") {
+        getLongestMonologueDataForSdr();
+      } else if (userRole == "Manager") {
+        getLongestMonologueDataForManager();
+      }
+    }
+  }, [accessToken, sdrId]);
+
+  const LongestMonologueLabels = Object.keys(data);
+
+  const mappings: any = {};
+  LongestMonologueLabels.forEach((label) => {
+    mappings[label] = label;
+  });
+
+  const LongestMonologueLabelsData = {
+    labels: LongestMonologueLabels,
+    mappings: mappings,
+  };
+
   // QA Analyst; QA manager; Manager, SRD/BDM
   if (tabData?.key === "Manager") {
     return (
@@ -265,7 +360,8 @@ const CommunicationInteraction = ({
             <BarChartVertical
               title="Longest Monologue"
               template={LongestMonologue}
-              data={avgCallScore}
+              data={data}
+              setSdrId={setSdrId}
             />
             <TalkRatio talkRatioData={talkRatioData} />
             <BarChartVertical

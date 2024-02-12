@@ -244,22 +244,18 @@ const Dashboard = ({ data }: any) => {
   };
 
   const getSellingData = ({ ...startEndDate }: any) => {
-    const finalPayload = {
-      date: {
-        from: startEndDate[0],
-        to: startEndDate[1],
-      },
-    };
-    axios
-      .post(`${baseUrl}api/selling-analysis/find-one`, finalPayload, {
-        headers: { Authorization: accessToken },
-      })
-      .then((res) => {
-        setSellingData(res.data.result);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    try {
+      axios
+        .get(`${baseUrl}api/dashboard/indicator/sellingSkills`, {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
+        .then((e) => {
+          setSellingData(e.data.result);
+        })
+        .catch((e) => {});
+    } catch (error) {}
   };
 
   const getScriptData = ({ ...startEndDate }: any) => {
