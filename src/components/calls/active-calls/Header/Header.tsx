@@ -48,9 +48,9 @@ const Header = ({ selectAll, win, deal, budget }: any) => {
           }}
         />
         <HeaderItem width={100} left={70} text={"CALL ID"} />
-        <HeaderItem width={130} left={20} text={"CALL title"} />
-        <HeaderItem width={100} left={10} text={"lead id"} />
-        <HeaderItem width={120} left={10} text={"lead title"} />
+        <HeaderItem width={150} left={20} text={"CALL title"} />
+        <HeaderItem width={90} left={10} text={"lead id"} />
+        <HeaderItem width={200} left={10} text={"lead title"} />
         <HeaderItem width={120} left={20} text={"Company Name"} />
         <HeaderItem width={120} left={20} text={"Product/Service"} />
         <HeaderItem width={110} left={20} text={"participants"} />

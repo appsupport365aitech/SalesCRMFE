@@ -15,15 +15,15 @@ import { baseUrl } from "@/utils/baseUrl";
 const KanbanItem = ({ item, i, Item }: any) => {
   const { pathname, replace, push } = useRouter();
   const leadId = () => {
-    const route = `${pathname}/${Item._id}/lead-profile`;
+    const route = `/sales/open/${Item._id}/lead-profile`;
     push(route);
   };
   const companyId = () => {
-    const route = `${pathname}/${Item._id}/company-profile`;
+    const route = `/sales/open/${Item._id}/company-profile`;
     push(route);
   };
   const clientId = () => {
-    const route = `${pathname}/${Item._id}/client-poc-profile`;
+    const route = `/sales/open/${Item._id}/client-poc-profile`;
     push(route);
   };
 
@@ -208,6 +208,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
         .catch((e) => {});
     });
   };
+  console.log(Item, "rw");
 
   return (
     <>

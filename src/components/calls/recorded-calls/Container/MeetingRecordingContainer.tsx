@@ -58,7 +58,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
   const [endDate, setEndDate] = useState("");
   const [search, setSearch] = useState("");
   const [companyName, setCompanyName] = useState("");
-  const [product, setProduct] = useState(" ");
+  const [product, setProduct] = useState("");
   const [callOwner, setCallOwner] = useState("");
   const [callType, setCallType] = useState("");
   const [callDisposition, setCallDisposition] = useState("");
@@ -303,7 +303,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
                 >
                   social media automation
                 </option>
-                <option selected={product === "P1"} value="P1">
+                {/* <option selected={product === "P1"} value="P1">
                   P1
                 </option>
                 <option selected={product === "P2"} value="P2">
@@ -348,7 +348,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
                 >
                   {" "}
                   Real Estate
-                </option>
+                </option> */}
               </select>
             </div>
             <div

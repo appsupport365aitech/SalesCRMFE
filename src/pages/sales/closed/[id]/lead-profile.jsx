@@ -14,6 +14,7 @@ import ActiveCall from "@/components/View/active-call-add";
 import Navbar from "@/components/app/Navbar/Navbar";
 import { useRouter } from "next/router";
 import { baseUrl } from "@/utils/baseUrl";
+import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 
 const Profile = () => {
   const [data, setData1] = useState({});
@@ -141,7 +142,30 @@ const Profile = () => {
 
   return (
     <>
-      <Navbar mainTitle="Sales" title="Close" src="manageLeadsIcon" />
+      {/* <Navbar mainTitle="Sales" title="Close" src="manageLeadsIcon" /> */}
+      <NavbarWithButton
+        mainTitle="Sales > Closed"
+        title={`${data1?.result?.lead_title} - Info`}
+        src="manageLeadsIcon"
+        buttons={[
+          {
+            text: "Take Action",
+            dropdown: true,
+            id: 1,
+            icon: "Plus",
+            dark: true,
+            light: false,
+            click: AddLead,
+            list: [
+              { title: "Call", Icon: "Phone" },
+              { title: "Email", Icon: "Mail" },
+              { title: "Event", Icon: "Calendar" },
+              { title: "Add note", Icon: "Tasks" },
+              { title: "Message", Icon: "Chat" },
+            ],
+          },
+        ]}
+      />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         {notes && (
           <Backdrop bool={bool}>
@@ -192,7 +216,7 @@ const Profile = () => {
             />
           </Backdrop>
         )}
-        <Navigation
+        {/* <Navigation
           title={`${data1?.result?.lead_title} - Info`}
           buttons={[
             {
@@ -212,9 +236,9 @@ const Profile = () => {
               ],
             },
           ]}
-        />
-        <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-          <div className="w-[340px] min-h-[70vh] bg-white rounded-xl shrink-0 p-[20px]">
+        /> */}
+        <div className="w-[100%] flex gap-[25px] mt-[10px] ">
+          <div className="w-[400px] min-h-[70vh] bg-[#ffe3e170] rounded-xl shrink-0 p-[20px]">
             <ProfilePage updated={UpdateData} data1={data?.result} />
           </div>
           <LeadProfileContainer

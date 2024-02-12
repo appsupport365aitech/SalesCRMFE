@@ -54,7 +54,7 @@ const CallItem = ({
 
   return (
     <div
-      className={`flex items-center  h-[20px] shrink-0`}
+      className="flex items-center h-fit py-1 shrink-0"
       style={{ width: width, marginLeft: left }}
     >
       {img && (
@@ -669,19 +669,23 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItem
             width={100}
             left={20}
-            // text={CallData.callId}
-            text={
-              String(convertDatetimeToCustomFormat(CallData.updatedAt)).slice(
-                0,
-                4
-              ) || "-"
-            }
+            text={(CallData?._id || "")
+              .split("")
+              .filter((dig: any) => /\d/.test(dig))
+              .join("")
+              .slice(-4)}
+            // text={
+            //   String(convertDatetimeToCustomFormat(CallData.updatedAt)).slice(
+            //     0,
+            //     4
+            //   ) || "-"
+            // }
             color={"#000"}
             click={true}
             route={`${pathname}/${id}/calling`}
           />
           <CallItem
-            width={130}
+            width={150}
             left={25}
             color={"#000"}
             text={CallData.call_title}
@@ -697,7 +701,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             color={"#000"}
           />
           <CallItem
-            width={140}
+            width={200}
             left={0}
             text={CallData?.leadId?.lead_title}
             color={"#000"}

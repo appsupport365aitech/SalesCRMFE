@@ -8,7 +8,7 @@ const Navigation = ({ buttons, title, leftBtns, leftChildren }: any) => {
   return (
     <div className="w-fit min-h-[100px] flex items-center">
       <div className="flex items-center">
-        <h1 className="w-[40%] text-[#3F434A] font-medium text-3xl">{title}</h1>
+        <h1 className="text-[#3F434A] font-medium text-3xl">{title}</h1>
         <div className="w-[40%] flex">
           {leftBtns?.map((item: any, i: number) => {
             return (

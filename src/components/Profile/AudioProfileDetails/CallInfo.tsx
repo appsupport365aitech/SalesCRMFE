@@ -89,7 +89,11 @@ const CallInfo = ({ check, info, data, data1 }: any) => {
       <div className="pl-[30px]">
         <p className=" border-b-2 w-full pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Call Id -{" "}
-          {String(convertDatetimeToCustomFormat(data1?.updatedAt)).slice(0, 4)}
+          {data1?._id
+            .split("")
+            .filter((dig: any) => /\d/.test(dig))
+            .join("")
+            .slice(-4)}
         </p>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[40%] mr-2">LEAD ID</p>

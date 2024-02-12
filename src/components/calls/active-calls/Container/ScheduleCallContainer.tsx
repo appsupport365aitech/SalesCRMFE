@@ -290,7 +290,7 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
                 >
                   social media automation
                 </option>
-                <option selected={product === "P1"} value="P1">
+                {/* <option selected={product === "P1"} value="P1">
                   P1
                 </option>
                 <option selected={product === "P2"} value="P2">
@@ -320,7 +320,7 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
                 >
                   {" "}
                   Real Estate
-                </option>
+                </option> */}
               </select>
             </div>
             <div

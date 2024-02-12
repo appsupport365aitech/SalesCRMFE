@@ -267,7 +267,7 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
                 >
                   social media automation
                 </option>
-                <option selected={product === "P1"} value="P1">
+                {/* <option selected={product === "P1"} value="P1">
                   P1
                 </option>
                 <option selected={product === "P2"} value="P2">
@@ -287,7 +287,7 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
                 </option>
                 <option selected={product === "Product D"} value="Product D">
                   Product D
-                </option>
+                </option> */}
                 {/* <option selected={product === "Technology"} value="Technology">
                   Technology
                 </option>
