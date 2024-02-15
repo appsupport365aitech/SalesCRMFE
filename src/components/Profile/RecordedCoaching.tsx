@@ -5,6 +5,7 @@ import Navigator from "@/utils/customNavigator";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { baseUrl } from "@/utils/baseUrl";
+import { useRouter } from "next/router";
 
 const Chart = ({ title, percent }: any) => {
   return (
@@ -49,28 +50,28 @@ const ScriptBuilding = ({ script }: any) => {
       </div>
       <ChartContainer>
         {/* percent={`${script.closing}%`} */}
-        <Chart title={"Opening"} percent={`${script?.Opening}%`} />
+        <Chart title={"Opening"} percent={`${script?.opening}%`} />
         <Chart
           title={"Lead Qualififcation"}
-          percent={`${script?.["Lead Qualification"]}%`}
+          percent={`${script?.["lead Qualification"]}%`}
         />
         <Chart
           title={"Need Discovery"}
-          percent={`${script?.["Need Discovery"]}%`}
+          percent={`${script?.["need Discovery"]}%`}
         />
         <Chart
           title={"Key Value Proposition"}
-          percent={`${script?.["Key Value Proposition"]}%`}
+          percent={`${script?.["key Value Proposition"]}%`}
         />
         <Chart
           title={"Product Knowledge"}
-          percent={`${script?.["Product Knowledge"]}%`}
+          percent={`${script?.["product Knowledge"]}%`}
         />
         <Chart
           title={"Price Discussion"}
-          percent={`${script?.["Price Discussion"]}%`}
+          percent={`${script?.["price Discussion"]}%`}
         />
-        <Chart title={"Closing"} percent={`${script?.Closing}%`} />
+        <Chart title={"Closing"} percent={`${script?.closing}%`} />
       </ChartContainer>
     </div>
   );
@@ -182,45 +183,23 @@ const Coaching = ({ data, refresh }: any) => {
   const [scriptBuildingData, setScriptBuildingData] = useState({});
   const [sellingSkillsData, setSellingSkillsData] = useState({});
   const [emotionData, setEmotionData] = useState({});
-  // const [data1, setData] = useState({
-  //   scriptBuilding: {
-  //     "Lead Qualification": 0,
-  //     "Need Discovery": 0,
-  //     "Product Knowledge": 0,
-  //     "Price Discussion": 0,
-  //     Closing: 0,
-  //     Opening: 0,
-  //     "Key Value Proposition": 0,
-  //   },
-  //   sellingSkills: {
-  //     "Consultative Selling": 0,
-  //     Empathy: 0,
-  //     "Listening Skills": 0,
-  //     Confidence: 0,
-  //     "Urgency Creation": 0,
-  //     "Positive Energy": 0,
-  //     "Rapport Building": 0,
-  //     Politeness: 0,
-  //   },
-  //   emotion: {
-  //     Joy: 0,
-  //     Trust: 0,
-  //     Politeness: 0,
-  //     Satisfaction: 0,
-  //     Curiosity: 0,
-  //     Assertiveness: 0,
-  //   },
-  // });
+
+  const router = useRouter();
+
+  const { id } = router.query;
 
   const getScriptBuildingData = () => {
     try {
       setLoading(true);
       axios
-        .get(`${baseUrl}api/dashboard/indicator/scriptBuildingBlocks`, {
-          headers: {
-            Authorization: accessToken,
-          },
-        })
+        .get(
+          `${baseUrl}api/dashboard/indicator/scriptBuildingBlocks?leadId=${id}`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
+          }
+        )
         .then((response) => {
           setScriptBuildingData(response.data.result);
         })
@@ -236,7 +215,7 @@ const Coaching = ({ data, refresh }: any) => {
     try {
       setLoading(true);
       axios
-        .get(`${baseUrl}api/dashboard/indicator/sellingSkills`, {
+        .get(`${baseUrl}api/dashboard/indicator/sellingSkills?leadId=${id}`, {
           headers: {
             Authorization: accessToken,
           },
@@ -252,7 +231,7 @@ const Coaching = ({ data, refresh }: any) => {
     try {
       setLoading(true);
       axios
-        .get(`${baseUrl}api/dashboard/indicator/emotionAnalysis`, {
+        .get(`${baseUrl}api/dashboard/indicator/emotionAnalysis?leadId=${id}`, {
           headers: {
             Authorization: accessToken,
           },

@@ -277,10 +277,13 @@ const Dashboard = ({ data }: any) => {
       });
   };
   useEffect(() => {
-    getPitchData([startDate, endDate]);
-    getScriptData([startDate, endDate]);
-    getSellingData([startDate, endDate]);
-  }, []);
+    if (!accessToken) return;
+    else {
+      getPitchData([startDate, endDate]);
+      getScriptData([startDate, endDate]);
+      getSellingData([startDate, endDate]);
+    }
+  }, [accessToken]);
 
   const handleTabNavigation = (payload: any) => {
     setCurrTab(payload);
