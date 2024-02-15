@@ -19,7 +19,8 @@ const DisplayTrack = ({
 
   React.useEffect(() => {
     onLoadedMetadata();
-  })
+  });
+
   return (
     <div>
       <audio

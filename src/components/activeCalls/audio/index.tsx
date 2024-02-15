@@ -548,26 +548,26 @@ const Audio = ({ data, data1, data2 }: any) => {
     setCallData(data2);
   }, [data2]);
 
-  const callit = () => {
-    const url = `https://sales365.trainright.fit/api/calling/call-status`;
-    if (data.leadId?._id) {
-      axios
-        .post(
-          url,
-          {
-            sid: data.Sid,
-            leadId: data.leadId._id,
-          },
-          { headers: { Authorization: accessToken } }
-        )
-        .then((e) => {
-          setCallData(e.data.result);
-          // console.log('--------------- setCallData --------------', e.data.result);
-          setCheck(false);
-        })
-        .catch((e: any) => {});
-    }
-  };
+  // const callit = () => {
+  //   const url = `https://sales365.trainright.fit/api/calling/call-status`;
+  //   if (data.leadId?._id) {
+  //     axios
+  //       .post(
+  //         url,
+  //         {
+  //           sid: data.Sid,
+  //           leadId: data.leadId._id,
+  //         },
+  //         { headers: { Authorization: accessToken } }
+  //       )
+  //       .then((e) => {
+  //         setCallData(e.data.result);
+  //         // console.log('--------------- setCallData --------------', e.data.result);
+  //         setCheck(false);
+  //       })
+  //       .catch((e: any) => {});
+  //   }
+  // };
 
   React.useEffect(() => {
     if (check) {

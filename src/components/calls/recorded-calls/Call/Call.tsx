@@ -547,9 +547,12 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
   };
 
   React.useEffect(() => {
-    if (checked) {
-      GetLeadData();
-      setChecked(false);
+    if (!accessToken) return;
+    else {
+      if (checked) {
+        GetLeadData();
+        setChecked(false);
+      }
     }
   }, [accessToken]);
 
@@ -626,6 +629,39 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
 
     return secondsDifference;
   }
+
+  const [duration, setDuration] = useState(0);
+
+  useEffect(() => {
+    const audio = new Audio();
+    audio.src = CallData?.RecordingUrl;
+
+    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+
+    return () => {
+      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+    };
+  }, []);
+
+  const handleLoadedMetadata = (e: any) => {
+    const audioDuration = e.target.duration;
+    setDuration(audioDuration);
+  };
+
+  function secondsToTime(seconds: any) {
+    var hours = Math.floor(seconds / 3600);
+    var minutes = Math.floor((seconds % 3600) / 60);
+    var remainingSeconds = Math.round(seconds % 60);
+
+    var formattedHours = hours < 10 ? "0" + hours : hours;
+    var formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+    var formattedSeconds =
+      remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
+
+    return formattedHours + ":" + formattedMinutes + ":" + formattedSeconds;
+  }
+
+  var callDuration = secondsToTime(duration);
 
   return (
     <>
@@ -768,14 +804,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
                 : "-"
             }
           />
-          <CallItem
-            width={120}
-            left={10}
-            text={calculateTimeDifference(
-              CallData?.StartTime,
-              CallData?.EndTime
-            )}
-          />
+          <CallItem width={120} left={10} text={callDuration} />
           <CallItem
             width={160}
             left={20}
