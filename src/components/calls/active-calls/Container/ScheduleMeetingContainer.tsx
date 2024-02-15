@@ -78,30 +78,33 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
   }, []);
 
   useEffect(() => {
-    try {
-      if (window !== undefined) {
-        axios
-          .get(`${baseUrl}api/master-users/find-all`, {
-            headers: {
-              Authorization: accessToken,
-            },
-          })
-          .then((res) => {
-            setOwnerOps(res?.data?.result);
-          })
-          .catch((e) => {});
-        axios
-          .get(`${baseUrl}api/user-company-master/findAllCompanies`, {
-            headers: {
-              Authorization: accessToken,
-            },
-          })
-          .then((res) => {
-            setCompanyOps(res?.data?.result);
-          })
-          .catch((e) => {});
-      }
-    } catch (error) {}
+    if (!accessToken) return;
+    else {
+      try {
+        if (window !== undefined) {
+          axios
+            .get(`${baseUrl}api/master-users/find-all`, {
+              headers: {
+                Authorization: accessToken,
+              },
+            })
+            .then((res) => {
+              setOwnerOps(res?.data?.result);
+            })
+            .catch((e) => {});
+          axios
+            .get(`${baseUrl}api/user-company-master/findAllCompanies`, {
+              headers: {
+                Authorization: accessToken,
+              },
+            })
+            .then((res) => {
+              setCompanyOps(res?.data?.result);
+            })
+            .catch((e) => {});
+        }
+      } catch (error) {}
+    }
   }, [accessToken]);
 
   const getQueryStr = () => {

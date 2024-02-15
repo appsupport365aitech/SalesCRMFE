@@ -486,6 +486,44 @@ const AllocatedCallsCC = ({ data }) => {
       return Math.floor(difference / 3600) + " hr";
     }
   }
+  // const [duration, setDuration] = useState(0);
+
+  const getCallDuretion = ({ src }) => {
+    const audio = new Audio();
+    audio.src = src;
+
+    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+    let duration = audio.removeEventListener(
+      "loadedmetadata",
+      handleLoadedMetadata
+    );
+    // console.log(duration, "arijit");
+    return () => {
+      duration;
+    };
+  };
+
+  useEffect(() => {}, []);
+
+  const handleLoadedMetadata = (e) => {
+    const audioDuration = e.target.duration;
+    setDuration(audioDuration);
+  };
+
+  function secondsToTime(seconds) {
+    var hours = Math.floor(seconds / 3600);
+    var minutes = Math.floor((seconds % 3600) / 60);
+    var remainingSeconds = Math.round(seconds % 60);
+
+    var formattedHours = hours < 10 ? "0" + hours : hours;
+    var formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+    var formattedSeconds =
+      remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
+
+    return formattedHours + ":" + formattedMinutes + ":" + formattedSeconds;
+  }
+
+  // var callDuration = secondsToTime(getCallDuretion);
 
   const getQuery = () => {
     let query = "";
@@ -598,7 +636,7 @@ const AllocatedCallsCC = ({ data }) => {
                       "-",
                   }, // call date & time
                   { text: item?.leadId?.[0]?.product_category || "-" }, // product/service
-                  { text: diff_minutes(item?.StartTime, item?.EndTime) || "-" }, // call duration
+                  { text: getCallDuretion(item.RecordingUrl) || "-" }, // call duration
                   { text: item?.callDisposiiton || "NA" }, // call disposition
                   { text: item?.callData[0]?.call_type || "-" }, // call type
                   { text: item?.score || "Not Scored" }, // call score

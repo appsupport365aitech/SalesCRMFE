@@ -520,9 +520,12 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
   };
 
   React.useEffect(() => {
-    if (checked) {
-      GetLeadData();
-      setChecked(false);
+    if (!accessToken) return;
+    else {
+      if (checked) {
+        GetLeadData();
+        setChecked(false);
+      }
     }
   }, [accessToken]);
 

@@ -94,16 +94,19 @@ const Calls = () => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${baseUrl}api/active-call/find-all`, {
-        headers: {
-          Authorization: accessToken,
-        },
-      })
-      .then((res) => {
-        setData(res?.data);
-      })
-      .catch((err) => {});
+    if (!accessToken) return;
+    else {
+      axios
+        .get(`${baseUrl}api/active-call/find-all`, {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
+        .then((res) => {
+          setData(res?.data);
+        })
+        .catch((err) => {});
+    }
   }, [accessToken]);
 
   const exportXLSX = () => {
