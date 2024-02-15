@@ -410,14 +410,20 @@ const Script = ({ data, scripts }: { data: any; scripts: any }) => {
   }, []);
 
   const refresh = () => {
-    axios
-      .get(`${baseUrl}api/call-script/active-call?activeCallId=${data?._id}`, {
-        headers: {
-          Authorization: accessToken,
-        },
-      })
-      .then((e) => {})
-      .catch((e) => {});
+    if (!accessToken) return;
+    else {
+      axios
+        .get(
+          `${baseUrl}api/call-script/active-call?activeCallId=${data?._id}`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
+          }
+        )
+        .then((e) => {})
+        .catch((e) => {});
+    }
   };
 
   const titles = ["SCRIPT"];

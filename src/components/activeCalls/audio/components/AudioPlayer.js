@@ -20,6 +20,7 @@ const AudioPlayer = ({ src }) => {
   const [muteVolume, setMuteVolume] = useState(false);
   const [speed, setSpeed] = useState(1);
   // reference
+  console.log(duration, "arijit");
   const audioRef = useRef();
   const progressBarRef = useRef();
 
