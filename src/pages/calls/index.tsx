@@ -464,15 +464,19 @@ const CallsPage = () => {
   ];
 
   const generateRows = (data: any) => {
+    console.log(data, "arijit");
+
     if (subType === "allocated_call_reviews") {
       setRowsACR(
         data?.map((item: any, index: number) => {
           let row = [
             {
               text:
-                String(
-                  convertDatetimeToCustomFormat(item?.callData?.[0]?.call_date)
-                ).slice(0, 4) || "-",
+                item?.callData[0]?._id
+                  .split("")
+                  .filter((dig: any) => /\d/.test(dig))
+                  .join("")
+                  .slice(-4) || "-",
               id: item?._id,
               link: `/calls/recorded-calls/${item?._id}/audio-call`,
             },
@@ -544,7 +548,12 @@ const CallsPage = () => {
         data?.map((item: any, index: number) => {
           let row = [
             {
-              text: item?._id || "-",
+              text:
+                item?.callData[0]?._id
+                  .split("")
+                  .filter((dig: any) => /\d/.test(dig))
+                  .join("")
+                  .slice(-4) || "-",
               id: item?._id,
               link: `/calls/recorded-calls/${item?._id}/audio-call`,
             },
