@@ -586,57 +586,58 @@ const Coaching = ({ data, refresh }: any) => {
               {tab2 === 2 && <Emotion data={emotionData} />}
             </div>
           )}
-          {tab === 1 && userRole === "QA manager" && (
-            <div>
-              {scoreQuestions?.map((quesItem: any, index: number) => (
-                <div className="mt-[16px]" key={index}>
-                  <p className="text-[20px] font-bold mb-2">
-                    {quesItem?.label}
-                  </p>
-                  <div>
-                    {quesItem?.options?.map(
-                      (optionItem: any, opIdx: number) => (
-                        <div key={opIdx} className="flex">
-                          <label htmlFor={quesItem?.key + optionItem?.key}>
-                            <input
-                              className="border border-[#E8E9EB]"
-                              type="radio"
-                              id={quesItem?.key + optionItem?.key}
-                              name={quesItem?.key}
-                              onChange={(e) =>
-                                updateScoreItem(
-                                  e.target.checked,
-                                  index,
-                                  optionItem?.value
-                                )
-                              }
-                            />
-                          </label>
-                          <div className="flex justify-start ml-2  mb-1">
-                            {optionItem?.value !== "NA" && (
-                              <p className="font-medium w-[80px]">
-                                {optionItem?.value} marks:
+          {tab === 1 &&
+            (userRole === "QA manager" || userRole === "QA Analyst") && (
+              <div>
+                {scoreQuestions?.map((quesItem: any, index: number) => (
+                  <div className="mt-[16px]" key={index}>
+                    <p className="text-[20px] font-bold mb-2">
+                      {quesItem?.label}
+                    </p>
+                    <div>
+                      {quesItem?.options?.map(
+                        (optionItem: any, opIdx: number) => (
+                          <div key={opIdx} className="flex">
+                            <label htmlFor={quesItem?.key + optionItem?.key}>
+                              <input
+                                className="border border-[#E8E9EB]"
+                                type="radio"
+                                id={quesItem?.key + optionItem?.key}
+                                name={quesItem?.key}
+                                onChange={(e) =>
+                                  updateScoreItem(
+                                    e.target.checked,
+                                    index,
+                                    optionItem?.value
+                                  )
+                                }
+                              />
+                            </label>
+                            <div className="flex justify-start ml-2  mb-1">
+                              {optionItem?.value !== "NA" && (
+                                <p className="font-medium w-[80px]">
+                                  {optionItem?.value} marks:
+                                </p>
+                              )}
+                              <p
+                                className={
+                                  optionItem?.label === "Not applicable."
+                                    ? "font-medium w-full"
+                                    : "w-full"
+                                }
+                              >
+                                {optionItem?.label}
                               </p>
-                            )}
-                            <p
-                              className={
-                                optionItem?.label === "Not applicable."
-                                  ? "font-medium w-full"
-                                  : "w-full"
-                              }
-                            >
-                              {optionItem?.label}
-                            </p>
+                            </div>
                           </div>
-                        </div>
-                      )
-                    )}
+                        )
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
 
-              <div className="form_btns w-[100%] flex justify-end">
-                {/* <SimpleButton
+                <div className="form_btns w-[100%] flex justify-end">
+                  {/* <SimpleButton
                   theme={1}
                   text={loading ? "Saving..." : "Save"}
                   left={0}
@@ -646,23 +647,23 @@ const Coaching = ({ data, refresh }: any) => {
                     submit();
                   }}
                 /> */}
-                <div className="gap-2 flex items-center mt-4">
-                  <button
-                    className="p-[10px] px-7 rounded-lg text-[red] text-[16px] border border-[red] hover:bg-[#ff7d6d] hover:text-white"
-                    onClick={handleScoreReset}
-                  >
-                    Reset
-                  </button>
-                  <button
-                    className="p-[10px] px-7 rounded-lg text-white text-[16px] bg-bg-red hover:bg-[#ff7d6d]"
-                    onClick={handleScoreSubmit}
-                  >
-                    Calculate Score
-                  </button>
+                  <div className="gap-2 flex items-center mt-4">
+                    <button
+                      className="p-[10px] px-7 rounded-lg text-[red] text-[16px] border border-[red] hover:bg-[#ff7d6d] hover:text-white"
+                      onClick={handleScoreReset}
+                    >
+                      Reset
+                    </button>
+                    <button
+                      className="p-[10px] px-7 rounded-lg text-white text-[16px] bg-bg-red hover:bg-[#ff7d6d]"
+                      onClick={handleScoreSubmit}
+                    >
+                      Calculate Score
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
         </>
       )}
     </div>
