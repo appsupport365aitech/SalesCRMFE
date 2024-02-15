@@ -19,7 +19,6 @@ const AudioPlayer = ({ src }) => {
   const [volume, setVolume] = useState(60);
   const [muteVolume, setMuteVolume] = useState(false);
   const [speed, setSpeed] = useState(1);
-
   // reference
   const audioRef = useRef();
   const progressBarRef = useRef();

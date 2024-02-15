@@ -464,8 +464,6 @@ const CallsPage = () => {
   ];
 
   const generateRows = (data: any) => {
-    console.log(data, "arijit");
-
     if (subType === "allocated_call_reviews") {
       setRowsACR(
         data?.map((item: any, index: number) => {

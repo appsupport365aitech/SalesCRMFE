@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DealsCard from "@/components/customComponents/360_components/cardDeals";
 import StageWiseAnalysis from "@/components/analysis/Call/Charts/StageWiseAnalysis";
 import DealAnalysis from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Deal_Analytics";
@@ -12,6 +12,10 @@ import {
   HighIntentCallVolume,
 } from "@/constants/chartFields";
 import { avgCallScore, highIntentCallVolume } from "@/constants/dummyData";
+import { BarChart } from "@mui/x-charts";
+import axios from "axios";
+import { baseUrl } from "@/utils/baseUrl";
+import { Card } from "@mui/material";
 
 const SalesPerformance = ({
   tabData,
