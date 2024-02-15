@@ -534,7 +534,12 @@ const FeedbackCallReviewsAC = () => {
               data?.map((item, index) => {
                 let row = [
                   {
-                    text: item?._id || "-",
+                    text:
+                      item?._id
+                        .split("")
+                        .filter((dig) => /\d/.test(dig))
+                        .join("")
+                        .slice(-4) || "-",
                     link: `/calls/recorded-calls/${item?._id}/audio-call`,
                   },
                   {

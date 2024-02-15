@@ -49,12 +49,12 @@ function useUI() {
           list: [{ title: "Indicator-basic", route: "basic" }],
           icon: "Zap",
         },
-        {
-          title: "Teams",
-          route: "teams",
-          icon: "Teams",
-          list: [],
-        },
+        // {
+        //   title: "Teams",
+        //   route: "teams",
+        //   icon: "Teams",
+        //   list: [],
+        // },
       ];
       break;
     case "QA Analyst":

@@ -521,8 +521,11 @@ const AllocatedCalls = () => {
                   {
                     // text: item?._id || "-",
                     text:
-                      parseInt(item?._id.replace(/\D/g, "").substr(0, 4)) ||
-                      "-",
+                      item?._id
+                        .split("")
+                        .filter((dig) => /\d/.test(dig))
+                        .join("")
+                        .slice(-4) || "-",
                     link: `/calls/recorded-calls/${item?._id}/audio-call`,
                   },
                   {
