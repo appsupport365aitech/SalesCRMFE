@@ -609,13 +609,13 @@ const Audio = ({ data, data1, data2 }: any) => {
               <div className="w-full gap-2 flex items-center mt-[6px]">
                 <Image
                   src={getBasicIcon("Rectangle_380")}
-                  className="h-[20px] "
+                  className="h-[20px]"
                   alt=""
                   width={10}
                   height={10}
                 />
                 <p className="text-gray-600 text-[14px]">
-                  Participant: {data?.activeCall?.participants?.customer_name}
+                  Participant: {data?.leadId?.customer_name}
                 </p>
               </div>
             </div>
@@ -625,7 +625,7 @@ const Audio = ({ data, data1, data2 }: any) => {
               color={"#4091FF"}
             />
             <Tracker
-              title={data?.activeCall?.call_new_participant_name}
+              title={data?.leadId?.customer_name}
               list={list}
               color={"#FE5143"}
             />
