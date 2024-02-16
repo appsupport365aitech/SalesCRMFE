@@ -32,7 +32,6 @@ const EmotionalAnalysisComp = () => {
   }, []);
 
   const [emotionData, setEmotionData] = useState({});
-
   const data = {
     labels: Object.keys(emotionData),
     datasets: [

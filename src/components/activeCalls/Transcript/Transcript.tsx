@@ -170,7 +170,7 @@ const Transcript = ({
                     {convertMilliseconds(item.start)}
                   </p>
                   <p
-                    className="text-[#304FFD] shrink-0 w-[48px] font-medium text-[15px] tracking-wide"
+                    className="text-[#304FFD] shrink-0 w-28 font-medium text-[15px] tracking-wide"
                     style={{
                       color: item.title === "A" ? "#4091FF" : "#FE5143",
                     }}
@@ -181,7 +181,11 @@ const Transcript = ({
                     //   }:`,
                     // }}
                   >
-                    {item.title} :
+                    {item.title == "A"
+                      ? data?.activeCall?.owner?.name
+                      : item.title == "B"
+                      ? data?.leadId?.customer_name
+                      : ""}
                   </p>
                   <p
                     className=" text-gray-600 tracking-wide font-medium text-[15px]"

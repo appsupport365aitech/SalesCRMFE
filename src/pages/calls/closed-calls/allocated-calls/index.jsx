@@ -497,7 +497,6 @@ const AllocatedCallsCC = ({ data }) => {
       "loadedmetadata",
       handleLoadedMetadata
     );
-    // console.log(duration, "arijit");
     return () => {
       duration;
     };
