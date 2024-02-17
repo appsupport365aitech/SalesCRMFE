@@ -282,16 +282,22 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
               >
                 <option selected={product === ""} value=""></option>
                 <option
-                  selected={product === "Email automation"}
-                  value="Email automation"
+                  selected={product === "20 lakh cover"}
+                  value="20 lakh cover"
                 >
-                  Email automation
+                  20 lakh cover
                 </option>
                 <option
-                  selected={product === "social media automation"}
-                  value="social media automation"
+                  selected={product === "50 lakh cover"}
+                  value="50 lakh cover"
                 >
-                  social media automation
+                  50 lakh cover
+                </option>
+                <option
+                  selected={product === "1 crore cover"}
+                  value="1 crore cover"
+                >
+                  1 crore cover
                 </option>
                 {/* <option selected={product === "P1"} value="P1">
                   P1
