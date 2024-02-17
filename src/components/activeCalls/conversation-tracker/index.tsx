@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-const Tracker = ({ color, title, list }: any) => {
+const Tracker = ({ color, title, list, uppercase }: any) => {
   const ref: any = useRef();
   const [width, setWidth] = useState<any>();
   React.useEffect(() => {
@@ -16,7 +16,9 @@ const Tracker = ({ color, title, list }: any) => {
   return (
     <div className="w-full px-[38px] my-[24px]">
       <h1
-        className={` text-[14px] font-medium`}
+        className={` text-[14px] font-medium ${
+          !uppercase ? uppercase : ""
+        }uppercase`}
         style={{
           color: color,
         }}

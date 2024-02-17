@@ -575,6 +575,38 @@ const Audio = ({ data, data1, data2 }: any) => {
     }
   }, []);
 
+  const callOwnerDuration: any = [];
+  const callParticipentsDuration: any = [];
+  let currentDurationForOwner = 0;
+  let currentTimeForOwner = 0;
+  let currentDurationForCustomar = 0;
+  let currentTimeForCustomar = 0;
+
+  callData?.transcriptId?.utterances.forEach((segment: any) => {
+    if (segment.speaker === "A") {
+      const segmentDuration = (segment.end - segment.start) / 100;
+      callOwnerDuration.push({
+        duration: segmentDuration,
+        at: currentTimeForOwner,
+      });
+      currentDurationForOwner += segmentDuration;
+    }
+
+    currentTimeForOwner = segment.end / 100;
+  });
+  callData?.transcriptId?.utterances.forEach((segment: any) => {
+    if (segment.speaker === "B") {
+      const segmentDuration = (segment.end - segment.start) / 100;
+      callParticipentsDuration.push({
+        duration: segmentDuration,
+        at: currentTimeForCustomar,
+      });
+      currentDurationForCustomar += segmentDuration;
+    }
+
+    currentTimeForCustomar = segment.end / 100;
+  });
+
   return (
     <>
       {/* <div className="w-full relative p-[20px] ">
@@ -602,8 +634,9 @@ const Audio = ({ data, data1, data2 }: any) => {
                   width={10}
                   height={10}
                 />
-                <p className="text-gray-600 text-[14px]">
-                  Call owner: {data?.activeCall?.owner?.name}
+                <p className="text-gray-600 flex gap-1 text-[14px]">
+                  Call owner:
+                  <p className="uppercase">{data?.activeCall?.owner?.name}</p>
                 </p>
               </div>
               <div className="w-full gap-2 flex items-center mt-[6px]">
@@ -621,12 +654,13 @@ const Audio = ({ data, data1, data2 }: any) => {
             </div>
             <Tracker
               title={data?.activeCall?.owner?.name}
-              list={list}
+              uppercase={true}
+              list={callOwnerDuration}
               color={"#4091FF"}
             />
             <Tracker
               title={data?.leadId?.customer_name}
-              list={list}
+              list={callParticipentsDuration}
               color={"#FE5143"}
             />
             {/* <Tracker title={"Topics"} list={list} color={"#434343"} /> */}

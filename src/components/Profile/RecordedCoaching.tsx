@@ -8,14 +8,24 @@ import { baseUrl } from "@/utils/baseUrl";
 import { useRouter } from "next/router";
 
 const Chart = ({ title, percent }: any) => {
+  const [hovered, setHovered] = useState(false);
   return (
-    <div className="w-[10px] h-[100%] flex flex-col items-center relative">
+    <div
+      className="w-[10px] h-[100%] flex flex-col items-center relative"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <div className="w-[10px] h-[100%] mb-[15px] bg-[#f7f8ff] rounded-t-[19px] relative overflow-hidden">
         <div
-          className="w-[100%] bg-bg-red bottom-0 absolute rounded-t-[19px]"
+          className="w-[100%] bg-bg-red bottom-0 absolute rounded-t-[19px] cursor-pointer"
           style={{ height: percent }}
         ></div>
       </div>
+      {hovered && (
+        <p className="w-[100%] text-[14px] leading-[13px] min-h-[200px] left-7 flex items-center justify-center font-medium text-[#8A9099] text-center absolute bottom-[-25px]">
+          {percent?.replace(/%/g, "")}
+        </p>
+      )}
       <p className="w-[100%] text-[8.5px] leading-[13px] min-h-[40px] flex items-center justify-center font-medium text-[#8A9099] text-center absolute bottom-[-25px]">
         {title}
       </p>
@@ -193,7 +203,8 @@ const Coaching = ({ data, refresh }: any) => {
       setLoading(true);
       axios
         .get(
-          `${baseUrl}api/dashboard/indicator/scriptBuildingBlocks?leadId=${id}`,
+          // `${baseUrl}api/dashboard/indicator/scriptBuildingBlocks?leadId=${id}`,
+          `https://api.npoint.io/ceba149ed9e2cd06ecf0`,
           {
             headers: {
               Authorization: accessToken,
@@ -201,7 +212,7 @@ const Coaching = ({ data, refresh }: any) => {
           }
         )
         .then((response) => {
-          setScriptBuildingData(response.data.result);
+          setScriptBuildingData(response.data);
         })
 
         .catch((error) => {
@@ -215,13 +226,19 @@ const Coaching = ({ data, refresh }: any) => {
     try {
       setLoading(true);
       axios
-        .get(`${baseUrl}api/dashboard/indicator/sellingSkills?leadId=${id}`, {
-          headers: {
-            Authorization: accessToken,
-          },
-        })
+        .get(
+          // `${baseUrl}api/dashboard/indicator/sellingSkills?leadId=${id}`
+          `https://api.npoint.io/a45d554c4fc28dd86987`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
+          }
+        )
         .then((e) => {
-          setSellingSkillsData(e.data.result);
+          console.log(e.data, "arijit");
+
+          setSellingSkillsData(e.data);
         })
         .catch((e) => {});
       setLoading(false);
@@ -231,18 +248,24 @@ const Coaching = ({ data, refresh }: any) => {
     try {
       setLoading(true);
       axios
-        .get(`${baseUrl}api/dashboard/indicator/emotionAnalysis?leadId=${id}`, {
-          headers: {
-            Authorization: accessToken,
-          },
-        })
+        .get(
+          // `${baseUrl}api/dashboard/indicator/emotionAnalysis?leadId=${id}`
+          `https://api.npoint.io/94de79c89a6c5d6b56ca`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
+          }
+        )
         .then((e) => {
-          setEmotionData(e.data.result);
+          setEmotionData(e.data);
         })
         .catch((e) => {});
       setLoading(false);
     } catch (error) {}
   };
+
+  console.log(sellingSkillsData, "arijit");
 
   useEffect(() => {
     if (!accessToken) return;
@@ -522,12 +545,12 @@ const Coaching = ({ data, refresh }: any) => {
             </h3>
             <div className="flex justify-between gap-[10px] py-6">
               <div className="w-[50%]">
-                <div className="w-[100%] flex font-medium">
+                {/* <div className="w-[100%] flex font-medium">
                   <span className="text-[gray] mb-2 w-[60%]">
                     Call Disposition
                   </span>
                   <span>{data?.activeCall?.call_disposition || "NA"}</span>
-                </div>
+                </div> */}
                 <div className="w-[100%] flex  font-medium">
                   <span className="text-[gray] w-[60%]">Call Type</span>
                   <span>{data?.activeCall?.call_type || "-"}</span>
@@ -560,9 +583,25 @@ const Coaching = ({ data, refresh }: any) => {
                 list={tabs2}
                 coachingButton2
               />
-              {tab2 === 0 && <ScriptBuilding script={scriptBuildingData} />}
-              {tab2 === 1 && <Selling selling={sellingSkillsData} />}
-              {tab2 === 2 && <Emotion data={emotionData} />}
+              {tab2 === 0 && (
+                <ScriptBuilding
+                  script={
+                    id == "65c5f4b9d8b4e9fdd127b987" ? scriptBuildingData : {}
+                  }
+                />
+              )}
+              {tab2 === 1 && (
+                <Selling
+                  selling={
+                    id == "65c5f4b9d8b4e9fdd127b987" ? sellingSkillsData : {}
+                  }
+                />
+              )}
+              {tab2 === 2 && (
+                <Emotion
+                  data={id == "65c5f4b9d8b4e9fdd127b987" ? emotionData : {}}
+                />
+              )}
             </div>
           )}
           {tab === 1 &&
