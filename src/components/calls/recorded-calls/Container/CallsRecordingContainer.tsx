@@ -374,7 +374,7 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
                 ))}
               </select>
             </div>
-            <div
+            {/* <div
               className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
                 callDisposition !== ""
                   ? "border border-red-500"
@@ -395,7 +395,7 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
                   Follow-up Required
                 </option>
               </select>
-            </div>
+            </div> */}
             <DatePicker
               startDate={startDate}
               setStartDate={setStartDate}
