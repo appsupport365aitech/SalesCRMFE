@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navigator from "@/utils/customNavigator";
 import Image from "next/image";
 import { getBasicIcon } from "@/utils/AssetsHelper";
@@ -40,94 +40,136 @@ const AudioProfileContainer = ({
     return strTime;
   }
 
-  console.log("----------- Audio Profile Container -----------", data, data1);
+  const [loading, setLoading] = useState(false);
+  const [duration, setDuration] = useState(0);
+
+  useEffect(() => {
+    setLoading(true);
+    try {
+      const audio = new Audio();
+      audio.src = data?.RecordingUrl;
+
+      audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+
+      return () => {
+        audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      };
+    } catch (error) {
+      setLoading(false);
+    }
+  }, [data?.RecordingUrl]);
+
+  const handleLoadedMetadata = (e: any) => {
+    const audioDuration = e.target.duration;
+    setDuration(audioDuration);
+    setLoading(false);
+  };
+
+  function secondsToTime(seconds: any) {
+    var hours = Math.floor(seconds / 3600);
+    var minutes = Math.floor((seconds % 3600) / 60);
+    var remainingSeconds = Math.round(seconds % 60);
+
+    var formattedHours = hours < 10 ? "0" + hours : hours;
+    var formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+    var formattedSeconds =
+      remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
+    return formattedHours + ":" + formattedMinutes + ":" + formattedSeconds;
+  }
+
+  var callDuration = secondsToTime(duration);
 
   return (
-    <div
-      className={`w-[${
-        width ? width : "100%"
-      }]  bg-[#ffe3e170] rounded-xl p-[25px] px-[35px] pt-[30px]`}
-    >
-      {data1?.companyId?.company_name && (
-        <div className="w-[90%] flex justify-around">
-          <div className="flex gap-2 text-[black]">
-            <Image
-              src={getBasicIcon("buildingIcon")}
-              style={{
-                zIndex: 10,
-              }}
-              alt=""
-              width={25}
-              height={25}
-            />
-            {data1?.companyId?.company_name}
+    <>
+      <div
+        className={`w-[${
+          width ? width : "100%"
+        }]  bg-[#ffe3e170] rounded-xl p-[25px] px-[35px] pt-[30px]`}
+      >
+        {data1 && (
+          <div className="w-[90%] flex justify-around">
+            {data1?.companyId?.company_name && (
+              <div className="flex gap-2 text-[black]">
+                <Image
+                  src={getBasicIcon("buildingIcon")}
+                  style={{
+                    zIndex: 10,
+                  }}
+                  alt=""
+                  width={25}
+                  height={25}
+                />
+                {data1?.companyId?.company_name}
+              </div>
+            )}
+            <div className="flex gap-2 text-[black]">
+              <Image
+                src={getBasicIcon("Calendar")}
+                style={{
+                  zIndex: 10,
+                }}
+                alt=""
+                width={25}
+                height={25}
+              />
+              {new Date(data1.createdAt).toDateString()}
+            </div>
+            <div className="flex gap-2 text-[black]">
+              <Image
+                src={getBasicIcon("Time")}
+                style={{
+                  zIndex: 10,
+                }}
+                alt=""
+                width={25}
+                height={25}
+              />
+              {getTime(data1?.createdAt)}
+            </div>
+            {!loading && (
+              <div className="flex gap-2 text-[black] items-center">
+                {/* <MdOutlineTimer className="w-6 h-6" fill="#3F434A" /> */}
+                <Image
+                  src={getBasicIcon("Timer")}
+                  style={{
+                    zIndex: 10,
+                  }}
+                  alt=""
+                  width={25}
+                  height={25}
+                />
+                {callDuration}
+              </div>
+            )}
           </div>
-          <div className="flex gap-2 text-[black]">
-            <Image
-              src={getBasicIcon("Calendar")}
-              style={{
-                zIndex: 10,
-              }}
-              alt=""
-              width={25}
-              height={25}
-            />
-            {new Date(data1.createdAt).toDateString()}
+        )}
+        <hr className="border-t-4 border-red-300 mt-4" />
+        <Navigator
+          callback={CallBack}
+          current={activeTitle}
+          list={list}
+          width={false}
+        />
+        <div className="flex justify-between w-[100%] relative overflow-hidden">
+          <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
+            {activeTitle === 0 && (
+              <CallInfo data1={data1} data={data} check={check} type={type} />
+            )}
+            {activeTitle === 1 && (
+              <CommentsAndNotes
+                data={data}
+                notesData={data}
+                refresh={refresh}
+                type={type}
+              />
+            )}
+            {activeTitle === 2 && (
+              <Coaching data={data} refresh={refresh} type={type} />
+            )}
           </div>
-          <div className="flex gap-2 text-[black]">
-            <Image
-              src={getBasicIcon("Time")}
-              style={{
-                zIndex: 10,
-              }}
-              alt=""
-              width={25}
-              height={25}
-            />
-            {getTime(data1?.createdAt)}
-          </div>
-          <div className="flex gap-2 text-[black] items-center">
-            {/* <MdOutlineTimer className="w-6 h-6" fill="#3F434A" /> */}
-            <Image
-              src={getBasicIcon("Timer")}
-              style={{
-                zIndex: 10,
-              }}
-              alt=""
-              width={25}
-              height={25}
-            />
-            {data?.Duration}
-            {/* {data?.activeCall?.call_duration} */}
-          </div>
-        </div>
-      )}
-      <hr className="border-t-4 border-red-300 mt-4" />
-      <Navigator
-        callback={CallBack}
-        current={activeTitle}
-        list={list}
-        width={false}
-      />
-      <div className="flex justify-between w-[100%] relative overflow-hidden">
-        <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
-          {activeTitle === 0 && (
-            <CallInfo data1={data1} data={data} check={check} type={type} />
-          )}
-          {activeTitle === 1 && (
-            <CommentsAndNotes
-              data={data}
-              notesData={data}
-              refresh={refresh}
-              type={type}
-            />
-          )}
-          {activeTitle === 2 && (
-            <Coaching data={data} refresh={refresh} type={type} />
-          )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
