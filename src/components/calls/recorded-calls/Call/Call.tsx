@@ -805,7 +805,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             }
           />
           <CallItem width={120} left={10} text={callDuration} />
-          <CallItem
+          {/* <CallItem
             width={160}
             left={20}
             text={
@@ -813,7 +813,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
               CallData?.callData?.[0]?.call_disposition ||
               "NA"
             }
-          />
+          /> */}
           <CallItem width={120} left={10} text={CallData?.score || "-"} />
           {/* <CallItem
             width={110}

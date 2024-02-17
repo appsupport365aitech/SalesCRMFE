@@ -170,7 +170,9 @@ const Transcript = ({
                     {convertMilliseconds(item.start)}
                   </p>
                   <p
-                    className="text-[#304FFD] shrink-0 w-28 font-medium text-[15px] tracking-wide"
+                    className={`text-[#304FFD] ${
+                      item.title == "A" ? "uppercase" : ""
+                    }  shrink-0 w-28 font-medium text-[15px] tracking-wide`}
                     style={{
                       color: item.title === "A" ? "#4091FF" : "#FE5143",
                     }}
