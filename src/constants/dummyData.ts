@@ -8,16 +8,24 @@ export const avgCallScore = {
     day_7: 77.5,
 };
 
-export const highIntentCallVolume = {
-    "specific_product_enquiries": 81,
-    "asking_about_availability": 23,
-    "pricing_discounts_questions": 5,
-    "comparing_options": 34,
-    "requesting_quotes": 87,
-    "return_and_guarentee_questions": 91.67,
-    "expressing_urgency": 77,
-};
-
+// export const highIntentCallVolume = {
+//     "specific_product_enquiries": 81,
+//     "asking_about_availability": 23,
+//     "pricing_discounts_questions": 5,
+//     "comparing_options": 34,
+//     "requesting_quotes": 87,
+//     "return_and_guarentee_questions": 91.67,
+//     "expressing_urgency": 77,
+// };
+export const highIntentCallVolume = [{
+    title: "Specific Product Enquiries",score: 81},
+    {title:"Asking About Availability",score: 23},
+    {title:"Pricing Discounts Questions",score: 5},
+    {title:"Comparing Options",score: 34},
+    {title:"Requesting Quotes",score: 87},
+    {title:"Return and Guarentee Questions",score: 91.67},
+    {title:"Expressing Urgency",score: 77},
+];
 export const noOfTopics = {
     "product_features": 81,
     "customization_options": 67,
@@ -47,14 +55,22 @@ export const satisfactionScore = {
     "likelihood_to_recommend": 99,
 };
 
-export const callDisposition = {
-    "follow_up_required": 25,
-    "call_dropped": 25,
-    "product_demo_required": 25,
-    "call_back_required": 25,
-    "no_answer": 25,
-    "price_too_high": 25,
-};
+// export const callDisposition = {
+//     "follow_up_required": 25,
+//     "call_dropped": 25,
+//     "product_demo_required": 25,
+//     "call_back_required": 25,
+//     "no_answer": 25,
+//     "price_too_high": 25,
+// };
+export const callDisposition = [{
+    title: "follow-up Required",score: 25},
+    {title:"Call Dropped",score: 25},
+    {title:"Product Demo Required",score: 25},
+    {title:"Call Back Required",score: 25},
+    {title:"No Answer",score: 25},
+    {title:"Price Too High",score: 25},
+];
 
 export const talkingSpeed = {
     "john_c": 45,
