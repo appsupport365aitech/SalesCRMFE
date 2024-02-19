@@ -257,6 +257,7 @@ const Dashboard = ({ data }: any) => {
         .catch((e) => {});
     } catch (error) {}
   };
+  console.log(noOfSwitches, "epr");
 
   const getScriptData = ({ ...startEndDate }: any) => {
     const finalPayload = {
