@@ -118,17 +118,12 @@ interface IndicatorCategory {
 }
 
 const Indicator = () => {
-  const [apiData, setApiData] = useState([]);
-  const [valuesApiData, setValuesApiData] = useState([]);
-
   const [indicatorTypes, setIndicatorTypes] = useState<any>([]);
   const [itClone, setItClone] = useState<any>([]);
 
   const [disableITSave, setDisableITSave] = useState<boolean>(false);
   const [currIndicatorType, setCurrIndicatorType] = useState(0);
   const [currIndicatorCategory, setCurrIndicatorCategory] = useState(0);
-  const [currIndicatorValue, setCurrIndicatorValue] = useState<any>(0);
-  const [editCategoryIdx, setEditCategoryIdx] = useState<any>(0);
   const [delPopup, setDelPopup] = useState<any>({ open: false, payload: {} });
   const [indicatorSetting, setIndicatorSetting] = useState(false);
   const [indicatorCategoryScoring, setIndicatorCategoryScoring] = useState<any>(
@@ -146,20 +141,17 @@ const Indicator = () => {
     open: false,
     payload: {},
   });
-  const [editIndicatorValue, setEditIndicatorValue] = useState<any>({
-    open: false,
-    payload: {},
-  });
+
   const [newIndicatorValue, setNewIndicatorValue] = useState<any>({
     open: false,
     payload: {},
   });
+
   const [currICTab, setCurrICTab] = useState(0);
   const [ICTabs, setICTabs] = useState([
     { id: 0, title: "Score Settings" },
     { id: 1, title: "Time Settings" },
   ]);
-  const [scoreSettingSave, setScoreSettingSave] = useState<any>(true);
   const [bool, setBool] = React.useState(true);
 
   const dispatch = useAppDispatch();
@@ -242,7 +234,20 @@ const Indicator = () => {
   const [indicatorValuesData, setIndicatorValuesData] = useState<
     IndicatorValue[]
   >([]);
+  const [indicatorValue, setIndicatorValue] = useState({
+    value: "",
+    score: "",
+    alternative: "",
+  });
+  const [indicatorValueId, setIndicatorValueId] = useState("");
+
+  const [editIndicatorValue, setEditIndicatorValue] = useState<any>({
+    open: false,
+    payload: {},
+  });
+
   const [loading, setLoading] = useState(false);
+
   const getTypes = () => {
     // if sdr/bdm user then find-all otherwise getTypesById
     axios
@@ -283,17 +288,6 @@ const Indicator = () => {
     }
   };
 
-  const getTypesById = (id: any) => {
-    axios
-      .get(`${baseUrl}api/indicator/find-by-id?id=${id}`, {
-        headers: { Authorization: accessToken },
-      })
-      .then((res: any) => {
-        console.log("============ indicator : data ============", res);
-      })
-      .catch((err: any) => {});
-  };
-
   const getValues = () => {
     let typeId = selectedData?.oid;
     let categoryId = selectedDataForIndicatorCategory?._id;
@@ -308,6 +302,21 @@ const Indicator = () => {
         )
         .then((res: any) => {
           setIndicatorValuesData(res?.data?.result);
+        })
+        .catch((err: any) => {});
+    }
+  };
+
+  const getValuesById = () => {
+    let id = indicatorValueId;
+    if (!id) return;
+    else {
+      axios
+        .get(`${baseUrl}api/indicator/find-by-id?id=${id}`, {
+          headers: { Authorization: accessToken },
+        })
+        .then((res: any) => {
+          setIndicatorValue(res?.data?.result);
         })
         .catch((err: any) => {});
     }
@@ -386,12 +395,16 @@ const Indicator = () => {
           setEditIndicatorCategory({ open: false, payload: {} });
         } else if (type === "VALUE") {
           setBool(false);
-          setEditIndicatorValue({ open: false, payload: {} });
+          setEditIndicatorValue({
+            open: false,
+            payload: {},
+          });
         }
         dispatch(
           setSuccess({
             show: true,
-            success: `Successfully edited ${type.toLowerCase()}.`,
+            success:
+              res.data.message ?? `Successfully edited ${type.toLowerCase()}.`,
           })
         );
         getTypes();
@@ -437,7 +450,7 @@ const Indicator = () => {
         dispatch(
           setSuccess({
             show: true,
-            success: `New ${type.toLowerCase()} created.`,
+            success: res.data.message ?? `New ${type.toLowerCase()} created.`,
           })
         );
         getTypes();
@@ -458,13 +471,7 @@ const Indicator = () => {
         createIndicator(
           {
             type: indicatorType.label,
-            // category: "",
-            // value: "",
-            // alternative: "",
             score: indicatorType.scoreWeightage,
-            // timeRestriction: "",
-            // comparisonType: "",
-            // speaker: "",
           },
           "INDICATOR"
         );
@@ -473,13 +480,6 @@ const Indicator = () => {
           {
             id: indicatorType.oid,
             type: indicatorType.category,
-            // type: indicatorType.label,
-            // value: indicatorType.value,
-            // alternative: indicatorType.alternatives,
-            // score: indicatorType.scoreWeightage,
-            // timeRestriction: "",
-            // comparisonType: "",
-            // speaker: "",
           },
           "INDICATOR"
         );
@@ -510,7 +510,7 @@ const Indicator = () => {
         categoryId: selectedDataForIndicatorCategory?._id,
         value: newIndicatorValue?.payload?.value,
         alternative: newIndicatorValue?.payload?.alternatives,
-        score: 0,
+        score: newIndicatorValue?.payload?.score,
       },
       "VALUE"
     );
@@ -558,20 +558,12 @@ const Indicator = () => {
   const saveEditedValue = () => {
     updateIndicator(
       {
-        id: indicatorTypes?.[currIndicatorType]?.categories?.[
-          currIndicatorCategory
-        ]?.values?.[editIndicatorValue?.payload?.key]?.oid,
-        type: indicatorTypes?.[currIndicatorType]?.label,
-        category:
-          indicatorTypes?.[currIndicatorType]?.categories?.[
-            currIndicatorCategory
-          ]?.label,
-        value: editIndicatorValue?.payload?.value,
-        alternative: editIndicatorValue?.payload?.alternatives,
-        score: indicatorTypes?.[currIndicatorType]?.scoreWeightage || "0",
-        timeRestriction: "",
-        comparisonType: "",
-        speaker: "",
+        id: indicatorValueId,
+        value: editIndicatorValue?.payload?.value || indicatorValue.value,
+        alternative:
+          editIndicatorValue?.payload?.alternative ||
+          indicatorValue.alternative,
+        score: editIndicatorValue?.payload?.score || indicatorValue.score || 0,
       },
       "VALUE"
     );
@@ -585,13 +577,6 @@ const Indicator = () => {
             {
               id: selectedDataForIndicatorCategory?._id,
               category: categoryItem?.label,
-              // type: indicatorTypes?.[currIndicatorType]?.label,
-              // score: indicatorTypes?.[currIndicatorType]?.scoreWeightage || "0",
-              // value: editIndicatorValue?.payload?.value,
-              // alternative: editIndicatorValue?.payload?.alternatives,
-              // timeRestriction: "",
-              // comparisonType: "",
-              // speaker: "",
             },
             "CATEGORY"
           );
@@ -599,7 +584,6 @@ const Indicator = () => {
           createIndicator(
             {
               type: indicatorTypes?.[currIndicatorType]?.label,
-              // score: indicatorTypes?.[currIndicatorType]?.scoreWeightage,
               category: categoryItem?.label,
             },
             "CATEGORY"
@@ -680,23 +664,12 @@ const Indicator = () => {
   ]);
 
   useEffect(() => {
+    getValuesById();
+  }, [indicatorValueId, indicatorValuesData]);
+
+  useEffect(() => {
     setCurrIndicatorCategory(0);
   }, [currIndicatorType]);
-
-  //   const handleBeforeHistoryChange = () => {
-  //     router.events.on("beforeHistoryChange", handleBeforeHistoryChange);
-  //     router.beforePopState(() => {
-  //       router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
-  //       return true;
-  //     });
-  //   };
-
-  //   handleBeforeHistoryChange();
-
-  //   return () => {
-  //     router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
-  //   };
-  // }, []);
 
   const handleIndicatorSettingClick = () => {
     setBool(true);
@@ -754,14 +727,13 @@ const Indicator = () => {
       return sum;
     } else if (type === "VALUE") {
       const sum = indicatorValuesData?.reduce((acc: number, item: any) => {
-        return acc + (isNaN(item?.scoreWeightage) ? 0 : item?.scoreWeightage);
+        return acc + (isNaN(item?.score) ? 0 : item?.score);
       }, 0);
       return sum;
     } else {
       const sum = indicatorTypes?.reduce((acc: number, item: any) => {
         return acc + (isNaN(item?.scoreWeightage) ? 0 : item?.scoreWeightage);
       }, 0);
-      // setScoreSettingSave(sum === 100);
       return sum;
     }
   };
@@ -833,6 +805,12 @@ const Indicator = () => {
 
   const handleEditIndicatorCategoryData = (payload: any) => {
     const { key, value } = payload;
+    setEditIndicatorCategory({
+      open: true,
+      payload: {
+        value: value,
+      },
+    });
     if (value) {
       setIndicatorTypes((currIndicatorTypes: any) => {
         return currIndicatorTypes?.map((currTypeItem: any, typeIdx: number) => {
@@ -945,6 +923,12 @@ const Indicator = () => {
 
   const handleEditIndicatorValue = (payload: any) => {
     const { key } = payload;
+    setBool(true);
+    setEditIndicatorValue({
+      open: true,
+      payload: { ...editIndicatorValue.payload },
+    });
+    setIndicatorValueId(payload.id);
     setIndicatorTypes((currTypes: any) => {
       return currTypes?.map((typeItem: any, typeIdx: number) => {
         if (typeIdx === key) {
@@ -987,7 +971,6 @@ const Indicator = () => {
 
   const handleDeleteIndicatorValue = (payload: any) => {
     const { key } = payload;
-    setCurrIndicatorValue(key);
     setBool(true);
     setDelPopup({
       open: true,
@@ -1225,7 +1208,7 @@ const Indicator = () => {
                     Add New Indicator Type
                   </button>
                 </div>
-                <span className="text-green-500 mt-2 w-[60px]">
+                <span className="text-green-500 mt-2 w-[100px]">
                   Sum: {getScoreWeightageSum("CATEGORY")}
                 </span>
               </div>
@@ -1277,7 +1260,7 @@ const Indicator = () => {
                     }
                     handleChangeScore={(e: any) => {}}
                     handleEditIndicatorType={() =>
-                      handleEditIndicatorValue({ key: index })
+                      handleEditIndicatorValue({ key: index, valueItem })
                     }
                     handleDeleteIndicatorType={() =>
                       handleDeleteIndicatorValue({ key: index })
@@ -1294,7 +1277,7 @@ const Indicator = () => {
                     Add New Indicator Type
                   </button>
                 </div>
-                <span className="text-green-500 mt-2 w-[60px]">
+                <span className="text-green-500 mt-2 w-[100px]">
                   Sum: {getScoreWeightageSum("VALUE")}
                 </span>
               </div>
@@ -1354,7 +1337,9 @@ const Indicator = () => {
             <AddText
               title="Indicator Value Name"
               place={"Indicator Value Name"}
-              value={editIndicatorValue?.payload?.value}
+              value={
+                editIndicatorValue?.payload?.value ?? indicatorValue?.value
+              }
               change={(e: any) => {
                 setBool(true);
                 setEditIndicatorValue({
@@ -1369,14 +1354,34 @@ const Indicator = () => {
             <AddText
               title="Alternate Values for the Indicator Value"
               place={"Enter Comma Seperated Values"}
-              value={editIndicatorValue?.payload?.alternatives}
+              value={
+                editIndicatorValue?.payload?.alternative ??
+                indicatorValue?.alternative
+              }
               change={(e: any) => {
                 setBool(true);
                 setEditIndicatorValue({
                   open: true,
                   payload: {
                     ...editIndicatorValue.payload,
-                    alternatives: e.target.value,
+                    alternative: e.target.value,
+                  },
+                });
+              }}
+            />
+            <AddText
+              title="Score"
+              place={"Enter Score"}
+              value={
+                editIndicatorValue?.payload?.score ?? indicatorValue?.score
+              }
+              change={(e: any) => {
+                setBool(true);
+                setEditIndicatorValue({
+                  open: true,
+                  payload: {
+                    ...editIndicatorValue.payload,
+                    score: e.target.value,
                   },
                 });
               }}
@@ -1398,7 +1403,7 @@ const Indicator = () => {
           <EditCategory
             submit={() => saveEditedCategoryScoring()}
             cancel={cancelEdit}
-            value={indicatorCategory?.[currIndicatorCategory]?.category}
+            value={editIndicatorCategory.payload.value}
             onChange={(e: any) =>
               handleEditIndicatorCategoryData({
                 key: currIndicatorCategory,
@@ -1453,6 +1458,21 @@ const Indicator = () => {
                   payload: {
                     ...newIndicatorValue.payload,
                     alternatives: e.target.value,
+                  },
+                });
+              }}
+            />
+            <AddText
+              title="Score"
+              place={"Enter Score"}
+              value={newIndicatorValue?.payload?.score}
+              change={(e: any) => {
+                setBool(true);
+                setNewIndicatorValue({
+                  open: true,
+                  payload: {
+                    ...newIndicatorValue.payload,
+                    score: e.target.value,
                   },
                 });
               }}
@@ -1676,9 +1696,8 @@ const Indicator = () => {
                           open: true,
                           payload: {
                             value:
-                              itClone?.[currIndicatorType]?.categories?.[
-                                currIndicatorCategory
-                              ]?.label,
+                              indicatorCategory?.[currIndicatorCategory]
+                                ?.category,
                           },
                         });
                       },
@@ -1733,7 +1752,12 @@ const Indicator = () => {
                   <div className="flex mt-6 gap-4 w-[10%] h-[62px]">
                     <button
                       className="w-[20px] h-[20px]"
-                      onClick={() => handleEditIndicatorValue({ key: index })}
+                      onClick={() =>
+                        handleEditIndicatorValue({
+                          key: index,
+                          id: data._id,
+                        })
+                      }
                     >
                       <Image
                         src={getBasicIcon("Edit")}
