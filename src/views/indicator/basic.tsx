@@ -120,7 +120,6 @@ const Indicator = () => {
   const [currIndicatorCategory, setCurrIndicatorCategory] = useState(0);
   const [currIndicatorValue, setCurrIndicatorValue] = useState<any>(0);
   const [editCategoryIdx, setEditCategoryIdx] = useState<any>(0);
-
   const [delPopup, setDelPopup] = useState<any>({ open: false, payload: {} });
   const [indicatorSetting, setIndicatorSetting] = useState(false);
   const [indicatorCategoryScoring, setIndicatorCategoryScoring] = useState<any>(
@@ -228,17 +227,47 @@ const Indicator = () => {
     setIndicatorTypes(newIndicators);
     setItClone(newIndicators);
   };
-
+  const [indicatorCategory, setIndicatorCategory] = useState([]);
+  const [indicatorValuesData, setIndicatorValuesData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const getTypes = () => {
     // if sdr/bdm user then find-all otherwise getTypesById
     axios
-      .get(`${baseUrl}api/indicator/find-all?page=0&limit=10`, {
+      .get(`${baseUrl}api/indicatorType/find-all`, {
         headers: { Authorization: accessToken },
       })
       .then((res: any) => {
         formatData(res.data);
       })
       .catch((err: any) => {});
+  };
+
+  const selectedData = itClone[currIndicatorType];
+
+  const selectedDataForIndicatorCategory: any =
+    indicatorCategory[currIndicatorCategory];
+
+  const getCategoryById = () => {
+    setLoading(true);
+    try {
+      let id = selectedData?.oid;
+      if (!id) return;
+      else {
+        axios
+          .get(`${baseUrl}api/indicatorCategory/findByType?typeId=${id}`, {
+            headers: { Authorization: accessToken },
+          })
+          .then((res: any) => {
+            setIndicatorCategory(res.data.result);
+            setLoading(false);
+          })
+          .catch((err: any) => {
+            setLoading(false);
+          });
+      }
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
   const getTypesById = (id: any) => {
@@ -253,25 +282,38 @@ const Indicator = () => {
   };
 
   const getValues = () => {
-    axios
-      .get(
-        `${baseUrl}api/indicator/getIndicatorValues?userId=65782fb3cae5f857818476dd`,
-        {
-          headers: { Authorization: accessToken },
-        }
-      )
-      .then((res: any) => {
-        console.log("============ indicator : data ============", res);
-      })
-      .catch((err: any) => {});
+    let typeId = selectedData?.oid;
+    let categoryId = selectedDataForIndicatorCategory?._id;
+    if (!typeId || !categoryId) return;
+    else {
+      axios
+        .get(
+          `${baseUrl}api/indicator/find-all?typeId=${typeId}&categoryId=${categoryId}`,
+          {
+            headers: { Authorization: accessToken },
+          }
+        )
+        .then((res: any) => {
+          setIndicatorValuesData(res?.data?.result);
+        })
+        .catch((err: any) => {});
+    }
   };
 
   const deleteIndicatorById = (
     id: any,
     type: "INDICATOR" | "CATEGORY" | "VALUE" | any
   ) => {
+    let url = "";
+    if (type === "TYPE") {
+      url = `${baseUrl}api/indicatorType/delete-by-id?id=${id}`;
+    } else if (type === "CATEGORY") {
+      url = `${baseUrl}api/indicatorCategory/delete-by-id?id=${id}`;
+    } else if (type === "VALUE") {
+      url = `${baseUrl}api/indicator/delete-by-id?id=${id}`;
+    }
     axios
-      .delete(`${baseUrl}api/indicator/delete-by-id?id=${id}`, {
+      .delete(url, {
         headers: { Authorization: accessToken },
       })
       .then((res: any) => {
@@ -290,7 +332,8 @@ const Indicator = () => {
         dispatch(
           setSuccess({
             show: true,
-            success: `Deleted ${type.toLowerCase()} successfully.`,
+            success:
+              res.data.message ?? `Deleted ${type.toLowerCase()} successfully.`,
           })
         );
         getTypes();
@@ -309,8 +352,16 @@ const Indicator = () => {
     payload: any,
     type: "INDICATOR" | "CATEGORY" | "VALUE"
   ) => {
+    let url = "";
+    if (type === "INDICATOR") {
+      url = `${baseUrl}api/indicatorType/update`;
+    } else if (type === "CATEGORY") {
+      url = `${baseUrl}api/indicatorCategory/update`;
+    } else if (type === "VALUE") {
+      url = `${baseUrl}api/indicator/update`;
+    }
     axios
-      .put(`${baseUrl}api/indicator/update`, payload, {
+      .put(url, payload, {
         headers: { Authorization: accessToken },
       })
       .then((res: any) => {
@@ -346,8 +397,16 @@ const Indicator = () => {
     payload: any,
     type: "INDICATOR" | "CATEGORY" | "VALUE" = "INDICATOR"
   ) => {
+    let url = "";
+    if (type === "INDICATOR") {
+      url = `${baseUrl}api/indicatorType/create`;
+    } else if (type === "CATEGORY") {
+      url = `${baseUrl}api/indicatorCategory/create`;
+    } else if (type === "VALUE") {
+      url = `${baseUrl}api/indicator/create`;
+    }
     axios
-      .post(`${baseUrl}api/indicator/create`, payload, {
+      .post(url, payload, {
         headers: { Authorization: accessToken },
       })
       .then((res: any) => {
@@ -374,7 +433,7 @@ const Indicator = () => {
         dispatch(
           setError({
             show: true,
-            error: "Error Occured!",
+            error: err?.response.data?.message ?? "Error Occured!",
           })
         );
       });
@@ -386,28 +445,28 @@ const Indicator = () => {
         createIndicator(
           {
             type: indicatorType.label,
-            category: "",
-            value: "",
-            alternative: "",
+            // category: "",
+            // value: "",
+            // alternative: "",
             score: indicatorType.scoreWeightage,
-            timeRestriction: "",
-            comparisonType: "",
-            speaker: "",
+            // timeRestriction: "",
+            // comparisonType: "",
+            // speaker: "",
           },
           "INDICATOR"
         );
       } else if (indicatorType?.edit) {
         updateIndicator(
           {
-            _id: indicatorType.oid,
-            type: indicatorType.label,
-            category: indicatorType.category,
-            value: indicatorType.value,
-            alternative: indicatorType.alternatives,
-            score: indicatorType.scoreWeightage,
-            timeRestriction: "",
-            comparisonType: "",
-            speaker: "",
+            id: indicatorType.oid,
+            type: indicatorType.category,
+            // type: indicatorType.label,
+            // value: indicatorType.value,
+            // alternative: indicatorType.alternatives,
+            // score: indicatorType.scoreWeightage,
+            // timeRestriction: "",
+            // comparisonType: "",
+            // speaker: "",
           },
           "INDICATOR"
         );
@@ -418,14 +477,14 @@ const Indicator = () => {
   const handleNewIndicatorCategory = () => {
     createIndicator(
       {
-        type: indicatorTypes?.[currIndicatorType]?.label,
+        typeId: indicatorTypes?.[currIndicatorType]?.oid,
         category: newIndicatorCategory?.payload?.category,
-        value: newIndicatorCategory?.payload?.value,
-        alternative: newIndicatorCategory?.payload?.value,
-        score: "",
-        timeRestriction: "",
-        comparisonType: "",
-        speaker: "",
+        // value: newIndicatorCategory?.payload?.value,
+        // alternative: newIndicatorCategory?.payload?.value,
+        // score: "",
+        // timeRestriction: "",
+        // comparisonType: "",
+        // speaker: "",
       },
       "CATEGORY"
     );
@@ -434,17 +493,11 @@ const Indicator = () => {
   const handleNewIndicatorValue = () => {
     createIndicator(
       {
-        type: indicatorTypes?.[currIndicatorType]?.label,
-        category:
-          indicatorTypes?.[currIndicatorType]?.categories?.[
-            currIndicatorCategory
-          ]?.label,
+        typeId: selectedDataForIndicatorCategory?.typeId,
+        categoryId: selectedDataForIndicatorCategory?._id,
         value: newIndicatorValue?.payload?.value,
         alternative: newIndicatorValue?.payload?.alternatives,
-        score: "",
-        timeRestriction: "",
-        comparisonType: "",
-        speaker: "",
+        score: 0,
       },
       "VALUE"
     );
@@ -492,7 +545,7 @@ const Indicator = () => {
   const saveEditedValue = () => {
     updateIndicator(
       {
-        _id: indicatorTypes?.[currIndicatorType]?.categories?.[
+        id: indicatorTypes?.[currIndicatorType]?.categories?.[
           currIndicatorCategory
         ]?.values?.[editIndicatorValue?.payload?.key]?.oid,
         type: indicatorTypes?.[currIndicatorType]?.label,
@@ -517,7 +570,7 @@ const Indicator = () => {
         if (categoryItem.edit == true && !categoryItem?.new) {
           updateIndicator(
             {
-              _id: categoryItem?.oid,
+              id: selectedDataForIndicatorCategory?._id,
               category: categoryItem?.label,
               // type: indicatorTypes?.[currIndicatorType]?.label,
               // score: indicatorTypes?.[currIndicatorType]?.scoreWeightage || "0",
@@ -533,7 +586,7 @@ const Indicator = () => {
           createIndicator(
             {
               type: indicatorTypes?.[currIndicatorType]?.label,
-              score: indicatorTypes?.[currIndicatorType]?.scoreWeightage,
+              // score: indicatorTypes?.[currIndicatorType]?.scoreWeightage,
               category: categoryItem?.label,
             },
             "CATEGORY"
@@ -567,16 +620,15 @@ const Indicator = () => {
       } else if (valueItem.edit == true && !valueItem?.new) {
         updateIndicator(
           {
-            _id: valueItem?.oid,
-            category: valueItem?.label,
-            value: valueItem.label,
-            // type: indicatorTypes?.[currIndicatorType]?.label,
-            // score: indicatorTypes?.[currIndicatorType]?.scoreWeightage || "0",
-            // value: editIndicatorValue?.payload?.value,
-            // alternative: editIndicatorValue?.payload?.alternatives,
-            // timeRestriction: "",
-            // comparisonType: "",
-            // speaker: "",
+            id: valueItem.oid,
+            category: valueItem.category,
+            type: indicatorTypes?.[currIndicatorType]?.label,
+            score: indicatorTypes?.[currIndicatorType]?.scoreWeightage || "0",
+            value: editIndicatorValue?.payload?.value,
+            alternative: editIndicatorValue?.payload?.alternatives,
+            timeRestriction: "",
+            comparisonType: "",
+            speaker: "",
           },
           "VALUE"
         );
@@ -588,16 +640,11 @@ const Indicator = () => {
     let id = "";
     const type = delPopup?.payload?.type;
     if (type === "TYPE") {
-      id = indicatorTypes?.[delPopup?.payload?.key]?.oid;
+      id = selectedData?.oid;
     } else if (type === "CATEGORY") {
-      id =
-        indicatorTypes?.[currIndicatorType]?.categories?.[
-          delPopup?.payload?.key
-        ]?.oid;
+      id = selectedDataForIndicatorCategory?._id;
     } else if (type === "VALUE") {
-      id =
-        indicatorTypes?.[currIndicatorType]?.categories?.[currIndicatorCategory]
-          ?.values?.[delPopup?.payload?.key]?.oid;
+      id = indicatorValuesData[delPopup.payload.key]?._id;
     }
     deleteIndicatorById(id, delPopup?.payload?.type);
   };
@@ -605,6 +652,19 @@ const Indicator = () => {
   useEffect(() => {
     getTypes();
   }, []);
+
+  useEffect(() => {
+    getCategoryById();
+  }, [selectedData, currIndicatorType]);
+
+  useEffect(() => {
+    getValues();
+  }, [
+    indicatorCategory,
+    setIndicatorCategory,
+    currIndicatorCategory,
+    currIndicatorType,
+  ]);
 
   useEffect(() => {
     setCurrIndicatorCategory(0);
@@ -675,17 +735,12 @@ const Indicator = () => {
 
   const getScoreWeightageSum = (type?: "CATEGORY" | "VALUE" | null) => {
     if (type === "CATEGORY") {
-      const sum = indicatorTypes?.[currIndicatorType]?.categories?.reduce(
-        (acc: number, item: any) => {
-          return acc + (isNaN(item?.scoreWeightage) ? 0 : item?.scoreWeightage);
-        },
-        0
-      );
+      const sum = itClone.reduce((acc: number, item: any) => {
+        return acc + (isNaN(item?.scoreWeightage) ? 0 : item?.scoreWeightage);
+      }, 0);
       return sum;
     } else if (type === "VALUE") {
-      const sum = indicatorTypes?.[currIndicatorType]?.categories?.[
-        currIndicatorCategory
-      ]?.values?.reduce((acc: number, item: any) => {
+      const sum = indicatorValuesData?.reduce((acc: number, item: any) => {
         return acc + (isNaN(item?.scoreWeightage) ? 0 : item?.scoreWeightage);
       }, 0);
       return sum;
@@ -775,7 +830,6 @@ const Indicator = () => {
                 (categoryItem: any, categoryIdx: number) => {
                   if (categoryIdx === key) {
                     return {
-                      ...categoryItem,
                       edit: true,
                       key: value,
                       label: value,
@@ -878,21 +932,17 @@ const Indicator = () => {
 
   const handleEditIndicatorValue = (payload: any) => {
     const { key } = payload;
-    setCurrIndicatorValue(key);
-    setBool(true);
-    setEditIndicatorValue({
-      open: true,
-      payload: {
-        key: key,
-        value:
-          indicatorTypes?.[currIndicatorType]?.categories?.[
-            currIndicatorCategory
-          ]?.values?.[key]?.key,
-        alternatives:
-          indicatorTypes?.[currIndicatorType]?.categories?.[
-            currIndicatorCategory
-          ]?.values?.[key]?.alternatives,
-      },
+    setIndicatorTypes((currTypes: any) => {
+      return currTypes?.map((typeItem: any, typeIdx: number) => {
+        if (typeIdx === key) {
+          return {
+            ...typeItem,
+            edit: true,
+          };
+        } else {
+          return typeItem;
+        }
+      });
     });
   };
 
@@ -917,7 +967,7 @@ const Indicator = () => {
       payload: {
         key: key,
         type: "CATEGORY",
-        label: indicatorTypes?.[currIndicatorType]?.categories?.[key]?.key,
+        label: indicatorCategory[currIndicatorCategory].category,
       },
     });
   };
@@ -931,10 +981,7 @@ const Indicator = () => {
       payload: {
         key: key,
         type: "VALUE",
-        label:
-          indicatorTypes?.[currIndicatorType]?.categories?.[
-            currIndicatorCategory
-          ]?.values?.[key]?.key,
+        label: indicatorValuesData[key].value,
       },
     });
   };
@@ -964,7 +1011,7 @@ const Indicator = () => {
     type: "SEPARATE" | "COMBINE" = "SEPARATE"
   ) => {
     if (type === "SEPARATE") {
-      return payload.split(",");
+      return payload?.split(",");
     } else {
       return payload?.join(",");
     }
@@ -1134,30 +1181,28 @@ const Indicator = () => {
               </h4>
             </div>
             <div>
-              {indicatorTypes?.[currIndicatorType]?.categories?.map(
-                (categoryItem: any, index: number) => (
-                  <div key={index} className="w-[100%]">
-                    <AddScore
-                      typeValue={categoryItem?.label}
-                      scoreValue={categoryItem?.scoreWeightage}
-                      disabled={!categoryItem?.edit}
-                      handleChangeType={(e: any) =>
-                        handleEditIndicatorCategoryData({
-                          key: index,
-                          value: e.target.value,
-                        })
-                      }
-                      handleChangeScore={(e: any) => {}}
-                      handleEditIndicatorType={() =>
-                        handleEditIndicatorCategoryData({ key: index })
-                      }
-                      handleDeleteIndicatorType={() =>
-                        handleDeleteIndicatorCategory({ key: index })
-                      }
-                    />
-                  </div>
-                )
-              )}
+              {indicatorTypes?.map((categoryItem: any, index: number) => (
+                <div key={index} className="w-[100%]">
+                  <AddScore
+                    typeValue={categoryItem?.label}
+                    scoreValue={categoryItem?.scoreWeightage}
+                    disabled={!categoryItem?.edit}
+                    handleChangeType={(e: any) =>
+                      handleEditIndicatorCategoryData({
+                        key: index,
+                        value: e.target.value,
+                      })
+                    }
+                    handleChangeScore={(e: any) => {}}
+                    handleEditIndicatorType={() =>
+                      handleEditIndicatorCategoryData({ key: index })
+                    }
+                    handleDeleteIndicatorType={() =>
+                      handleDeleteIndicatorCategory({ key: index })
+                    }
+                  />
+                </div>
+              ))}
               <div className="px-8 flex mt-4">
                 <div className="w-3/4">
                   <button
@@ -1205,13 +1250,11 @@ const Indicator = () => {
               </h4>
             </div>
             <div>
-              {indicatorTypes?.[currIndicatorType]?.categories?.[
-                currIndicatorCategory
-              ]?.values?.map((valueItem: any, index: number) => (
+              {indicatorValuesData?.map((valueItem: any, index: number) => (
                 <div key={index} className="w-[100%]">
                   <AddScore
-                    typeValue={valueItem?.label}
-                    scoreValue={valueItem?.scoreWeightage}
+                    typeValue={valueItem?.value}
+                    scoreValue={valueItem?.score}
                     disabled={!valueItem?.edit}
                     handleChangeType={(e: any) =>
                       handleEditValueData({
@@ -1342,11 +1385,7 @@ const Indicator = () => {
           <EditCategory
             submit={() => saveEditedCategoryScoring()}
             cancel={cancelEdit}
-            value={
-              indicatorTypes?.[currIndicatorType]?.categories?.[
-                currIndicatorCategory
-              ]?.label
-            }
+            value={indicatorCategory?.[currIndicatorCategory]?.category}
             onChange={(e: any) =>
               handleEditIndicatorCategoryData({
                 key: currIndicatorCategory,
@@ -1455,7 +1494,7 @@ const Indicator = () => {
                 }
               }}
             />{" "}
-            <AddText
+            {/* <AddText
               title="Add New Indicator Value"
               place={"Indicator Value Name"}
               value={newIndicatorCategory?.payload?.value}
@@ -1484,7 +1523,7 @@ const Indicator = () => {
                   },
                 });
               }}
-            />
+            /> */}
             <div className="w-[100%] flex justify-end">
               <SimpleButton
                 theme={1}
@@ -1539,9 +1578,9 @@ const Indicator = () => {
         </div>
 
         <div className="bg-[#fe50430c] p-4 w-[80%]">
-          <div className="w-[70%] flex items-start justify-between ">
-            {itClone?.[currIndicatorType]?.categories?.map(
-              (it: any, index: number) => (
+          {!loading ? (
+            <div className="w-[70%] flex items-start justify-between ">
+              {indicatorCategory?.map((it: any, index: number) => (
                 <button
                   key={index}
                   onClick={() => {
@@ -1553,17 +1592,16 @@ const Indicator = () => {
                       : "text-black font-medium text-md px-7 py-2"
                   }
                 >
-                  {it?.label}
+                  {it?.category}
                 </button>
-              )
-            )}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <></>
+          )}
           <hr className="mt-4" />
           <NavigationWithEditAndDeleteButtons
-            title={
-              itClone?.[currIndicatorType]?.categories?.[currIndicatorCategory]
-                ?.label
-            }
+            title={indicatorCategory?.[currIndicatorCategory]?.category}
             buttons={[
               {
                 text: "Score",
@@ -1658,17 +1696,15 @@ const Indicator = () => {
             </div>
             <hr className="mt-2" />
 
-            {itClone?.[currIndicatorType]?.categories?.[
-              currIndicatorCategory
-            ]?.values?.map((data: any, index: number) => (
+            {indicatorValuesData.map((data: any, index: number) => (
               <div key={index}>
                 <div className=" w-[99%] flex items-center justify-between">
                   <div className=" h-[auto] flex justify-between items-center w-[80%] py-4">
                     <h4 className="text-gray-600 font-semibold">
-                      {data?.label}
+                      {data?.value}
                     </h4>
                     <div className="flex flex-col gap-3">
-                      {formatString(data?.alternatives)?.map((item: any) => (
+                      {formatString(data?.alternative)?.map((item: any) => (
                         <h4
                           key={item.id}
                           className="text-gray-600 font-semibold"
@@ -1678,7 +1714,7 @@ const Indicator = () => {
                       ))}
                     </div>
                     <h4 className="text-gray-600 font-semibold">
-                      {data.scoreWeightage}
+                      {data.score}
                     </h4>
                   </div>
                   <div className="flex mt-6 gap-4 w-[10%] h-[62px]">
