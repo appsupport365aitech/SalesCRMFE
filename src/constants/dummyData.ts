@@ -26,15 +26,24 @@ export const highIntentCallVolume = [{
     {title:"Return and Guarentee Questions",score: 91.67},
     {title:"Expressing Urgency",score: 77},
 ];
-export const noOfTopics = {
-    "product_features": 81,
-    "customization_options": 67,
-    "integration_possibilities": 54.34,
-    "data_security_and_privacy": 23,
-    "ux_and_interface": 3,
-    "pricing_plans": 11,
-    "support_and_training": 1,
-};
+// export const noOfTopics = {
+//     "product_features": 81,
+//     "customization_options": 67,
+//     "integration_possibilities": 54.34,
+//     "data_security_and_privacy": 23,
+//     "ux_and_interface": 3,
+//     "pricing_plans": 11,
+//     "support_and_training": 1,
+// };
+export const noOfTopics = [
+    {title:"Product Features",score: 81},
+    {title:"Customization Options",score: 67},
+    {title:"Integration Possibilities",score: 54.34},
+    {title:"Data Security and Privacy",score: 23},
+    {title:"UX and Interface",score: 3},
+   {title:"Pricing Plans",score: 11},
+    {title:"Support and Training",score: 1},
+];
 
 export const salesRepSentimentScore = {
     "affirmation": 45,
@@ -45,15 +54,15 @@ export const salesRepSentimentScore = {
     "customer_centric_approach": 19,
 };
 
-export const satisfactionScore = {
-    "understanding_prospect_needs": 33,
-    "product_knowledge": 22,
-    "communication_skills": 44,
-    "sales_presentation": 88,
-    "problem_solving_approach": 66,
-    "clarity_on_pricing_and_terms": 9.9,
-    "likelihood_to_recommend": 99,
-};
+export const satisfactionScore = [{
+    title:"Understanding Prospect Needs",score: 33},
+    {title:"Product Knowledge",score: 22},
+    {title:"Communication Skills",score: 44},
+   { title:"Sales Presentation",score: 88},
+   { title:"Problem Solving Approach",score: 66},
+   {title: "Clarity on Pricing and Terms",score: 9.9},
+    {title:"Likelihood to Recommend",score: 99,
+}];
 
 // export const callDisposition = {
 //     "follow_up_required": 25,
@@ -72,15 +81,24 @@ export const callDisposition = [{
     {title:"Price Too High",score: 25},
 ];
 
-export const talkingSpeed = {
-    "john_c": 45,
-    "pter_k": 45,
-    "barbara_o": 45,
-    "michelle_l": 45,
-    "naomi_o": 45,
-    "meghan_m": 45,
-    "harry_j": 45,
-};
+// export const talkingSpeed = {
+//     "john_c": 45,
+//     "pter_k": 45,
+//     "barbara_o": 45,
+//     "michelle_l": 45,
+//     "naomi_o": 45,
+//     "meghan_m": 45,
+//     "harry_j": 45,
+// };
+export const talkingSpeed = [{
+    title: "John C", score: 45},
+    {title:"Peter K.", score: 45},
+    {title:"Barbara O.", score: 45},
+    {title:"Michelle L.", score: 45},
+    {title:"Naomi O.", score: 45},
+    {title:"Meghan M.", score: 45},
+    {title:"Harry J.", score: 45,
+}];
 
 export const noOfParticipants = {
     sdr: {
