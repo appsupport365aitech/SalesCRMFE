@@ -108,6 +108,15 @@ const AddScore = ({
   );
 };
 
+interface IndicatorValue {
+  _id: string;
+  value: string;
+}
+
+interface IndicatorCategory {
+  category: string;
+}
+
 const Indicator = () => {
   const [apiData, setApiData] = useState([]);
   const [valuesApiData, setValuesApiData] = useState([]);
@@ -227,8 +236,12 @@ const Indicator = () => {
     setIndicatorTypes(newIndicators);
     setItClone(newIndicators);
   };
-  const [indicatorCategory, setIndicatorCategory] = useState([]);
-  const [indicatorValuesData, setIndicatorValuesData] = useState([]);
+  const [indicatorCategory, setIndicatorCategory] = useState<
+    IndicatorCategory[]
+  >([]);
+  const [indicatorValuesData, setIndicatorValuesData] = useState<
+    IndicatorValue[]
+  >([]);
   const [loading, setLoading] = useState(false);
   const getTypes = () => {
     // if sdr/bdm user then find-all otherwise getTypesById
