@@ -44,7 +44,7 @@ const Chart = ({ title, percent }: any) => {
       )}
       <p
         className={`min-h-[40px] flex items-center justify-center font-medium text-[#8A9099] text-center absolute ${
-          title.length > 5
+          title?.length > 5
             ? "w-[85px] text-[10px]  bottom-[-30px]"
             : "text-[12px] w-[40px]  bottom-[-25px]"
         }`}

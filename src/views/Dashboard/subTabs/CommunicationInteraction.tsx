@@ -47,7 +47,7 @@ const Chart = ({ title, percent }: any) => {
       )}
       <p
         className={`min-h-[40px] flex items-center justify-center font-medium text-[#8A9099] text-center absolute ${
-          title.length > 5
+          title?.length > 5
             ? "w-[85px] text-[10px]  bottom-[-30px]"
             : "text-[12px] w-[40px]  bottom-[-25px]"
         }`}
@@ -215,22 +215,7 @@ const CommunicationInteraction = ({
                 { key: "", label: "Jacob Wilson" },
               ]}
             />
-            <div className="w-[100%] p-6 h-[400px] bg-[#fff] rounded-md shrink-0  py-[19px] shadow-md">
-              <div className="w-[100%] flex items-center justify-between">
-                <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
-                  Longest Monologue
-                </h1>
-              </div>
-              <ChartContainer>
-                <Chart title="Day 1" percent={`${avgCallScore["day_1"]}%`} />
-                <Chart title="Day 2" percent={`${avgCallScore["day_2"]}%`} />
-                <Chart title="Day 3" percent={`${avgCallScore["day_3"]}%`} />
-                <Chart title="Day 4" percent={`${avgCallScore["day_4"]}%`} />
-                <Chart title="Day 5" percent={`${avgCallScore["day_5"]}%`} />
-                <Chart title="Day 6" percent={`${avgCallScore["day_6"]}%`} />
-                <Chart title="Day 7" percent={`${avgCallScore["day_7"]}%`} />
-              </ChartContainer>
-            </div>
+
             <TalkRatio talkRatioData={talkRatioData} />
             <BarChartVertical
               title="Number of Topics"
@@ -244,22 +229,6 @@ const CommunicationInteraction = ({
                 { key: "", label: "Jacob Wilson" },
               ]}
             />
-            <div className="w-[100%] p-6 h-[400px] bg-[#fff] rounded-md shrink-0  py-[19px] shadow-md">
-              <div className="w-[100%] flex items-center justify-between">
-                <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
-                  Number of Topics
-                </h1>
-              </div>
-              <ChartContainer>
-                {noOfTopics.map((item) => (
-                  <Chart
-                    key={item.title}
-                    title={item.title}
-                    percent={`${item.score}%`}
-                  />
-                ))}
-              </ChartContainer>
-            </div>
           </div>
           <div className="w-[100%] lg:w-[48%] md:w-[48%] flex flex-col gap-6">
             <BarChartVertical
@@ -274,42 +243,7 @@ const CommunicationInteraction = ({
                 { key: "", label: "Jacob Wilson" },
               ]}
             />
-            <div className="w-[100%] p-6 h-[400px] bg-[#fff] rounded-md shrink-0  py-[19px] shadow-md">
-              <div className="w-[100%] flex items-center justify-between">
-                <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
-                  Sales Rep&apos;s Patience/Silence
-                </h1>
-                {options.length > 1 && (
-                  <div className="bg-[#909193] pr-2 rounded-lg">
-                    <select
-                      className="text-white p-2 focus:outline-none outline-none cursor-pointer rounded-lg bg-[#909193]"
-                      name="option"
-                      onChange={(e) => setSdrId(e.target.value)}
-                      id="option"
-                    >
-                      {options?.map((option: any, index: number) => (
-                        <option
-                          style={{ textTransform: "capitalize" }}
-                          key={index}
-                          value={option?._id}
-                        >
-                          {option?.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-              </div>
-              <ChartContainer>
-                <Chart title="Day 1" percent={`${avgCallScore["day_1"]}%`} />
-                <Chart title="Day 2" percent={`${avgCallScore["day_2"]}%`} />
-                <Chart title="Day 3" percent={`${avgCallScore["day_3"]}%`} />
-                <Chart title="Day 4" percent={`${avgCallScore["day_4"]}%`} />
-                <Chart title="Day 5" percent={`${avgCallScore["day_5"]}%`} />
-                <Chart title="Day 6" percent={`${avgCallScore["day_6"]}%`} />
-                <Chart title="Day 7" percent={`${avgCallScore["day_7"]}%`} />
-              </ChartContainer>
-            </div>
+
             <BarChartVertical
               title="Longest Customer Story"
               template={LongestCustomerStory}
@@ -322,42 +256,7 @@ const CommunicationInteraction = ({
                 { key: "", label: "Jacob Wilson" },
               ]}
             />
-            <div className="w-[100%] p-6 h-[400px] bg-[#fff] rounded-md shrink-0  py-[19px] shadow-md">
-              <div className="w-[100%] flex items-center justify-between">
-                <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
-                  Longest Customer Story
-                </h1>
-                {options.length > 1 && (
-                  <div className="bg-[#909193] pr-2 rounded-lg">
-                    <select
-                      className="text-white p-2 focus:outline-none outline-none cursor-pointer rounded-lg bg-[#909193]"
-                      name="option"
-                      onChange={(e) => setSdrId(e.target.value)}
-                      id="option"
-                    >
-                      {options?.map((option: any, index: number) => (
-                        <option
-                          style={{ textTransform: "capitalize" }}
-                          key={index}
-                          value={option?._id}
-                        >
-                          {option?.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-              </div>
-              <ChartContainer>
-                <Chart title="Day 1" percent={`${avgCallScore["day_1"]}%`} />
-                <Chart title="Day 2" percent={`${avgCallScore["day_2"]}%`} />
-                <Chart title="Day 3" percent={`${avgCallScore["day_3"]}%`} />
-                <Chart title="Day 4" percent={`${avgCallScore["day_4"]}%`} />
-                <Chart title="Day 5" percent={`${avgCallScore["day_5"]}%`} />
-                <Chart title="Day 6" percent={`${avgCallScore["day_6"]}%`} />
-                <Chart title="Day 7" percent={`${avgCallScore["day_7"]}%`} />
-              </ChartContainer>
-            </div>
+
             <NoOfInterruptionsChart
               title="Number of Interruptions"
               template={NoOfInterruptions}
@@ -382,22 +281,6 @@ const CommunicationInteraction = ({
                 { key: "", label: "Jacob Wilson" },
               ]}
             />
-            <div className="w-[100%] p-6 h-[400px] bg-[#fff] rounded-md shrink-0  py-[19px] shadow-md">
-              <div className="w-[100%] flex items-center justify-between">
-                <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
-                  Number of Switches
-                </h1>
-              </div>
-              <ChartContainer>
-                <Chart title="Day 1" percent={`${noOfSwitches["day_1"]}%`} />
-                <Chart title="Day 2" percent={`${noOfSwitches["day_2"]}%`} />
-                <Chart title="Day 3" percent={`${noOfSwitches["day_3"]}%`} />
-                <Chart title="Day 4" percent={`${noOfSwitches["day_4"]}%`} />
-                <Chart title="Day 5" percent={`${noOfSwitches["day_5"]}%`} />
-                <Chart title="Day 6" percent={`${noOfSwitches["day_6"]}%`} />
-                <Chart title="Day 7" percent={`${noOfSwitches["day_7"]}%`} />
-              </ChartContainer>
-            </div>
           </div>
         </div>
       </div>
