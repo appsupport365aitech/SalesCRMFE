@@ -286,34 +286,13 @@ const EngagementReports = ({
               )}
             </div>
             <ChartContainer>
-              <Chart
-                title="Understanding Prospect Needs"
-                percent={`${satisfactionScore["understanding_prospect_needs"]}%`}
-              />
-              <Chart
-                title="Product Knowledge"
-                percent={`${satisfactionScore["product_knowledge"]}%`}
-              />
-              <Chart
-                title="Communication Skills"
-                percent={`${satisfactionScore["communication_skills"]}%`}
-              />
-              <Chart
-                title="Sales Presentation"
-                percent={`${satisfactionScore["sales_presentation"]}%`}
-              />
-              <Chart
-                title="Problem Solving Approach"
-                percent={`${satisfactionScore["problem_solving_approach"]}%`}
-              />
-              <Chart
-                title="Clarity On Pricing and Terms"
-                percent={`${satisfactionScore["clarity_on_pricing_and_terms"]}%`}
-              />
-              <Chart
-                title="Likelihood to Recommend"
-                percent={`${satisfactionScore["likelihood_to_recommend"]}%`}
-              />
+              {satisfactionScore.map((item) => (
+                <Chart
+                  key={item.title}
+                  title={item.title}
+                  percent={`${item.score}%`}
+                />
+              ))}
             </ChartContainer>
           </div>
           {/* <BarChartVertical
