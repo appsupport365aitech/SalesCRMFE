@@ -569,7 +569,7 @@ const FormEditContainer = ({
                         <div className="w-[100%]">
                           <label
                             className="font-medium text-[#8a9099]"
-                            htmlFor="lead_title"
+                            htmlFor="company_website_url"
                           >
                             Company Website
                           </label>
@@ -603,7 +603,7 @@ const FormEditContainer = ({
                         <div className="w-[100%]">
                           <label
                             className="font-medium text-[#8a9099]"
-                            htmlFor="lead_title"
+                            htmlFor="company_socialMedia1Url"
                           >
                             Social Media 1 URL
                           </label>
@@ -637,7 +637,7 @@ const FormEditContainer = ({
                         <div className="w-[100%]">
                           <label
                             className="font-medium text-[#8a9099]"
-                            htmlFor="lead_title"
+                            htmlFor="company_socialMedia2Url"
                           >
                             Social Media 2 URL
                           </label>
@@ -650,7 +650,7 @@ const FormEditContainer = ({
                           />
                         </div>
                       </div>
-                      <div className="absolute right-[160px] bottom-[20px] mt-[200px] flex">
+                      <div className="absolute right-[200px] bottom-[20px] mt-[200px] flex">
                         <SimpleButton
                           theme={2}
                           text="Cancel"
@@ -661,7 +661,7 @@ const FormEditContainer = ({
                           }}
                         />
                       </div>
-                      <div className="absolute right-[40px] bottom-[20px] mt-[200px] flex">
+                      <div className="absolute right-[50px] bottom-[20px] mt-[200px] flex">
                         <SimpleButton
                           theme={1}
                           text="Save"

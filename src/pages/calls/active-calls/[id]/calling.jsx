@@ -17,7 +17,6 @@ import Messages from "@/components/View/messages";
 import Call from "@/components/calls/active-calls/Call/Call";
 import { useRouter } from "next/router";
 import { baseUrl } from "@/utils/baseUrl";
-//Manya will make this page
 
 const AudioProfile = () => {
   const titles = ["LEAD INFO", "ACTIVITY HISTORY", "NOTES"];
@@ -58,30 +57,33 @@ const AudioProfile = () => {
   }, [data]);
 
   const getData = () => {
-    try {
-      axios
-        .get(`${baseUrl}api/active-call/find-by-id?id=${id}`, {
-          headers: {
-            Authorization: accessToken,
-          },
-        })
-        .then((res1) => {
-          setDataa(res1.data);
-          axios
-            .get(
-              `${baseUrl}api/call-script/active-call?activeCallId=${res1?.data?.result?._id}`,
-              {
-                headers: {
-                  Authorization: accessToken,
-                },
-              }
-            )
-            .then((res2) => {
-              setScripts(res2.data);
-            });
-        })
-        .catch((e) => {});
-    } catch (error) {}
+    if (!id) return;
+    else {
+      try {
+        axios
+          .get(`${baseUrl}api/active-call/find-by-id?id=${id}`, {
+            headers: {
+              Authorization: accessToken,
+            },
+          })
+          .then((res1) => {
+            setDataa(res1.data);
+            axios
+              .get(
+                `${baseUrl}api/call-script/active-call?activeCallId=${res1?.data?.result?._id}`,
+                {
+                  headers: {
+                    Authorization: accessToken,
+                  },
+                }
+              )
+              .then((res2) => {
+                setScripts(res2.data);
+              });
+          })
+          .catch((e) => {});
+      } catch (error) {}
+    }
   };
 
   useEffect(() => {
@@ -90,7 +92,7 @@ const AudioProfile = () => {
     } else {
       getData();
     }
-  }, [accessToken]);
+  }, [accessToken, id]);
 
   const takeAction = (e, e1) => {
     if (e1 === 0) {

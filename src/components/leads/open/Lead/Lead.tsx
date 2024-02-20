@@ -399,14 +399,14 @@ const ExpandableRow = ({
           {leadData?.leadSource}
         </p>
       </div>
-      <div className="w-[100%] flex items-center mb-[20px]">
+      {/* <div className="w-[100%] flex items-center mb-[20px]">
         <p className="w-[200px] text-[16px] text-[#8A9099] font-bold">
           Last Call Disposition
         </p>
         <p className="text-[#000] mt-[5px] text-[16px] tracking-wide">
           {leadData?.activityId?.lastCallDisposition ?? "-"}
         </p>
-      </div>
+      </div> */}
       <div className="w-[100%] mb-[20px]">
         <p className="w-[200px] text-[16px] text-[#8A9099] font-bold">
           Lead Description

@@ -219,6 +219,7 @@ const Deals = ({ data, type }: any) => {
       })
       .catch((error) => console.error("Error fetching data: ", error));
   }, [accessToken, data]);
+
   return (
     <div className="">
       <Navigator
@@ -256,9 +257,9 @@ const Deals = ({ data, type }: any) => {
                       key={index}
                       className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5 "
                     >
-                      <div className="text-[14px] py-[5px] text-[#8A9099] leading-[21px] flex justify-between items-center bg-[#ffffff] rounded-xl px-2 ">
+                      <div className="text-[14px] py-[10px] text-[#8A9099] leading-[21px] flex justify-between items-center bg-[#ffffff] rounded-xl px-2 ">
                         <div className="">
-                          <p className="text-[#3F434A] w-[140px]">
+                          <p className="text-[#3F434A] w-[130px]">
                             {deal?.leadId || "-"}
                           </p>
                         </div>
@@ -272,14 +273,7 @@ const Deals = ({ data, type }: any) => {
                         </div>
                         <div className="">
                           <p className="w-[160px]">
-                            {deal?.lastActivity?.subject
-                              ? deal?.leadData?.subject
-                              : "-"}
-                          </p>
-                          <p className="w-[160px]">
-                            {deal?.lastActivity?.createdAt
-                              ? deal?.leadData?.createdAt
-                              : "-"}
+                            {deal?.activityId?.createdAt.split("T")[0] ?? "-"}
                           </p>
                         </div>
                         <div className=" flex items-start gap-[5px] text-[#3F434A]">
@@ -537,11 +531,10 @@ const Deals = ({ data, type }: any) => {
                       key={index}
                       className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5"
                     >
-                      <div className="text-[14px] py-[5px] text-[#8A9099] leading-[21px] flex justify-between items-center bg-[#ffffff] rounded-xl px-2">
-                        <div className="w-[180px]">
+                      <div className="text-[14px] py-[10px] text-[#8A9099] leading-[21px] flex justify-between items-center text-center bg-[#ffffff] rounded-xl">
+                        <div className="w-[160px]">
                           <p className="ml-2">
-                            {deal?.companyData?.[0]?.company_product_category ||
-                              "-"}
+                            {deal?.leadData?.product_category || "-"}
                           </p>
                         </div>
                         <div className="w-[140px]">
@@ -551,7 +544,6 @@ const Deals = ({ data, type }: any) => {
                           <p>
                             {deal?.lastActivity?.call_id !== "" ? "Call" : "-"}
                           </p>
-                          <p>{deal?.lastActivity?.call_date || "-"}</p>
                         </div>
                         {/* <div className="w-[45%] flex justify-end">
               <Image

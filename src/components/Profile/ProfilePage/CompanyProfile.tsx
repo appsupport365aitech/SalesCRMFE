@@ -7,6 +7,8 @@ import axios from "axios";
 import { baseUrl } from "@/utils/baseUrl";
 
 const CompanyProfile = ({ data1, refresh }: any) => {
+  console.log(data1, "arijit");
+
   const [edit, setEdit] = useState(false);
   const [bool, setBool] = useState(true);
 

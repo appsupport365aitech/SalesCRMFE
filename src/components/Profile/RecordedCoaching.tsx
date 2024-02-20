@@ -11,7 +11,7 @@ const Chart = ({ title, percent }: any) => {
   const [hovered, setHovered] = useState(false);
   return (
     <div
-      className="w-[10px] h-[100%] flex flex-col items-center relative"
+      className="w-[10px] h-[100%] flex flex-col items-center relative hover:cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -23,7 +23,9 @@ const Chart = ({ title, percent }: any) => {
       </div>
       {hovered && (
         <p className="w-[100%] text-[14px] leading-[13px] min-h-[200px] left-7 flex items-center justify-center font-medium text-[#8A9099] text-center absolute bottom-[-25px]">
-          {percent?.replace(/%/g, "")}
+          {percent?.replace(/%/g, "") == "undefined"
+            ? 0
+            : percent?.replace(/%/g, "")}
         </p>
       )}
       <p className="w-[100%] text-[8.5px] leading-[13px] min-h-[40px] flex items-center justify-center font-medium text-[#8A9099] text-center absolute bottom-[-25px]">
@@ -236,8 +238,6 @@ const Coaching = ({ data, refresh }: any) => {
           }
         )
         .then((e) => {
-          console.log(e.data, "arijit");
-
           setSellingSkillsData(e.data);
         })
         .catch((e) => {});
@@ -264,8 +264,6 @@ const Coaching = ({ data, refresh }: any) => {
       setLoading(false);
     } catch (error) {}
   };
-
-  console.log(sellingSkillsData, "arijit");
 
   useEffect(() => {
     if (!accessToken) return;

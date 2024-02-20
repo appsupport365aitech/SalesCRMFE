@@ -131,7 +131,10 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
             <p className="text-sm font-medium w-[40%] mr-4"> Social Media</p>
             <p className="text-sm font-semibold text-black flex">
               {data?.result?.customerId?.customer_socialMedia1 && (
-                <a href={data?.result?.customerId?.customer_socialMedia1Url}>
+                <a
+                  target="_blank"
+                  href={data?.result?.customerId?.customer_socialMedia1Url}
+                >
                   <Image
                     src={getBasicIcon(
                       data?.result?.customerId?.customer_socialMedia1
