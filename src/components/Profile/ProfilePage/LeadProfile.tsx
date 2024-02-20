@@ -146,28 +146,29 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
     return `${hours}:${minutes} ${day} ${month} ${year}`;
   }
 
-  function getTypeCounts(data2: any) {
+  function getTypeCounts(activityData: any) {
     let phoneCount = 0;
     let smsCount = 0;
     let emailCount = 0;
     let noteCount = 0;
 
-    data2.forEach((entry: any) => {
-      switch (entry.type) {
-        case "phone":
-          phoneCount++;
-          break;
-        case "sms":
-          smsCount++;
-          break;
-        case "email":
-          emailCount++;
-          break;
-        case "note":
-          noteCount++;
-          break;
-      }
-    });
+    activityData?.length > 0 &&
+      activityData?.forEach((entry: any) => {
+        switch (entry.type) {
+          case "phone":
+            phoneCount++;
+            break;
+          case "sms":
+            smsCount++;
+            break;
+          case "email":
+            emailCount++;
+            break;
+          case "note":
+            noteCount++;
+            break;
+        }
+      });
 
     const typeCounts = {
       phoneCount,
