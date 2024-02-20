@@ -106,13 +106,13 @@ const AllocatedCalls = () => {
       key: "call_duration",
       checked: true,
     },
-    {
-      width: 200,
-      left: 40,
-      text: "Call Disposition",
-      key: "cal_disposition",
-      checked: true,
-    },
+    // {
+    //   width: 200,
+    //   left: 40,
+    //   text: "Call Disposition",
+    //   key: "cal_disposition",
+    //   checked: true,
+    // },
     {
       width: 120,
       left: 20,
@@ -155,13 +155,13 @@ const AllocatedCalls = () => {
       key: "allocated_on",
       checked: true,
     },
-    {
-      width: 120,
-      left: 20,
-      text: "Review Due Date",
-      key: "review_due_date",
-      checked: true,
-    },
+    // {
+    //   width: 120,
+    //   left: 20,
+    //   text: "Review Due Date",
+    //   key: "review_due_date",
+    //   checked: true,
+    // },
     {
       width: 120,
       left: 20,
@@ -195,11 +195,11 @@ const AllocatedCalls = () => {
       ],
       value: "",
     },
-    callDisposition: {
-      label: "Call Disposition",
-      options: [{ key: "Follow-Up required", label: "Follow-Up required" }],
-      value: "",
-    },
+    // callDisposition: {
+    //   label: "Call Disposition",
+    //   options: [{ key: "Follow-Up required", label: "Follow-Up required" }],
+    //   value: "",
+    // },
     callType: {
       label: "Call Type",
       options: [
@@ -239,12 +239,12 @@ const AllocatedCalls = () => {
       value: "",
       type: "SLIDER",
       min: {
-        value: 30,
-        label: "30 min",
+        value: 0,
+        label: "0 min",
       },
       max: {
-        value: 60,
-        label: "1 hr",
+        value: 15,
+        label: "15 min",
       },
     },
     allocatedOn: {
@@ -252,11 +252,11 @@ const AllocatedCalls = () => {
       value: ["", ""],
       type: "DATERANGE",
     },
-    reviewDueDate: {
-      label: "Review Due Date",
-      value: ["", ""],
-      type: "DATERANGE",
-    },
+    // reviewDueDate: {
+    //   label: "Review Due Date",
+    //   value: ["", ""],
+    //   type: "DATERANGE",
+    // },
   });
 
   const [totalItem, setTotalItems] = useState(0);
@@ -650,7 +650,7 @@ const AllocatedCalls = () => {
         src="ActiveCalls"
       />
       <div className="bg-[#ffe3e170] mx-6 pt-8 rounded-xl w-[96%] min-h-[90vh] pl-[40px] pr-[40px] mt-[30px]">
-        <div className="flex items-center justify-between">
+        <div className="mb-6 flex items-center justify-between">
           <div className="w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] p-2  flex items-center">
             <input
               type="text"

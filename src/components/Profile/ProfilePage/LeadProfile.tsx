@@ -154,8 +154,8 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
 
     activityData?.length > 0 &&
       activityData?.forEach((entry: any) => {
-        switch (entry.type) {
-          case "phone":
+        switch (entry.type || entry.callId) {
+          case entry.callId:
             phoneCount++;
             break;
           case "sms":

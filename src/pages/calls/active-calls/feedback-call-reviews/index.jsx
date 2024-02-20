@@ -103,13 +103,13 @@ const FeedbackCallReviewsAC = () => {
       key: "call_duration",
       checked: true,
     },
-    {
-      width: 200,
-      left: 40,
-      text: "Call Disposition",
-      key: "call_disposition",
-      checked: true,
-    },
+    // {
+    //   width: 200,
+    //   left: 40,
+    //   text: "Call Disposition",
+    //   key: "call_disposition",
+    //   checked: true,
+    // },
     {
       width: 120,
       left: 20,
@@ -152,13 +152,13 @@ const FeedbackCallReviewsAC = () => {
       key: "allocated_on",
       checked: true,
     },
-    {
-      width: 120,
-      left: 20,
-      text: "Review Due Date",
-      key: "review_due_date",
-      checked: true,
-    },
+    // {
+    //   width: 120,
+    //   left: 20,
+    //   text: "Review Due Date",
+    //   key: "review_due_date",
+    //   checked: true,
+    // },
     {
       width: 120,
       left: 20,
@@ -208,11 +208,11 @@ const FeedbackCallReviewsAC = () => {
       ],
       value: "",
     },
-    callDisposition: {
-      label: "Call Disposition",
-      options: [{ key: "Follow-Up required", label: "Follow-Up required" }],
-      value: "",
-    },
+    // callDisposition: {
+    //   label: "Call Disposition",
+    //   options: [{ key: "Follow-Up required", label: "Follow-Up required" }],
+    //   value: "",
+    // },
     callType: {
       label: "Call Type",
       options: [
@@ -252,12 +252,12 @@ const FeedbackCallReviewsAC = () => {
       value: "",
       type: "SLIDER",
       min: {
-        value: 30,
-        label: "30 min",
+        value: 0,
+        label: "0 min",
       },
       max: {
-        value: 60,
-        label: "1 hr",
+        value: 15,
+        label: "15 min",
       },
     },
     feedbackRequestedOn: {
@@ -265,11 +265,11 @@ const FeedbackCallReviewsAC = () => {
       type: "DATERANGE",
       value: ["", ""],
     },
-    reviewDueDate: {
-      label: "Review Due Date",
-      type: "DATERANGE",
-      value: ["", ""],
-    },
+    // reviewDueDate: {
+    //   label: "Review Due Date",
+    //   type: "DATERANGE",
+    //   value: ["", ""],
+    // },
   });
 
   const [totalItem, setTotalItems] = useState(0);
@@ -641,7 +641,7 @@ const FeedbackCallReviewsAC = () => {
       />
       <div className="bg-[#ffe3e170] mx-6 rounded-xl pt-8 w-[100%] min-h-[90vh] pl-[40px] pr-[40px] mt-[20px]">
         <div className="flex items-center justify-between">
-          <div className="w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] p-2  flex items-center">
+          <div className="mb-6 w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] p-2  flex items-center">
             <input
               type="text"
               className="w-[100%] text-black bg-white"

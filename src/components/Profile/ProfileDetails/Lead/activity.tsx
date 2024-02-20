@@ -53,7 +53,7 @@ const Activityhistory = ({ data }: { data: any }) => {
 
     return { date: formattedDate, time: formattedTime };
   }
-  console.log(data, "raju");
+
   const getOutcome = (item: any, idx: number) => {
     if (item?.type?.toLowerCase() == "email") {
       return "Email sent";

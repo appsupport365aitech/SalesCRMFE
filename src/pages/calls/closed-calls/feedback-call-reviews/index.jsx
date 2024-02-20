@@ -278,12 +278,12 @@ const FeedbackCallReviewsCC = () => {
       value: "",
       type: "SLIDER",
       min: {
-        value: 30,
-        label: "30 min",
+        value: 0,
+        label: "0 min",
       },
       max: {
-        value: 60,
-        label: "1 hr",
+        value: 15,
+        label: "15 min",
       },
     },
     feedbackRequestedOn: {
@@ -659,7 +659,7 @@ const FeedbackCallReviewsCC = () => {
         src="ClosedCalls"
       />
       <div className="bg-[#ffe3e170] mx-6 pt-8 rounded-xl w-[96%] min-h-[90vh] pl-[40px] pr-[40px] mt-[30px]">
-        <div className="flex items-center justify-between">
+        <div className="mb-4 flex items-center justify-between">
           <div className="w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] p-2  flex items-center">
             <input
               type="text"

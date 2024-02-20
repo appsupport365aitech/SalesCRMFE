@@ -103,13 +103,13 @@ const AllocatedCallsCC = ({ data }) => {
       key: "call_duration",
       checked: true,
     },
-    {
-      width: 200,
-      left: 40,
-      text: "Call Disposition",
-      key: "call_disposition",
-      checked: true,
-    },
+    // {
+    //   width: 200,
+    //   left: 40,
+    //   text: "Call Disposition",
+    //   key: "call_disposition",
+    //   checked: true,
+    // },
     {
       width: 120,
       left: 20,
@@ -124,13 +124,13 @@ const AllocatedCallsCC = ({ data }) => {
       key: "call_score",
       checked: true,
     },
-    {
-      width: 200,
-      left: 40,
-      text: "Call Review Type",
-      key: "call_ireview_type",
-      checked: true,
-    },
+    // {
+    //   width: 200,
+    //   left: 40,
+    //   text: "Call Review Type",
+    //   key: "call_ireview_type",
+    //   checked: true,
+    // },
     // {
     //   width: 120,
     //   left: 20,
@@ -152,13 +152,13 @@ const AllocatedCallsCC = ({ data }) => {
       key: "allocated_on",
       checked: true,
     },
-    {
-      width: 120,
-      left: 20,
-      text: "Review Due Date",
-      key: "review_due_date",
-      checked: true,
-    },
+    // {
+    //   width: 120,
+    //   left: 20,
+    //   text: "Review Due Date",
+    //   key: "review_due_date",
+    //   checked: true,
+    // },
     {
       width: 120,
       left: 20,
@@ -166,27 +166,27 @@ const AllocatedCallsCC = ({ data }) => {
       key: "last_updated_on",
       checked: true,
     },
-    {
-      width: 200,
-      left: 40,
-      text: "On Time Review",
-      key: "on_time_review",
-      checked: true,
-    },
-    {
-      width: 120,
-      left: 20,
-      text: "Delay Time",
-      key: "delay_time",
-      checked: true,
-    },
-    {
-      width: 120,
-      left: 20,
-      text: "Time to Complete Review",
-      key: "time_to_complete_review",
-      checked: true,
-    },
+    // {
+    //   width: 200,
+    //   left: 40,
+    //   text: "On Time Review",
+    //   key: "on_time_review",
+    //   checked: true,
+    // },
+    // {
+    //   width: 120,
+    //   left: 20,
+    //   text: "Delay Time",
+    //   key: "delay_time",
+    //   checked: true,
+    // },
+    // {
+    //   width: 120,
+    //   left: 20,
+    //   text: "Time to Complete Review",
+    //   key: "time_to_complete_review",
+    //   checked: true,
+    // },
   ]);
   const [showManageCol, setShowManageCol] = useState(false);
 
@@ -210,11 +210,11 @@ const AllocatedCallsCC = ({ data }) => {
       ],
       value: "",
     },
-    callDisposition: {
-      label: "Call Disposition",
-      options: [{ key: "Follow-Up required", label: "Follow-Up required" }],
-      value: "",
-    },
+    // callDisposition: {
+    //   label: "Call Disposition",
+    //   options: [{ key: "Follow-Up required", label: "Follow-Up required" }],
+    //   value: "",
+    // },
     callType: {
       label: "Call Type",
       options: [
@@ -254,12 +254,12 @@ const AllocatedCallsCC = ({ data }) => {
       value: "",
       type: "SLIDER",
       min: {
-        value: 30,
-        label: "30 min",
+        value: 0,
+        label: "0 min",
       },
       max: {
-        value: 60,
-        label: "1 hr",
+        value: 15,
+        label: "15 min",
       },
     },
     callScore: {
@@ -267,8 +267,8 @@ const AllocatedCallsCC = ({ data }) => {
       value: "",
       type: "SLIDER",
       min: {
-        value: 80,
-        label: "80",
+        value: 0,
+        label: "0",
       },
       max: {
         value: 100,
@@ -280,29 +280,29 @@ const AllocatedCallsCC = ({ data }) => {
       type: "DATERANGE",
       value: ["", ""],
     },
-    reviewDueDate: {
-      label: "Review Due Date",
-      type: "DATERANGE",
-      value: ["", ""],
-    },
-    onTimeReview: {
-      label: "On Time Review",
-      options: [
-        { key: "No", label: "No" },
-        { key: "Yes", label: "Yes" },
-      ],
-      value: "",
-    },
-    delayTime: {
-      label: "Delay Time",
-      options: [{ key: "2 Days", label: "2 Days" }],
-      value: "",
-    },
-    timeToCompleteReview: {
-      label: "Time to Complete Review",
-      options: [{ key: "5 days", label: "5 days" }],
-      value: "",
-    },
+    // reviewDueDate: {
+    //   label: "Review Due Date",
+    //   type: "DATERANGE",
+    //   value: ["", ""],
+    // },
+    // onTimeReview: {
+    //   label: "On Time Review",
+    //   options: [
+    //     { key: "No", label: "No" },
+    //     { key: "Yes", label: "Yes" },
+    //   ],
+    //   value: "",
+    // },
+    // delayTime: {
+    //   label: "Delay Time",
+    //   options: [{ key: "2 Days", label: "2 Days" }],
+    //   value: "",
+    // },
+    // timeToCompleteReview: {
+    //   label: "Time to Complete Review",
+    //   options: [{ key: "5 days", label: "5 days" }],
+    //   value: "",
+    // },
   });
 
   const [totalItem, setTotalItems] = useState(0);
@@ -636,7 +636,7 @@ const AllocatedCallsCC = ({ data }) => {
                   }, // call date & time
                   { text: item?.leadId?.[0]?.product_category || "-" }, // product/service
                   { text: getCallDuretion(item.RecordingUrl) || "-" }, // call duration
-                  { text: item?.callDisposiiton || "NA" }, // call disposition
+                  // call disposition
                   { text: item?.callData[0]?.call_type || "-" }, // call type
                   { text: item?.score || "Not Scored" }, // call score
                   { text: "Allocated Call" }, // call review type
@@ -726,7 +726,7 @@ const AllocatedCallsCC = ({ data }) => {
       />
       <div className="bg-[#ffe3e170] mx-6 pt-8 rounded-xl w-[96%] min-h-[90vh] pl-[40px] pr-[40px] mt-[30px]">
         <div className="flex items-center justify-between">
-          <div className="w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] p-2 mb-4 flex items-center">
+          <div className="w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] p-2 mb-6 flex items-center">
             <input
               type="text"
               className="w-[100%] text-black bg-white outline-none"
