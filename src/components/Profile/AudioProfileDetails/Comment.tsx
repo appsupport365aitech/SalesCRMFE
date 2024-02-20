@@ -181,7 +181,6 @@ const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
   useEffect(() => {
     setList(data?.comments);
   }, [data]);
-  console.log("arijit", data);
 
   function getCurrentTimeInHoursAndMinutes() {
     let now = new Date();

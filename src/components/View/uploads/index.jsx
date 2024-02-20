@@ -31,11 +31,12 @@ const AddText = ({ top, title, width, change }) => {
   );
 };
 
-const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
+const Uploads = ({ cancel, leadId, id, owners, refresh, setBool }) => {
   const [file, setFile] = useState();
   const [fileSelected, setFileSelected] = useState(false);
   const [dropzoneActive, setDropzoneActive] = useState(false);
   const [dragActive, setDragActive] = React.useState(false);
+  const [loading, setLoading] = useState(false);
 
   // handle drag events
   const handleDrag = function (e) {
@@ -82,6 +83,7 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
   const submit = async () => {
     if (submitStart) {
       setSubmitStart(false);
+      setLoading(true);
       try {
         if (file) {
           const formData = new FormData();
@@ -99,16 +101,20 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
             )
             .then((e) => {
               refresh();
+              setBool(false);
               dispatch(
                 setSuccess({
                   show: true,
-                  success: "Note Added Successfully!",
+                  success: e.data.message ?? "Script Added Successfully!",
                 })
               );
               cancel();
             });
         }
-      } catch (error) {}
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
     }
   };
 
@@ -183,7 +189,7 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
           />
           <SimpleButton
             theme={1}
-            text={"Complete"}
+            text={loading ? "Loading..." : "Complete"}
             left={20}
             right={0}
             click={submit}

@@ -66,8 +66,6 @@ const Activityhistory = ({ data }: { data: any }) => {
     }
   };
 
-  console.log(history, "arijit");
-
   return (
     <div>
       <Card className="bg-[#ffffff] w-[100%] pb-10 p-6">

@@ -21,6 +21,7 @@ const ScriptDoc = ({
   onSelectFile,
   setSelected,
   selected,
+  setIndex,
 }: any) => {
   //fetch file data from a
   const fetchAdditionalData = async (fileUrl: string) => {
@@ -48,11 +49,12 @@ const ScriptDoc = ({
   const handleView = () => {
     setSelected(!selected);
     setbtn(false);
+    setIndex(id);
   };
   return (
     <div className="w-[100%] mt-[20px]">
       <p className="text-[16px] text-[#595F69] font-medium tracking-wide">
-        {title}
+        {title.replace(/%/g, " ")}
       </p>
       <div className="flex items-center mt-[14px]">
         {/* <Image
@@ -78,9 +80,22 @@ const ScriptDoc = ({
             }
           }}
         /> */}
-        <div className="ml-[10px]">
-          <p className="text-[12px] text-[#3F434A] font-medium ">{docName}</p>
-          <p className="text-[11px] text-[#8A9099] font-medium">{size}</p>
+        <div className=" flex gap-2">
+          <Image
+            src={getBasicIcon("pdfScript")}
+            style={{
+              zIndex: 10,
+            }}
+            alt=""
+            width={25}
+            height={25}
+          />
+          <div>
+            <p className="text-[12px] text-[#3F434A] font-medium ">
+              {docName.replace(/%/g, " ")}
+            </p>
+            <p className="text-[11px] text-[#8A9099] font-medium">{size}</p>
+          </div>
         </div>
         <div className="flex w-[100px] items-center justify-between ml-auto">
           <Image
@@ -215,8 +230,10 @@ const ScriptList = ({
   onSelectFile,
   setSelected,
   selected,
+  setIndex,
 }: {
   setSelected: any;
+  setIndex: any;
   selected: any;
   data: any;
   moredata: any;
@@ -330,6 +347,7 @@ const ScriptList = ({
             id={moredata?._id}
             leadId={moredata?.leadId?._id}
             owners={moredata?.leadId?.owners?.[0]}
+            setBool={setBool}
           />
         </Backdrop>
       )}
@@ -372,6 +390,7 @@ const ScriptList = ({
               onSelectFile={onSelectFile}
               setSelected={setSelected}
               selected={selected}
+              setIndex={setIndex}
             />
           );
         })}
@@ -381,7 +400,7 @@ const ScriptList = ({
 };
 const ScriptView = ({ data }: { data: any }) => {
   return (
-    <>
+    <div className="h-[300px]">
       <embed
         src={`${data?.fileUrl}#toolbar=0`}
         type="application/pdf"
@@ -390,7 +409,7 @@ const ScriptView = ({ data }: { data: any }) => {
           height: "100%",
         }}
       ></embed>
-    </>
+    </div>
   );
 };
 
@@ -406,8 +425,6 @@ const Script = ({ data, scripts }: { data: any; scripts: any }) => {
   useEffect(() => {
     setCurrScripts(scripts?.result);
   }, [scripts]);
-
-  console.log(currScripts, "arijit");
 
   const [selected, setSelected] = useState(false);
   const [accessToken, setAccessToken] = useState<any>("");
@@ -430,86 +447,53 @@ const Script = ({ data, scripts }: { data: any; scripts: any }) => {
             },
           }
         )
-        .then((e) => {})
+        .then((e) => {
+          setCurrScripts(e.data.result);
+        })
         .catch((e) => {});
     }
   };
 
   const titles = ["SCRIPT"];
-  const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
-
-  //for etchinf data in script section
 
   const [selectedFileData, setSelectedFileData] = useState<any>(null);
-  // Function to handle file selection and set data
   const handleFileSelect = async (additionalData: any) => {
     setSelectedFileData(additionalData);
     setSelected(true);
   };
 
-  // const [numPages, setNumPages] = useState(null);
-  // const [pdfText, setPdfText] = useState("");
+  const [index, setIndex] = useState("");
 
-  // const onDocumentLoadSuccess = ({ numPages }: any) => {
+  const [showScript, setShowScript] = useState<any>({});
 
-  //   setNumPages(numPages);
-
-  //   const loadingTask = pdfjs.getDocument({
-  //     url: "https://salescrm247.s3.amazonaws.com/scripts/Get_Started_With_Smallpdf.pdf",
-  //   });
-  //   loadingTask.promise
-  //     .then((pdf) => {
-  //       const textPromises = [];
-
-  //       for (let i = 1; i <= numPages; i++) {
-  //         textPromises.push(
-  //           pdf
-  //             .getPage(i)
-  //             .then((page) => page.getTextContent())
-  //             .then((textContent) => {
-  //               const pageText = textContent.items
-  //                 .map((item) => {
-  //                   if ("str" in item) {
-  //                     return item.str;
-  //                   } else if ("text" in item) {
-  //                     return item.text;
-  //                   } else {
-  //                     return "";
-  //                   }
-  //                 })
-  //                 .join(" ");
-  //               return pageText;
-  //             })
-  //         );
-  //       }
-
-  //       return Promise.all(textPromises);
-  //     })
-  //     .then((pageTexts) => {
-  //       const extractedText = pageTexts.join(" ");
-  //       setPdfText(extractedText);
-  //     })
-  //     .catch((error) => console.error("Failed to extract PDF text:", error));
-  // };
+  useEffect(() => {
+    setShowScript(currScripts?.find((obj: any) => obj._id === index));
+  }, [index]);
 
   return (
-    <div className="w-full p-[30px] overflow-y-auto custom-scroll">
-      {selected && (
-        <div className="w-[100%] flex flex-col gap-4 justify-between p-4 bg-white border border-gray-200 rounded-lg shadow">
-          <h2 className="text-lg font-semibold">Script</h2>
-          <ScriptView data={currScripts[0]} />
-        </div>
-      )}
-
-      <ScriptList
-        refresh={refresh}
-        data={currScripts}
-        moredata={data}
-        onSelectFile={handleFileSelect}
-        setSelected={setSelected}
-        selected={selected}
-      />
-    </div>
+    <>
+      <div className="w-full p-[30px] overflow-y-auto custom-scroll">
+        {currScripts?.length != 0 ? (
+          <>
+            <div className="w-[100%] flex flex-col gap-4 justify-between p-4 bg-white border border-gray-200 rounded-lg shadow">
+              <h2 className="text-lg font-semibold">Script</h2>
+              <ScriptView data={showScript} />
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+        <ScriptList
+          refresh={refresh}
+          data={currScripts}
+          moredata={data}
+          onSelectFile={handleFileSelect}
+          setSelected={setSelected}
+          selected={selected}
+          setIndex={setIndex}
+        />
+      </div>
+    </>
   );
 };
 

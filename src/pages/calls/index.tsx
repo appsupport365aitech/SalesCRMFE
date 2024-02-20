@@ -325,12 +325,12 @@ const CallsPage = () => {
       text: "Allocated To",
       checked: true,
     },
-    {
-      width: 120,
-      left: 20,
-      text: "Review Due Date",
-      checked: true,
-    },
+    // {
+    //   width: 120,
+    //   left: 20,
+    //   text: "Review Due Date",
+    //   checked: true,
+    // },
     {
       width: 160,
       left: 20,
@@ -510,7 +510,7 @@ const CallsPage = () => {
                 text: item?.leadId?.[0]?.product_category || "-",
                 id: item?._id,
               }, // product/service
-              { text: item?.callDisposiiton || "NA", id: item?._id }, // call disposition
+              // { text: item?.callDisposiiton || "NA", id: item?._id }, // call disposition
               { text: item?.callData[0]?.call_type || "-", id: item?._id }, // call type
               {
                 text: "Allocated Call",
@@ -528,7 +528,7 @@ const CallsPage = () => {
                 text: item?.allocatedTo[0]?.name || "-",
                 id: item?._id,
               }, // allocated to
-              { text: item?.callId || "NA", id: item?._id }, // review due date
+              // { text: item?.callId || "NA", id: item?._id }, // review due date
               {
                 text:
                   currTab == 0
@@ -577,7 +577,7 @@ const CallsPage = () => {
               id: item?._id,
             }, // product/service
             { text: "Feedback Requested", id: item?._id }, // call review type
-            { text: item?.callDisposiiton || "NA", id: item?._id }, // call disposition
+            // { text: item?.callDisposiiton || "NA", id: item?._id }, // call disposition
             { text: item?.callData[0]?.call_type || "-", id: item?._id }, // call type
             { text: item?.score || "Not Scored", id: item?._id }, // call score
             currTab != 0 && {
@@ -588,9 +588,9 @@ const CallsPage = () => {
               text: item?.allocatedBy[0]?.name || "-",
               id: item?._id,
             }, // feedback requestd by
-            { text: item?.callId || "NA", id: item?._id }, // on time review
-            { text: item?.callId || "NA", id: item?._id }, // delay time
-            { text: item?.callId || "NA", id: item?._id }, // time to complete review
+            // { text: item?.callId || "NA", id: item?._id }, // on time review
+            // { text: item?.callId || "NA", id: item?._id }, // delay time
+            // { text: item?.callId || "NA", id: item?._id }, // time to complete review
             {
               text:
                 currTab == 0
@@ -599,7 +599,7 @@ const CallsPage = () => {
                   ? "In-progess"
                   : "Completed",
               id: item?._id,
-            },
+            }, // call review status
           ];
           return row;
         })
@@ -634,7 +634,10 @@ const CallsPage = () => {
         const data = res?.data?.result;
         setData(data);
         generateRows(data);
-        setTotalItems(res?.data?.totalRecords);
+        setTotalItems(
+          res?.data?.result.filter((obj: any) => obj.callData.length != 0)
+            .length
+        );
         const pages = Math.ceil(res?.data?.totalRecords / limit);
         setTotalPages(pages);
       })

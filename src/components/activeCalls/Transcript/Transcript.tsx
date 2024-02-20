@@ -51,8 +51,6 @@ const Transcript = ({
   text: any;
   utterances: any;
 }) => {
-  console.log(data, "arijit");
-
   // url = `${baseUrl}api/audio-transcript/create/by-audio-url`
   // method = post
   // body = {
