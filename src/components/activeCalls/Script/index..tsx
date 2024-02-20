@@ -380,14 +380,16 @@ const ScriptList = ({
   );
 };
 const ScriptView = ({ data }: { data: any }) => {
-  console.log(data);
   return (
     <>
       <embed
-        height={300}
         src={`${data?.fileUrl}#toolbar=0`}
         type="application/pdf"
-      />
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
+      ></embed>
     </>
   );
 };
@@ -398,7 +400,14 @@ const Script = ({ data, scripts }: { data: any; scripts: any }) => {
   function CallBack(childData: any) {
     setActiveTitle(childData);
   }
-  const [currScripts, setCurrScripts] = useState<any[]>(scripts?.result);
+
+  const [currScripts, setCurrScripts] = useState<any[]>([]);
+
+  useEffect(() => {
+    setCurrScripts(scripts?.result);
+  }, [scripts]);
+
+  console.log(currScripts, "arijit");
 
   const [selected, setSelected] = useState(false);
   const [accessToken, setAccessToken] = useState<any>("");
@@ -484,7 +493,7 @@ const Script = ({ data, scripts }: { data: any; scripts: any }) => {
   // };
 
   return (
-    <div className="w-full p-[30px]">
+    <div className="w-full p-[30px] overflow-y-auto custom-scroll">
       {selected && (
         <div className="w-[100%] flex flex-col gap-4 justify-between p-4 bg-white border border-gray-200 rounded-lg shadow">
           <h2 className="text-lg font-semibold">Script</h2>
