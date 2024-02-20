@@ -203,8 +203,8 @@ const Coaching = ({ data, refresh }: any) => {
       setLoading(true);
       axios
         .get(
-          // `${baseUrl}api/dashboard/indicator/scriptBuildingBlocks?leadId=${id}`,
-          `https://api.npoint.io/ceba149ed9e2cd06ecf0`,
+          `${baseUrl}api/dashboard/indicator/scriptBuildingBlocks?leadId=${id}`,
+          // `https://api.npoint.io/ceba149ed9e2cd06ecf0`,
           {
             headers: {
               Authorization: accessToken,
@@ -227,8 +227,8 @@ const Coaching = ({ data, refresh }: any) => {
       setLoading(true);
       axios
         .get(
-          // `${baseUrl}api/dashboard/indicator/sellingSkills?leadId=${id}`
-          `https://api.npoint.io/a45d554c4fc28dd86987`,
+          `${baseUrl}api/dashboard/indicator/sellingSkills?leadId=${id}`,
+          // `https://api.npoint.io/a45d554c4fc28dd86987`,
           {
             headers: {
               Authorization: accessToken,
@@ -249,8 +249,8 @@ const Coaching = ({ data, refresh }: any) => {
       setLoading(true);
       axios
         .get(
-          // `${baseUrl}api/dashboard/indicator/emotionAnalysis?leadId=${id}`
-          `https://api.npoint.io/94de79c89a6c5d6b56ca`,
+          `${baseUrl}api/dashboard/indicator/emotionAnalysis?leadId=${id}`,
+          // `https://api.npoint.io/94de79c89a6c5d6b56ca`,
           {
             headers: {
               Authorization: accessToken,
@@ -583,25 +583,9 @@ const Coaching = ({ data, refresh }: any) => {
                 list={tabs2}
                 coachingButton2
               />
-              {tab2 === 0 && (
-                <ScriptBuilding
-                  script={
-                    id == "65c5f4b9d8b4e9fdd127b987" ? scriptBuildingData : {}
-                  }
-                />
-              )}
-              {tab2 === 1 && (
-                <Selling
-                  selling={
-                    id == "65c5f4b9d8b4e9fdd127b987" ? sellingSkillsData : {}
-                  }
-                />
-              )}
-              {tab2 === 2 && (
-                <Emotion
-                  data={id == "65c5f4b9d8b4e9fdd127b987" ? emotionData : {}}
-                />
-              )}
+              {tab2 === 0 && <ScriptBuilding script={scriptBuildingData} />}
+              {tab2 === 1 && <Selling selling={sellingSkillsData} />}
+              {tab2 === 2 && <Emotion data={emotionData} />}
             </div>
           )}
           {tab === 1 &&
