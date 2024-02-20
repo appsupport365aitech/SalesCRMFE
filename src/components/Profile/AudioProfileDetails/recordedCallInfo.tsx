@@ -48,9 +48,25 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
 
     return secondsDifference;
   }
-  console.log("data1", data1);
-  console.log("data", data);
 
+  const callMatrics = [
+    {
+      title: "Talk/Listen Ratio ",
+      data: "26%",
+    },
+    {
+      title: "Longest Monologue",
+      data: "03:53",
+    },
+    {
+      title: "Filler words per minute",
+      data: "7",
+    },
+    {
+      title: "Engaging Questions",
+      data: "3",
+    },
+  ];
   return (
     <div>
       <div className="flex justify-between">
@@ -131,12 +147,12 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
               : data?.activeCall?.call_discription ?? "-"}
           </p>
         </div>
-        <div className="text-[#8A9099] flex  mt-[7px] leading-[21px]">
+        {/* <div className="text-[#8A9099] flex  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[50%] mr-4">Call Disposition</p>
           <p className="text-sm font-semibold text-black">
             {data?.activeCall?.call_disposition ?? "-"}
           </p>
-        </div>
+        </div> */}
       </div>
       <div className="pl-[30px]">
         <div className="mt-[25px]">
@@ -173,50 +189,26 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
               <p className="border-b-2 w-3/4 pb-2 border-red-400 text-[#3F434A] text-[20px] font-medium leading-[22px]">
                 CALL METRICS
               </p>
-              <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-                <p className="text-sm font-medium w-[50%] mr-4">
-                  Talk/Listen Ratio
-                </p>
-                <p className="text-sm font-semibold text-black">
-                  {data?.talkRatio || "-"}
-                </p>
-              </div>
             </div>
-            <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-              <p className="text-sm font-medium w-[50%] mr-4">
-                Longest Monologue
-              </p>
-              <p className="text-sm font-semibold text-black">
-                {data?.longestMonologue || "-"}
-              </p>
-            </div>
-            <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-              <p className="text-sm font-medium w-[50%] mr-4">
-                Filler words per minute
-              </p>
-              <p className="text-sm font-semibold text-black">
-                {data?.fillerWords || "-"}
-              </p>
-            </div>
-            <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-              <p className="text-sm font-medium w-[50%] mr-4">Interactivity</p>
-              <p className="text-sm font-semibold text-black">
-                {data?.interactivity || "-"}
-              </p>
-            </div>
-            <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-              <p className="text-sm font-medium w-[50%] mr-4"> Next Steps</p>
-              <p className="text-sm font-semibold text-black">
-                {data?.nextSteps || "-"}
-              </p>
-            </div>
-            <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-              <p className="text-sm font-medium w-[50%] mr-4">
-                Engaging questions
-              </p>
-              <p className="text-sm font-semibold text-black">
-                {data?.engagingQuestions || "-"}
-              </p>
+            <div className="mt-2">
+              <ul className="w-[85%] flex flex-col gap-2">
+                {callMatrics?.map((item: any) => (
+                  <li
+                    key={item.title}
+                    className="flex justify-between items-center"
+                  >
+                    <h3 className="text-[#909193] text-[14px] font-[500]">
+                      {item.title}
+                    </h3>
+                    <p
+                      className="text-[#434343] text-[14px] font-[500] w-[120px]
+                "
+                    >
+                      {item.data}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </>

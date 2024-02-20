@@ -65,6 +65,9 @@ const Activityhistory = ({ data }: { data: any }) => {
       return "NA";
     }
   };
+
+  console.log(history, "arijit");
+
   return (
     <div>
       <Card className="bg-[#ffffff] w-[100%] pb-10 p-6">
@@ -132,7 +135,7 @@ const Activityhistory = ({ data }: { data: any }) => {
                       <div className="w-[19%]">
                         <p>{getOutcome(item, i)}</p>
                       </div>
-                      <div className=" w-[17.5%] ">
+                      <div className=" w-[19%] ">
                         {item?.type === "email" ? (
                           <>
                             <p
@@ -148,11 +151,11 @@ const Activityhistory = ({ data }: { data: any }) => {
                           </>
                         ) : (
                           <>
-                            <p className="text-gray-500  font-bold text-lg">
-                              {item?.title}
+                            <p className="text-gray-500  font-bold text-sm">
+                              {item?.title ?? item.call_title}
                             </p>
-                            <p className="text-[#8A9099] font-small text-sm">
-                              {item?.content}
+                            <p className="text-[#8A9099] font-small text-xs">
+                              {item?.content ?? item.call_discription}
                             </p>
                           </>
                         )}

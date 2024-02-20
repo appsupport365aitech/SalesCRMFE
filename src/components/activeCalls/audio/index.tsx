@@ -648,7 +648,11 @@ const Audio = ({ data, data1, data2 }: any) => {
                   height={10}
                 />
                 <p className="text-gray-600 text-[14px]">
-                  Participant: {data?.leadId?.customer_name}
+                  Participant:{" "}
+                  <p className="">
+                    {data?.leadId?.customer_name ??
+                      data?.activeCall?.participants?.customer_name}
+                  </p>
                 </p>
               </div>
             </div>
@@ -659,7 +663,10 @@ const Audio = ({ data, data1, data2 }: any) => {
               color={"#4091FF"}
             />
             <Tracker
-              title={data?.leadId?.customer_name}
+              title={
+                data?.leadId?.customer_name ??
+                data?.activeCall?.participants?.customer_name
+              }
               list={callParticipentsDuration}
               color={"#FE5143"}
             />

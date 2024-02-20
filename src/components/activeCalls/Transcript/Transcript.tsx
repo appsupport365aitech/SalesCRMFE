@@ -51,6 +51,8 @@ const Transcript = ({
   text: any;
   utterances: any;
 }) => {
+  console.log(data, "arijit");
+
   // url = `${baseUrl}api/audio-transcript/create/by-audio-url`
   // method = post
   // body = {
@@ -171,7 +173,7 @@ const Transcript = ({
                   </p>
                   <p
                     className={`text-[#304FFD] ${
-                      item.title == "A" ? "uppercase" : ""
+                      item.title == "A" ? "uppercase" : "capitalize"
                     }  shrink-0 w-28 font-medium text-[15px] tracking-wide`}
                     style={{
                       color: item.title === "A" ? "#4091FF" : "#FE5143",
@@ -186,7 +188,8 @@ const Transcript = ({
                     {item.title == "A"
                       ? data?.activeCall?.owner?.name
                       : item.title == "B"
-                      ? data?.leadId?.customer_name
+                      ? data?.leadId?.customer_name ??
+                        data?.activeCall?.participants?.customer_name
                       : ""}
                   </p>
                   <p

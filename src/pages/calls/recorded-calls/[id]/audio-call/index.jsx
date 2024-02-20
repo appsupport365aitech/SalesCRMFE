@@ -195,19 +195,19 @@ const CallProfile = () => {
                   list: qams,
                   click: handleRequestFeedback,
                 },
-                {
-                  text: "Share",
-                  dropdown: true,
-                  id: 1,
-                  icon: "Share",
-                  light: false,
-                  dark: true,
-                  click: addCall,
-                  list: [
-                    { title: "Full Call", Icon: "Phone" },
-                    { title: "Call Snippet", Icon: "Mail" },
-                  ],
-                },
+                // {
+                //   text: "Share",
+                //   dropdown: true,
+                //   id: 1,
+                //   icon: "Share",
+                //   light: false,
+                //   dark: true,
+                //   click: addCall,
+                //   list: [
+                //     { title: "Full Call", Icon: "Phone" },
+                //     { title: "Call Snippet", Icon: "Mail" },
+                //   ],
+                // },
               ]
         }
         mainTitle="Calls"

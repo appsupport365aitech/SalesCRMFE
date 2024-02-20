@@ -124,13 +124,12 @@ const CallsPage = () => {
       ],
       value: "",
     },
-    callDisposition: {
-      label: "Call Disposition",
-      options: [{ key: "Follow-Up required", label: "Follow-Up required" }],
-      value: "",
-    },
+    // callDisposition: {
+    //   label: "Call Disposition",
+    //   options: [{ key: "Follow-Up required", label: "Follow-Up required" }],
+    //   value: "",
+    // },
   });
-  console.log(filters, "ut");
 
   const formatDateToCustomFormat = (isoDate: any) => {
     const dateObject = new Date(isoDate);
@@ -284,12 +283,12 @@ const CallsPage = () => {
       text: "Product/Service",
       checked: true,
     },
-    {
-      width: 120,
-      left: 20,
-      text: "Call Disposition",
-      checked: true,
-    },
+    // {
+    //   width: 120,
+    //   left: 20,
+    //   text: "Call Disposition",
+    //   checked: true,
+    // },
     {
       width: 120,
       left: 20,
@@ -407,12 +406,12 @@ const CallsPage = () => {
       text: "Call Review Type",
       checked: true,
     },
-    {
-      width: 120,
-      left: 20,
-      text: "Call Disposition",
-      checked: true,
-    },
+    // {
+    //   width: 120,
+    //   left: 20,
+    //   text: "Call Disposition",
+    //   checked: true,
+    // },
     {
       width: 120,
       left: 20,
@@ -437,24 +436,24 @@ const CallsPage = () => {
       text: "Feedback Requested By",
       checked: true,
     },
-    {
-      width: 120,
-      left: 20,
-      text: "On Time Review",
-      checked: true,
-    },
-    {
-      width: 120,
-      left: 20,
-      text: "Delay Time",
-      checked: true,
-    },
-    {
-      width: 120,
-      left: 20,
-      text: "Time To Complete Review",
-      checked: true,
-    },
+    // {
+    //   width: 120,
+    //   left: 20,
+    //   text: "On Time Review",
+    //   checked: true,
+    // },
+    // {
+    //   width: 120,
+    //   left: 20,
+    //   text: "Delay Time",
+    //   checked: true,
+    // },
+    // {
+    //   width: 120,
+    //   left: 20,
+    //   text: "Time To Complete Review",
+    //   checked: true,
+    // },
     {
       width: 120,
       left: 20,
@@ -466,80 +465,82 @@ const CallsPage = () => {
   const generateRows = (data: any) => {
     if (subType === "allocated_call_reviews") {
       setRowsACR(
-        data?.map((item: any, index: number) => {
-          let row = [
-            {
-              text:
-                item?.callData[0]?._id
-                  .split("")
-                  .filter((dig: any) => /\d/.test(dig))
-                  .join("")
-                  .slice(-4) || "-",
-              id: item?._id,
-              link: `/calls/recorded-calls/${item?._id}/audio-call`,
-            },
-            {
-              text: item?.callData[0]?.call_title || "-",
-              id: item?.callData[0]?.callId,
-            }, // call title
-            {
-              text: item?.leadId?.[0]?.leadId || "-",
-              id: item?._id,
-              link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile`,
-            },
-            {
-              text: item?.leadId?.[0]?.lead_title || "-",
-              id: item?._id,
-              link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile`,
-            },
-            {
-              text: item?.company?.[0]?.company_name || "-",
-              id: item?._id,
-              link: `/sales/open/${item?.leadId?.[0]?._id}/company-profile`,
-            },
-            { text: item?.owner?.[0]?.name || "-", id: item?._id }, // call owner
-            { text: item?.manager[0]?.name || "-", id: item?._id }, // team manager
-            { text: item?.customer[0]?.customer_name || "-", id: item?._id }, // client poc
-            {
-              text:
-                formatDateToCustomFormat(item?.callData[0]?.call_date) || "-",
-              id: item?._id,
-            }, // call date & time
-            {
-              text: item?.leadId?.[0]?.product_category || "-",
-              id: item?._id,
-            }, // product/service
-            { text: item?.callDisposiiton || "NA", id: item?._id }, // call disposition
-            { text: item?.callData[0]?.call_type || "-", id: item?._id }, // call type
-            {
-              text: "Allocated Call",
-              id: item?._id,
-            }, // call review type
-            { text: item?.score || "Not Scored", id: item?._id }, // call score
-            currTab != 0 && { text: item?.callId || "Manual", id: item?._id }, // allocation type
-            currTab != 0 && {
-              text: item?.qaAllocatedAt
-                ? formatDateToCustomFormat(item?.qaAllocatedAt)
-                : "-",
-              id: item?._id,
-            }, // allocated on
-            currTab != 0 && {
-              text: item?.allocatedTo[0]?.name || "-",
-              id: item?._id,
-            }, // allocated to
-            { text: item?.callId || "NA", id: item?._id }, // review due date
-            {
-              text:
-                currTab == 0
-                  ? "Pending"
-                  : currTab == 1
-                  ? "In-progess"
-                  : "Completed",
-              id: item?._id,
-            }, // call review status
-          ];
-          return row;
-        })
+        data
+          .filter((obj: any) => obj.callData.length != 0)
+          .map((item: any, index: number) => {
+            let row = [
+              {
+                text:
+                  item?.callData[0]?._id
+                    .split("")
+                    .filter((dig: any) => /\d/.test(dig))
+                    .join("")
+                    .slice(-4) || "-",
+                id: item?._id,
+                link: `/calls/recorded-calls/${item?._id}/audio-call`,
+              },
+              {
+                text: item?.callData[0]?.call_title || "-",
+                id: item?.callData[0]?.callId,
+              }, // call title
+              {
+                text: item?.leadId?.[0]?.leadId || "-",
+                id: item?._id,
+                link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile`,
+              },
+              {
+                text: item?.leadId?.[0]?.lead_title || "-",
+                id: item?._id,
+                link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile`,
+              },
+              {
+                text: item?.company?.[0]?.company_name || "-",
+                id: item?._id,
+                link: `/sales/open/${item?.leadId?.[0]?._id}/company-profile`,
+              },
+              { text: item?.owner?.[0]?.name || "-", id: item?._id }, // call owner
+              { text: item?.manager[0]?.name || "-", id: item?._id }, // team manager
+              { text: item?.customer[0]?.customer_name || "-", id: item?._id }, // client poc
+              {
+                text:
+                  formatDateToCustomFormat(item?.callData[0]?.call_date) || "-",
+                id: item?._id,
+              }, // call date & time
+              {
+                text: item?.leadId?.[0]?.product_category || "-",
+                id: item?._id,
+              }, // product/service
+              { text: item?.callDisposiiton || "NA", id: item?._id }, // call disposition
+              { text: item?.callData[0]?.call_type || "-", id: item?._id }, // call type
+              {
+                text: "Allocated Call",
+                id: item?._id,
+              }, // call review type
+              { text: item?.score || "Not Scored", id: item?._id }, // call score
+              currTab != 0 && { text: item?.callId || "Manual", id: item?._id }, // allocation type
+              currTab != 0 && {
+                text: item?.qaAllocatedAt
+                  ? formatDateToCustomFormat(item?.qaAllocatedAt)
+                  : "-",
+                id: item?._id,
+              }, // allocated on
+              currTab != 0 && {
+                text: item?.allocatedTo[0]?.name || "-",
+                id: item?._id,
+              }, // allocated to
+              { text: item?.callId || "NA", id: item?._id }, // review due date
+              {
+                text:
+                  currTab == 0
+                    ? "Pending"
+                    : currTab == 1
+                    ? "In-progess"
+                    : "Completed",
+                id: item?._id,
+              }, // call review status
+            ];
+            return row;
+          })
       );
     } else {
       setRowsFRCR(

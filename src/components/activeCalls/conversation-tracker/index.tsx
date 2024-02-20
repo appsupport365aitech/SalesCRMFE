@@ -16,9 +16,9 @@ const Tracker = ({ color, title, list, uppercase }: any) => {
   return (
     <div className="w-full px-[38px] my-[24px]">
       <h1
-        className={` text-[14px] font-medium ${
-          !uppercase ? uppercase : ""
-        }uppercase`}
+        className={`text-[14px] font-medium ${
+          uppercase ? "uppercase" : "capitalize"
+        }`}
         style={{
           color: color,
         }}
