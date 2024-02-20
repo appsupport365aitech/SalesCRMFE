@@ -111,10 +111,15 @@ const AddScore = ({
 interface IndicatorValue {
   _id: string;
   value: string;
+  score: string;
+  edit: boolean;
 }
 
 interface IndicatorCategory {
   category: string;
+  edit: boolean;
+  label: string;
+  score: string;
 }
 
 const Indicator = () => {
@@ -122,8 +127,13 @@ const Indicator = () => {
   const [itClone, setItClone] = useState<any>([]);
 
   const [disableITSave, setDisableITSave] = useState<boolean>(false);
+  const [disableICSave, setDisableICSave] = useState<boolean>(false);
+  const [disableIVSave, setDisableIVSave] = useState<boolean>(false);
   const [currIndicatorType, setCurrIndicatorType] = useState(0);
+  const [currIndicatorValueScore, setCurrIndicatorValueScore] = useState(0);
   const [currIndicatorCategory, setCurrIndicatorCategory] = useState(0);
+  const [currIndicatorCategoryScore, setCurrIndicatorCategoryScore] =
+    useState(0);
   const [delPopup, setDelPopup] = useState<any>({ open: false, payload: {} });
   const [indicatorSetting, setIndicatorSetting] = useState(false);
   const [indicatorCategoryScoring, setIndicatorCategoryScoring] = useState<any>(
@@ -137,6 +147,7 @@ const Indicator = () => {
     open: false,
     payload: {},
   });
+
   const [newIndicatorCategory, setNewIndicatorCategory] = useState<any>({
     open: false,
     payload: {},
@@ -266,6 +277,9 @@ const Indicator = () => {
   const selectedDataForIndicatorCategory: any =
     indicatorCategory[currIndicatorCategory];
 
+  const selectedDataForIndicatorCategoryValue: any =
+    indicatorValuesData[currIndicatorValueScore];
+
   const getCategoryById = () => {
     setLoading(true);
     try {
@@ -389,13 +403,15 @@ const Indicator = () => {
       })
       .then((res: any) => {
         if (type === "INDICATOR") {
-          // setIndicatorSetting(false);
+          setBool(false);
+          setIndicatorSetting(false);
         } else if (type === "CATEGORY") {
           setBool(false);
           setIndicatorCategoryScoring({ open: false, payload: {} });
           setEditIndicatorCategory({ open: false, payload: {} });
         } else if (type === "VALUE") {
           setBool(false);
+          setIndicatorValueScoring({ open: false });
           setEditIndicatorValue({
             open: false,
             payload: {},
@@ -481,6 +497,7 @@ const Indicator = () => {
           {
             id: indicatorType.oid,
             type: indicatorType.category,
+            score: indicatorType.scoreWeightage,
           },
           "INDICATOR"
         );
@@ -493,12 +510,6 @@ const Indicator = () => {
       {
         typeId: indicatorTypes?.[currIndicatorType]?.oid,
         category: newIndicatorCategory?.payload?.category,
-        // value: newIndicatorCategory?.payload?.value,
-        // alternative: newIndicatorCategory?.payload?.value,
-        // score: "",
-        // timeRestriction: "",
-        // comparisonType: "",
-        // speaker: "",
       },
       "CATEGORY"
     );
@@ -511,7 +522,6 @@ const Indicator = () => {
         categoryId: selectedDataForIndicatorCategory?._id,
         value: newIndicatorValue?.payload?.value,
         alternative: newIndicatorValue?.payload?.alternatives,
-        score: newIndicatorValue?.payload?.score,
       },
       "VALUE"
     );
@@ -526,6 +536,30 @@ const Indicator = () => {
       setDisableITSave(true);
     } else {
       setDisableITSave(false);
+    }
+  };
+
+  const handleScoreChangeForCategory = () => {
+    let score = 0;
+    indicatorCategory?.forEach((typeItem: any, index: number) => {
+      score += typeItem?.score;
+    });
+    if (score !== 100) {
+      setDisableICSave(true);
+    } else {
+      setDisableICSave(false);
+    }
+  };
+
+  const handleScoreChangeForValue = () => {
+    let score = 0;
+    indicatorValuesData?.forEach((typeItem: any, index: number) => {
+      score += typeItem?.score;
+    });
+    if (score !== 100) {
+      setDisableIVSave(true);
+    } else {
+      setDisableIVSave(false);
     }
   };
 
@@ -556,6 +590,14 @@ const Indicator = () => {
     handleScoreChange();
   }, [indicatorTypes]);
 
+  useEffect(() => {
+    handleScoreChangeForCategory();
+  }, [indicatorCategory]);
+
+  useEffect(() => {
+    handleScoreChangeForValue();
+  }, [indicatorValuesData]);
+
   const saveEditedValue = () => {
     updateIndicator(
       {
@@ -564,13 +606,12 @@ const Indicator = () => {
         alternative:
           editIndicatorValue?.payload?.alternative ||
           indicatorValue.alternative,
-        score: editIndicatorValue?.payload?.score || indicatorValue.score || 0,
       },
       "VALUE"
     );
   };
 
-  const saveEditedCategoryScoring = () => {
+  const saveEditedCategory = () => {
     indicatorTypes?.[currIndicatorType]?.categories?.forEach(
       (categoryItem: any, index: number) => {
         if (categoryItem.edit == true && !categoryItem?.new) {
@@ -594,39 +635,30 @@ const Indicator = () => {
     );
   };
 
-  const saveEditedValueScoring = () => {
-    indicatorTypes?.[currIndicatorType]?.categories?.[
-      currIndicatorCategory
-    ]?.values?.forEach((valueItem: any, index: number) => {
-      if (valueItem.new === true) {
-        createIndicator(
-          {
-            type: indicatorTypes?.[currIndicatorType]?.label,
-            category:
-              indicatorTypes?.[currIndicatorType]?.categories?.[
-                currIndicatorCategory
-              ]?.label,
-            value: valueItem?.label,
-            alternative: "",
-            score: indicatorTypes?.[currIndicatorType]?.scoreWeightage,
-            timeRestriction: "",
-            comparisonType: "",
-            speaker: "",
-          },
-          "VALUE"
-        );
-      } else if (valueItem.edit == true && !valueItem?.new) {
+  const saveEditedCategoryScoring = () => {
+    indicatorCategory.forEach((item: any) => {
+      if (item.edit) {
         updateIndicator(
           {
-            id: valueItem.oid,
-            category: valueItem.category,
-            type: indicatorTypes?.[currIndicatorType]?.label,
-            score: indicatorTypes?.[currIndicatorType]?.scoreWeightage || "0",
-            value: editIndicatorValue?.payload?.value,
+            id: item._id,
+            score: item.score || "0",
+            category: item.category,
+          },
+          "CATEGORY"
+        );
+      }
+    });
+  };
+
+  const handleSaveEditedValueScoring = () => {
+    indicatorValuesData.forEach((item: any) => {
+      if (item.edit) {
+        updateIndicator(
+          {
+            id: item._id,
+            score: editIndicatorValue?.payload?.score || item.score || "0",
+            value: editIndicatorValue?.payload?.value || item.value,
             alternative: editIndicatorValue?.payload?.alternatives,
-            timeRestriction: "",
-            comparisonType: "",
-            speaker: "",
           },
           "VALUE"
         );
@@ -753,24 +785,6 @@ const Indicator = () => {
     ]);
   };
 
-  const addNewIndicatorCategory = () => {
-    setIndicatorTypes((currTypes: any) => {
-      return currTypes?.map((typeItem: any, typeIdx: number) => {
-        if (typeIdx === currIndicatorType) {
-          return {
-            ...typeItem,
-            categories: [
-              ...typeItem.categories,
-              { key: "", label: "", scoreWeightage: 0, edit: true, new: true },
-            ],
-          };
-        } else {
-          return typeItem;
-        }
-      });
-    });
-  };
-
   const addNewIndicatorValue = () => {
     setIndicatorTypes((currTypes: any) => {
       return currTypes?.map((typeItem: any, typeIdx: any) => {
@@ -805,13 +819,24 @@ const Indicator = () => {
   };
 
   const handleEditIndicatorCategoryData = (payload: any) => {
-    const { key, value } = payload;
-    setEditIndicatorCategory({
-      open: true,
-      payload: {
-        value: value,
-      },
-    });
+    const { key, value, typeValue, scoreValue } = payload;
+    if (!payload.type) {
+      setEditIndicatorCategory({
+        open: true,
+        payload: {
+          value: value,
+        },
+      });
+    } else {
+      setEditIndicatorCategory({
+        open: false,
+        payload: {
+          value: typeValue,
+          score: scoreValue,
+        },
+      });
+    }
+
     if (value) {
       setIndicatorTypes((currIndicatorTypes: any) => {
         return currIndicatorTypes?.map((currTypeItem: any, typeIdx: number) => {
@@ -862,6 +887,60 @@ const Indicator = () => {
         });
       });
     }
+  };
+
+  const setNewIndicatorCategoryData = (
+    idx: number,
+    key: string,
+    value: string
+  ) => {
+    setIndicatorCategory((currIndicatorCategory: any) => {
+      return currIndicatorCategory?.map((currIndicator: any, index: number) => {
+        if (index === idx) {
+          if (key === "score") {
+            return {
+              ...currIndicator,
+              score: parseInt(value || "0"),
+            };
+          } else {
+            return {
+              ...currIndicator,
+              category: value,
+              key: value,
+            };
+          }
+        } else {
+          return currIndicator;
+        }
+      });
+    });
+  };
+
+  const setNewIndicatorValuesData = (
+    idx: number,
+    key: string,
+    value: string
+  ) => {
+    setIndicatorValuesData((currIndicatorCategory: any) => {
+      return currIndicatorCategory?.map((currIndicator: any, index: number) => {
+        if (index === idx) {
+          if (key === "score") {
+            return {
+              ...currIndicator,
+              score: parseInt(value || "0"),
+            };
+          } else {
+            return {
+              ...currIndicator,
+              value: value,
+              key: value,
+            };
+          }
+        } else {
+          return currIndicator;
+        }
+      });
+    });
   };
 
   const handleEditValueData = (payload: any) => {
@@ -921,8 +1000,9 @@ const Indicator = () => {
       });
     });
   };
-  const handleEditIndicatorCategory = (payload: any) => {
+  const handleEditIndicatorCategoryScore = (payload: any) => {
     const { key } = payload;
+    setCurrIndicatorCategoryScore(key);
     setIndicatorCategory((currTypes: any) => {
       return currTypes?.map((typeItem: any, typeIdx: number) => {
         if (typeIdx === key) {
@@ -939,6 +1019,7 @@ const Indicator = () => {
 
   const handleEditIndicatorValueScore = (payload: any) => {
     const { key } = payload;
+    setCurrIndicatorValueScore(key);
     setIndicatorValuesData((currTypes: any) => {
       return currTypes?.map((typeItem: any, typeIdx: number) => {
         if (typeIdx === key) {
@@ -1216,14 +1297,17 @@ const Indicator = () => {
                     scoreValue={categoryItem?.score}
                     disabled={!categoryItem?.edit}
                     handleChangeType={(e: any) =>
-                      handleEditIndicatorCategoryData({
-                        key: index,
-                        value: e.target.value,
-                      })
+                      setNewIndicatorCategoryData(index, "type", e.target.value)
                     }
-                    handleChangeScore={() => {}}
+                    handleChangeScore={(e: any) =>
+                      setNewIndicatorCategoryData(
+                        index,
+                        "score",
+                        e.target.value
+                      )
+                    }
                     handleEditIndicatorType={() =>
-                      handleEditIndicatorCategory({ key: index })
+                      handleEditIndicatorCategoryScore({ key: index })
                     }
                     handleDeleteIndicatorType={() =>
                       handleDeleteIndicatorCategory({ key: index })
@@ -1235,7 +1319,7 @@ const Indicator = () => {
                 <div className="w-3/4">
                   <button
                     className=" mt-2 text-sm cursor-pointer text-[#304FFD]"
-                    onClick={addNewIndicatorCategory}
+                    onClick={addNewIndicatorType}
                   >
                     Add New Indicator Category
                   </button>
@@ -1247,6 +1331,7 @@ const Indicator = () => {
               <div className="w-[100%] pb-4 mt-10 pr-5 flex justify-end">
                 <SimpleButton
                   theme={1}
+                  disabled={disableICSave}
                   click={() => saveEditedCategoryScoring()}
                   text={"Save"}
                   left={20}
@@ -1285,12 +1370,11 @@ const Indicator = () => {
                     scoreValue={valueItem?.score}
                     disabled={!valueItem?.edit}
                     handleChangeType={(e: any) =>
-                      handleEditValueData({
-                        key: index,
-                        value: e.target.value,
-                      })
+                      setNewIndicatorValuesData(index, "type", e.target.value)
                     }
-                    handleChangeScore={(e: any) => {}}
+                    handleChangeScore={(e: any) =>
+                      setNewIndicatorValuesData(index, "score", e.target.value)
+                    }
                     handleEditIndicatorType={() =>
                       handleEditIndicatorValueScore({ key: index, valueItem })
                     }
@@ -1316,7 +1400,8 @@ const Indicator = () => {
               <div className="w-[100%] pb-4 mt-10 pr-5 flex justify-end">
                 <SimpleButton
                   theme={1}
-                  click={() => saveEditedValueScoring()}
+                  disabled={disableIVSave}
+                  click={() => handleSaveEditedValueScoring()}
                   text={"Save"}
                   left={20}
                   right={0}
@@ -1401,23 +1486,6 @@ const Indicator = () => {
                 });
               }}
             />
-            <AddText
-              title="Score"
-              place={"Enter Score"}
-              value={
-                editIndicatorValue?.payload?.score ?? indicatorValue?.score
-              }
-              change={(e: any) => {
-                setBool(true);
-                setEditIndicatorValue({
-                  open: true,
-                  payload: {
-                    ...editIndicatorValue.payload,
-                    score: e.target.value,
-                  },
-                });
-              }}
-            />
             <div className="w-[100%] flex justify-end">
               <SimpleButton
                 theme={1}
@@ -1433,7 +1501,7 @@ const Indicator = () => {
       {editIndicatorCategory.open && (
         <Backdrop bool={bool}>
           <EditCategory
-            submit={() => saveEditedCategoryScoring()}
+            submit={() => saveEditedCategory()}
             cancel={cancelEdit}
             value={editIndicatorCategory.payload.value}
             onChange={(e: any) =>
@@ -1490,21 +1558,6 @@ const Indicator = () => {
                   payload: {
                     ...newIndicatorValue.payload,
                     alternatives: e.target.value,
-                  },
-                });
-              }}
-            />
-            <AddText
-              title="Score"
-              place={"Enter Score"}
-              value={newIndicatorValue?.payload?.score}
-              change={(e: any) => {
-                setBool(true);
-                setNewIndicatorValue({
-                  open: true,
-                  payload: {
-                    ...newIndicatorValue.payload,
-                    score: e.target.value,
                   },
                 });
               }}
