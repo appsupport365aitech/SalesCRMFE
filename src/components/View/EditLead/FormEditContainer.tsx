@@ -272,14 +272,11 @@ const FormEditContainer = ({
                           >
                             <option value="" selected>
                               -- Select Product/Service --
+                              {/* {data?.product_category} */}
                             </option>
-                            <option value="P1">P1</option>
-                            <option value="P2">P2</option>
-                            <option value="P2">P3</option>
-                            <option value="Product A">Product A</option>
-                            <option value="Product B">Product B</option>
-                            <option value="Product C">Product C</option>
-                            <option value="Product D">Product D</option>
+                            <option value="20 lakh cover">20 lakh cover</option>
+                            <option value="50 lakh cover">50 lakh cover</option>
+                            <option value="1 crore cover">1 crore cover</option>
                           </Field>
                         </div>
                         <div className="flex gap-5">
