@@ -231,6 +231,7 @@ const Indicator = () => {
   const [indicatorCategory, setIndicatorCategory] = useState<
     IndicatorCategory[]
   >([]);
+
   const [indicatorValuesData, setIndicatorValuesData] = useState<
     IndicatorValue[]
   >([]);
@@ -721,8 +722,8 @@ const Indicator = () => {
 
   const getScoreWeightageSum = (type?: "CATEGORY" | "VALUE" | null) => {
     if (type === "CATEGORY") {
-      const sum = itClone.reduce((acc: number, item: any) => {
-        return acc + (isNaN(item?.scoreWeightage) ? 0 : item?.scoreWeightage);
+      const sum = indicatorCategory.reduce((acc: number, item: any) => {
+        return acc + (isNaN(item?.score) ? 0 : item?.score);
       }, 0);
       return sum;
     } else if (type === "VALUE") {
@@ -908,6 +909,37 @@ const Indicator = () => {
   const handleEditIndicatorType = (payload: any) => {
     const { key } = payload;
     setIndicatorTypes((currTypes: any) => {
+      return currTypes?.map((typeItem: any, typeIdx: number) => {
+        if (typeIdx === key) {
+          return {
+            ...typeItem,
+            edit: true,
+          };
+        } else {
+          return typeItem;
+        }
+      });
+    });
+  };
+  const handleEditIndicatorCategory = (payload: any) => {
+    const { key } = payload;
+    setIndicatorCategory((currTypes: any) => {
+      return currTypes?.map((typeItem: any, typeIdx: number) => {
+        if (typeIdx === key) {
+          return {
+            ...typeItem,
+            edit: true,
+          };
+        } else {
+          return typeItem;
+        }
+      });
+    });
+  };
+
+  const handleEditIndicatorValueScore = (payload: any) => {
+    const { key } = payload;
+    setIndicatorValuesData((currTypes: any) => {
       return currTypes?.map((typeItem: any, typeIdx: number) => {
         if (typeIdx === key) {
           return {
@@ -1171,17 +1203,17 @@ const Indicator = () => {
             </h2>
             <hr className="mt-4" />
             <div className="flex justify-between mt-4 pl-8 pr-16">
-              <h4 className="font-bold text-center">Indicator Type</h4>
+              <h4 className="font-bold text-center">Indicator Category</h4>
               <h4 className="font-bold text-center">
                 Score Weightage <br /> (Out of 100 )
               </h4>
             </div>
             <div>
-              {indicatorTypes?.map((categoryItem: any, index: number) => (
+              {indicatorCategory?.map((categoryItem: any, index: number) => (
                 <div key={index} className="w-[100%]">
                   <AddScore
-                    typeValue={categoryItem?.label}
-                    scoreValue={categoryItem?.scoreWeightage}
+                    typeValue={categoryItem?.category}
+                    scoreValue={categoryItem?.score}
                     disabled={!categoryItem?.edit}
                     handleChangeType={(e: any) =>
                       handleEditIndicatorCategoryData({
@@ -1189,9 +1221,9 @@ const Indicator = () => {
                         value: e.target.value,
                       })
                     }
-                    handleChangeScore={(e: any) => {}}
+                    handleChangeScore={() => {}}
                     handleEditIndicatorType={() =>
-                      handleEditIndicatorCategoryData({ key: index })
+                      handleEditIndicatorCategory({ key: index })
                     }
                     handleDeleteIndicatorType={() =>
                       handleDeleteIndicatorCategory({ key: index })
@@ -1205,7 +1237,7 @@ const Indicator = () => {
                     className=" mt-2 text-sm cursor-pointer text-[#304FFD]"
                     onClick={addNewIndicatorCategory}
                   >
-                    Add New Indicator Type
+                    Add New Indicator Category
                   </button>
                 </div>
                 <span className="text-green-500 mt-2 w-[100px]">
@@ -1240,7 +1272,7 @@ const Indicator = () => {
           <div className="w-[100%] text-black px-[30px] pt-[20px]">
             <h2 className="text-[24px] font-medium">Indicator Value Scoring</h2>
             <div className="flex justify-between mt-4 pl-8 pr-16">
-              <h4 className="font-bold text-center">Indicator Type</h4>
+              <h4 className="font-bold text-center">Indicator Value</h4>
               <h4 className="font-bold text-center">
                 Score Weightage <br /> (Out of 100 )
               </h4>
@@ -1260,7 +1292,7 @@ const Indicator = () => {
                     }
                     handleChangeScore={(e: any) => {}}
                     handleEditIndicatorType={() =>
-                      handleEditIndicatorValue({ key: index, valueItem })
+                      handleEditIndicatorValueScore({ key: index, valueItem })
                     }
                     handleDeleteIndicatorType={() =>
                       handleDeleteIndicatorValue({ key: index })
@@ -1274,7 +1306,7 @@ const Indicator = () => {
                     className=" mt-2 text-sm cursor-pointer text-[#304FFD]"
                     onClick={addNewIndicatorValue}
                   >
-                    Add New Indicator Type
+                    Add New Indicator Value
                   </button>
                 </div>
                 <span className="text-green-500 mt-2 w-[100px]">
