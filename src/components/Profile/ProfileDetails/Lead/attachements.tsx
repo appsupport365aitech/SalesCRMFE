@@ -47,7 +47,7 @@ const ScriptDoc = ({
             <p className="text-[12px] text-[#3F434A] font-medium ">{docName}</p>
             <p className="text-[11px] text-[#8A9099] font-medium">{size}</p>
           </div>
-          <div className="flex w-[100px] items-center justify-between ml-auto">
+          <div className="flex w-fit gap-6 pr-10 items-center justify-between ml-auto">
             <Image
               src={getBasicIcon("Download")}
               alt=""
@@ -87,7 +87,7 @@ const ScriptDoc = ({
               width={20}
               height={20}
             />
-            <Image
+            {/* <Image
               src={getBasicIcon("More")}
               alt=""
               // fill={true}
@@ -98,7 +98,7 @@ const ScriptDoc = ({
               }
               width={20}
               height={20}
-            />
+            /> */}
           </div>
         </div>
         <p className="text-[#8A9099] text-[13px] font-medium mt-[10px]">

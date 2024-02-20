@@ -53,7 +53,18 @@ const Activityhistory = ({ data }: { data: any }) => {
 
     return { date: formattedDate, time: formattedTime };
   }
-
+  console.log(data, "raju");
+  const getOutcome = (item: any, idx: number) => {
+    if (item?.type?.toLowerCase() == "email") {
+      return "Email sent";
+    } else if (item?.type?.toLowerCase() == "sms") {
+      return "SMS sent";
+    } else if (item?.type?.toLowerCase() == "note") {
+      return "Note sent";
+    } else {
+      return "NA";
+    }
+  };
   return (
     <div>
       <Card className="bg-[#ffffff] w-[100%] pb-10 p-6">
@@ -96,10 +107,10 @@ const Activityhistory = ({ data }: { data: any }) => {
                             item?.type === "email"
                               ? getBasicIcon("Mail")
                               : item?.type === "note"
-                                ? getBasicIcon("Tasks")
-                                : item?.call_title
-                                  ? getBasicIcon("Phone")
-                                  : getBasicIcon("activity-1")
+                              ? getBasicIcon("Tasks")
+                              : item?.call_title
+                              ? getBasicIcon("Phone")
+                              : getBasicIcon("activity-1")
                           }
                           className={`
                     `}
@@ -113,10 +124,13 @@ const Activityhistory = ({ data }: { data: any }) => {
                         />
                       </div>
                       <div className="w-[21%]">
-                        <p>-</p>
+                        <p className="font-semibold text-gray-600">
+                          {data.owners[0].name}
+                        </p>
+                        <p>{data.customerId.customer_name}</p>
                       </div>
                       <div className="w-[19%]">
-                        <p>-</p>
+                        <p>{getOutcome(item, i)}</p>
                       </div>
                       <div className=" w-[17.5%] ">
                         {item?.type === "email" ? (
@@ -126,7 +140,9 @@ const Activityhistory = ({ data }: { data: any }) => {
                               className="text-gray-500  font-semibold text-xs"
                             ></p>
                             <p
-                              dangerouslySetInnerHTML={{ __html: item?.content }}
+                              dangerouslySetInnerHTML={{
+                                __html: item?.content,
+                              }}
                               className="text-[#8A9099] font-small text-xs"
                             ></p>
                           </>

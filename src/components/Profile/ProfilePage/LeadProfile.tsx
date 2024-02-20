@@ -146,6 +146,42 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
     return `${hours}:${minutes} ${day} ${month} ${year}`;
   }
 
+  function getTypeCounts(data2: any) {
+    let phoneCount = 0;
+    let smsCount = 0;
+    let emailCount = 0;
+    let noteCount = 0;
+
+    data2.forEach((entry) => {
+      switch (entry.type) {
+        case "phone":
+          phoneCount++;
+          break;
+        case "sms":
+          smsCount++;
+          break;
+        case "email":
+          emailCount++;
+          break;
+        case "note":
+          noteCount++;
+          break;
+      }
+    });
+
+    const typeCounts = {
+      phoneCount,
+      smsCount,
+      emailCount,
+      noteCount,
+      // Add more properties if needed
+    };
+
+    return typeCounts;
+  }
+
+  const counts = getTypeCounts(data1?.activityId?.history);
+
   return (
     <>
       {edit && (
@@ -222,7 +258,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
             </p>
           </div>
           {data?.companyId?.company_socialMedia1 ? (
-            <div className="text-[#8A9099] flex justify-between gap-4 w-9/12  mt-[7px] leading-[21px]">
+            <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
               <p className="text-sm font-medium w-[40%]"> Social Media</p>
               <p className="text-sm font-semibold text-black flex">
                 {data?.companyId?.company_socialMedia1 && (
@@ -324,7 +360,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
                     objectFit: "contain",
                   }}
                 />
-                <p className="text-black">{Activities.call}</p>
+                <p className="text-black">{counts.phoneCount}</p>
               </div>
               <div className="flex mr-[8px]">
                 <Image
@@ -337,7 +373,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
                     objectFit: "contain",
                   }}
                 />
-                <p className="text-black">0</p>
+                <p className="text-black">{counts.smsCount}</p>
               </div>
               <div className="flex mr-[8px]">
                 <Image
@@ -350,7 +386,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
                     objectFit: "contain",
                   }}
                 />
-                <p className="text-black">{Activities.email}</p>
+                <p className="text-black">{counts.emailCount}</p>
               </div>
             </div>
             <div className="flex mt-2 gap-3 items-center">
@@ -378,7 +414,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
                   }}
                   className="mr-[3px] svg-red cursor-pointer"
                 />
-                <p className="text-black">{Activities.notes}</p>
+                <p className="text-black">{counts.noteCount}</p>
               </div>
             </div>
           </div>

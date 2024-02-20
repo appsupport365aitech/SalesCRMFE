@@ -107,7 +107,7 @@ const LeadProfileContainer = ({ titles, current, info, data, width }: any) => {
                     {data?.product_category}
                   </p>
                 </div>
-                <div className="flex items-center mt-4">
+                {/* <div className="flex items-center mt-4">
                   <p className="text-[#3F434A] text-sm mr-4 w-[300px]">
                     Last Call Disposition
                   </p>
@@ -126,14 +126,13 @@ const LeadProfileContainer = ({ titles, current, info, data, width }: any) => {
                   <p className="text-[#595F69] text-sm font-medium">
                     {data?.activityId?.lastActivity?.nextAction || "-"}
                   </p>
-                </div>
+                </div> */}
                 <div className="flex items-center mt-4">
                   <p className="text-[#3F434A] text-sm mr-4 w-[300px]">
                     Interested Product/Service Type
                   </p>
                   <p className="text-[#595F69] text-sm font-medium">
-                    {data?.activityId?.lastActivity?.interestedProductType ||
-                      "-"}
+                    {data?.product_category || "-"}
                   </p>
                 </div>
               </div>
