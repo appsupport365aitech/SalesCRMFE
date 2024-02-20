@@ -92,7 +92,7 @@ const RenderHeader = ({
   };
 
   return (
-    <div className="pl-[10px] min-h-[40px] flex items-center grow border-[#ccc] border-b-[1px]">
+    <div className="pl-[10px] min-h-[40px] flex items-center w-fit grow border-[#ccc] border-b-[1px]">
       <RenderCheckBox width={30} onUpdate={onSelection} />
       {columns?.map((column: any, index: number) => (
         <RenderHeaderColumn
@@ -168,7 +168,7 @@ const RenderRow = ({
   return rows?.map((row: any, rowIndex: number) => (
     <div
       key={rowIndex}
-      className="pl-[10px] min-h-[40px] flex items-center grow border-[#ccc] border-b-[1px]"
+      className="w-fit pl-[10px] min-h-[40px] flex items-center grow border-[#ccc] border-b-[1px]"
     >
       <RenderCheckBox
         width={30}
