@@ -152,7 +152,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
     let emailCount = 0;
     let noteCount = 0;
 
-    data2.forEach((entry) => {
+    data2.forEach((entry: any) => {
       switch (entry.type) {
         case "phone":
           phoneCount++;
@@ -174,7 +174,6 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
       smsCount,
       emailCount,
       noteCount,
-      // Add more properties if needed
     };
 
     return typeCounts;
