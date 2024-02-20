@@ -23,8 +23,6 @@ const AddText = ({ title, place, change, value }: any) => {
 };
 
 const EditCategory = ({ cancel, submit, value, onChange }: any) => {
-  console.log(value, "arijit");
-
   return (
     <div className="w-[100%] h-[100%] py-[10px] pl-[30px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium mb-[24px] tracking-[1px]">

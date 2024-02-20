@@ -93,7 +93,7 @@ const FormEditContainer = ({
                     ...data,
                     lead_title: data?.lead_title,
                     lead_description: data?.lead_description,
-                    lead_manager: data?.manager?._id,
+                    lead_manager: data?.manager?.name,
                     product_category: data?.product_category,
                     lead_owner:
                       data?.owners?.length > 0 ? data?.owners?.[0]?._id : "",

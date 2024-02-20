@@ -76,10 +76,6 @@ const EditLead = ({
   title?: any;
   mastersData: any;
 }) => {
-  console.log(
-    "============================ EditLead ----------------------",
-    data
-  );
   const titles = ["LEAD INFO", "CONTACT INFO", "DEAL INFO"];
   const [content, setContent] = useState<any>({});
   const router = useRouter();
