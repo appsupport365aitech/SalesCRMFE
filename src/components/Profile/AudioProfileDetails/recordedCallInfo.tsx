@@ -195,14 +195,12 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
                 {callMatrics?.map((item: any) => (
                   <li
                     key={item.title}
-                    className="flex justify-between items-center"
+                    className=" flex mt-[7px] leading-[21px]"
                   >
-                    <h3 className="text-[#909193]  text-[14px]">
+                    <h3 className="text-sm font-medium w-[60%] mr-4">
                       {item.title}
                     </h3>
-                    <p className="text-sm font-normal text-black w-[130px]">
-                      {item.data}
-                    </p>
+                    <p className="text-sm font-normal">{item.data}</p>
                   </li>
                 ))}
               </ul>

@@ -410,7 +410,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
               objectFit: "contain",
             }}
           />
-          <p>0</p>
+          <p>{Item?.attachments?.length}</p>
           <Image
             src={getBasicIcon("Chat")}
             className={`w-[18px]`}
