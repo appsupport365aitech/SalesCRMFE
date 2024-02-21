@@ -206,7 +206,6 @@ const Coaching = ({ data, refresh }: any) => {
       axios
         .get(
           `${baseUrl}api/dashboard/indicator/scriptBuildingBlocks?leadId=${id}`,
-          // `https://api.npoint.io/ceba149ed9e2cd06ecf0`,
           {
             headers: {
               Authorization: accessToken,
@@ -214,9 +213,8 @@ const Coaching = ({ data, refresh }: any) => {
           }
         )
         .then((response) => {
-          setScriptBuildingData(response.data);
+          setScriptBuildingData(response.data.result);
         })
-
         .catch((error) => {
           console.error("Error fetching script building data:", error);
         });
@@ -238,7 +236,7 @@ const Coaching = ({ data, refresh }: any) => {
           }
         )
         .then((e) => {
-          setSellingSkillsData(e.data);
+          setSellingSkillsData(e.data.result);
         })
         .catch((e) => {});
       setLoading(false);
@@ -258,7 +256,7 @@ const Coaching = ({ data, refresh }: any) => {
           }
         )
         .then((e) => {
-          setEmotionData(e.data);
+          setEmotionData(e.data.result);
         })
         .catch((e) => {});
       setLoading(false);
