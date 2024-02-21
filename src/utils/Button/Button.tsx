@@ -118,7 +118,7 @@ const ButtonDropDown = ({
       )}
       {text?.length > 0 && (
         <p
-          className={`whitespace-nowrap tracking-wider font-medium text-[14px] ${
+          className={`whitespace-nowrap capitalize tracking-wider font-medium text-[14px] ${
             light ? "pl-[4px] pr-[4px]" : "px-[6px]"
           } ${light ? "text-[#3F434A]" : "text-[#ffffff]"} `}
         >

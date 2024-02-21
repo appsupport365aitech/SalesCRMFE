@@ -14,7 +14,7 @@ const Tracker = ({ color, title, list, uppercase }: any) => {
   }, []);
 
   return (
-    <div className="w-full px-[38px] my-[24px]">
+    <div className="w- my-[24px]">
       <h1
         className={`text-[14px] font-medium ${
           uppercase ? "uppercase" : "capitalize"
@@ -26,13 +26,13 @@ const Tracker = ({ color, title, list, uppercase }: any) => {
         {title}
       </h1>
       <div
-        className="w-[100%] bg-[#efefef]  h-[11px] mt-[5px] relative "
+        className="w-full bg-[#efefef]  h-[11px] mt-[5px] relative "
         ref={ref}
       >
         {list.map((item: any, i: any) => {
           return (
             <div
-              className="h-[11px] absolute "
+              className="h-[11px] absolute"
               key={i}
               style={{
                 width: `${(item.duration / width) * 100}px`,

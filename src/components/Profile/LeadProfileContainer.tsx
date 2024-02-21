@@ -138,8 +138,8 @@ const LeadProfileContainer = ({ titles, current, info, data, width }: any) => {
               </div>
 
               <h2 className="text-2xl font-semibold mt-5">Lead Description</h2>
-              <p className="mt-4">{data?.lead_description}</p>
-              <h2 className="text-2xl font-semibold mt-5">
+              <p className="mt-4 capitalize">{data?.lead_description}</p>
+              <h2 className="text-2xl font-semibold mt-5 capitalize">
                 Company Description
               </h2>
               <p className="mt-4">{data?.companyId?.company_description}</p>

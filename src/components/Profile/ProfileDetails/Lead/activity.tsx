@@ -124,7 +124,7 @@ const Activityhistory = ({ data }: { data: any }) => {
                           }}
                         />
                       </div>
-                      <div className="w-[21%]">
+                      <div className="w-[21%] capitalize">
                         <p className="font-semibold text-gray-600">
                           {data.owners[0].name}
                         </p>
@@ -133,7 +133,7 @@ const Activityhistory = ({ data }: { data: any }) => {
                       <div className="w-[19%]">
                         <p>{getOutcome(item, i)}</p>
                       </div>
-                      <div className=" w-[19%] ">
+                      <div className="w-[19%] capitalize ">
                         {item?.type === "email" ? (
                           <>
                             <p
@@ -185,7 +185,9 @@ const Activityhistory = ({ data }: { data: any }) => {
             <>
               <div className="w-[100%] h-[20vh] rounded-md border-black border border-solid p-5">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold">{item?.title}</h2>
+                  <h2 className="text-xl font-semibold capitalize">
+                    {item?.title}
+                  </h2>
                   <div className="flex gap-4">
                     <h2>{item?.createdAt.split("T")[0]}</h2>
                     <h2>{item?.createdAt.split("T")[1].substring(0, 5)}</h2>

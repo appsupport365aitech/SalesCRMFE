@@ -24,7 +24,7 @@ const HeaderItem = ({ width, text, left, align, bold, color }: any) => {
       style={{ width: width, marginLeft: left }}
     >
       <p
-        className="uppercase text-[12px] font-medium tracking-wider w-[100%]"
+        className="uppercase text-[12px] font-normal tracking-wider w-[100%]"
         style={{
           textAlign: align && "center",
           fontWeight: bold ? bold : 700,
@@ -56,7 +56,7 @@ const Header = ({ selectAll, win, deal, budget }: any) => {
         <HeaderItem width={200} left={20} text={"Participants"} />
         <HeaderItem width={140} left={20} text={"Meeting owner"} />
         <HeaderItem width={130} left={20} text={"Meeting type"} />
-        <HeaderItem width={120} left={10} text={"Meeting Date/Time"} />
+        <HeaderItem width={150} left={10} text={"Meeting Date/Time"} />
         <HeaderItem width={120} left={10} text={"Duration"} />
         <HeaderItem width={160} left={10} text={"Location"} />
         <HeaderItem width={120} left={10} text={"Join Info"} />

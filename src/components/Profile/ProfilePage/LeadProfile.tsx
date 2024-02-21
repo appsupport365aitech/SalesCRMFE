@@ -299,11 +299,13 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
         </p>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px] gap-4">
           <p className="text-sm font-medium w-[40%]">Status</p>
-          <p className="text-sm font-semibold text-black">{data?.leadStatus}</p>
+          <p className="text-sm font-semibold text-black capitalize">
+            {data?.leadStatus}
+          </p>
         </div>
         <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[40%]">Stage</p>
-          <p className="text-sm font-semibold text-black w-[40%]">
+          <p className="text-sm font-semibold text-black w-[40%] capitalize">
             {data?.leadStage}
           </p>
         </div>
@@ -313,7 +315,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
             {data?.leadSource ?? "-"}
           </p>
         </div>
-        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
+        <div className="text-[#8A9099] flex gap-4 mt-[7px] capitalize leading-[21px]">
           <p className="text-sm font-medium w-[40%]">Lead owner</p>
           {data?.owners?.map((owner: any, index: number) => {
             if (owner && Object.keys(owner).length !== 0) {
@@ -417,7 +419,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
                 <p className="text-black">{counts.noteCount}</p>
               </div>
 
-              <div className="flex mr-[8px]">
+              <div className="flex mr-[8px] cursor-pointer">
                 <Image
                   src={getBasicIcon("Attachment")}
                   className={`w-[18px] svg-red ml-1 mr-[3px]`}

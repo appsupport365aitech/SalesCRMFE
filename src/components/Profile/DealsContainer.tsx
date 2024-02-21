@@ -37,9 +37,6 @@ const QuickActions = ({
         className="cursor-pointer"
         width={25}
         height={25}
-        onClick={() => {
-          call();
-        }}
         style={{
           objectFit: "contain",
         }}
@@ -51,9 +48,6 @@ const QuickActions = ({
         src={getBasicIcon("Mail")}
         alt=""
         width={25}
-        onClick={() => {
-          emails();
-        }}
         height={25}
         style={{
           objectFit: "contain",
@@ -69,9 +63,6 @@ const QuickActions = ({
         className="cursor-pointer"
         width={25}
         height={25}
-        onClick={() => {
-          events();
-        }}
         style={{
           objectFit: "contain",
         }}
@@ -85,9 +76,6 @@ const QuickActions = ({
         className="cursor-pointer"
         width={25}
         height={25}
-        onClick={() => {
-          notes();
-        }}
         style={{
           objectFit: "contain",
         }}
@@ -103,9 +91,6 @@ const QuickActions = ({
         height={25}
         style={{
           objectFit: "contain",
-        }}
-        onClick={() => {
-          messages();
         }}
       />
       <p className="mr-[4px]  flex items-center font-semibold text-gray-600">
@@ -330,7 +315,7 @@ const Deals = ({ data, type }: any) => {
                             {deal?.activityId?.createdAt.split("T")[0] ?? "-"}
                           </p>
                         </div>
-                        <div className="justify-center flex items-start gap-[5px] text-[#3F434A]">
+                        <div className="justify-center flex items-start gap-[5px] pr-10 text-[#3F434A]">
                           <QuickActions
                             phoneCount={counts.phoneCount}
                             mailCount={counts.emailCount}
@@ -338,76 +323,9 @@ const Deals = ({ data, type }: any) => {
                             tasksCount={0}
                             chatCount={counts.smsCount}
                             width={""}
-                            notes={() => {
-                              AddLead(1, 0);
-                            }}
-                            events={() => {
-                              AddLead(1, 1);
-                            }}
-                            emails={() => {
-                              AddLead(1, 3);
-                            }}
-                            messages={() => {
-                              AddLead(1, 5);
-                            }}
-                            call={() => {
-                              AddLead(1, 6);
-                            }}
                           />
                         </div>
                       </div>
-
-                      {notes && (
-                        <Backdrop bool={bool}>
-                          <Notes
-                            cancel={cancelNotes}
-                            //  leadid={id}
-                          />
-                        </Backdrop>
-                      )}
-                      {events && (
-                        <Backdrop bool={bool} pad={"50px 0"}>
-                          <Events
-                            cancel={cancelEvents}
-                            // leadid={id}
-                          />
-                        </Backdrop>
-                      )}
-                      {emails && (
-                        <Backdrop bool={bool} pad={"50px 0"}>
-                          <EmailPage
-                            // refresh={UpdateData}
-                            data={data?.leadData}
-                            cancel={cancelEmails}
-                            refresh={function (e: any) {
-                              // throw new Error("Function not implemented.");
-                            }}
-                          />
-                        </Backdrop>
-                      )}
-                      {notes1 && (
-                        <Backdrop bool={bool} pad={"50px 0"}>
-                          {/* note={LeadData?.notes} */}
-                          <Notes1 cancel={cancelNotes1} />
-                        </Backdrop>
-                      )}
-                      {messages && (
-                        <Backdrop bool={bool} pad={"50px 0"}>
-                          <Messages cancel={cancelMessages} />
-                        </Backdrop>
-                      )}
-                      {call && (
-                        <Backdrop bool={bool} pad={"50px 0"}>
-                          <ActiveCall
-                            cancel={cancelCall}
-                            // id={LeadData._id}
-                            // lead={LeadData}
-                            // companyId={LeadData.companyId._id}
-                            // companyName={LeadData.companyId.company_name}
-                            // customerId={LeadData.customerId._id}
-                          />
-                        </Backdrop>
-                      )}
                     </div>
                   ))}
               </div>
@@ -417,7 +335,7 @@ const Deals = ({ data, type }: any) => {
           )}
         </div>
 
-        {/* ?close deals */}
+        {/* close deals */}
 
         <div className=" my-[40px] overflow-hidden">
           <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-bold">
@@ -426,17 +344,19 @@ const Deals = ({ data, type }: any) => {
           {/* <p className="text-center text-[#000]">-</p> */}
           {closedDeals?.length > 0 ? (
             <div>
-              <div className="mt-[20px] flex text-[#8A9099] text-[14px] leading-[21px] items-center justify-between text-center">
-                <p className="w-[140px] font-semibold">Lead Id</p>
-                <p className="w-[180px] font-semibold">Product/Service</p>
-                <p className="w-[160px] font-semibold">Lead Stage</p>
-                <p className="w-[200px] font-semibold">Last Activity</p>
-                <p className="w-[200px] font-semibold">Activity History</p>
+              <div className="mt-[20px] pl-4 flex text-[#8A9099] text-[14px] leading-[21px] items-center justify-between text-center">
+                <p className=" font-semibold">Lead Id</p>
+                <p className=" font-semibold">Product/Service</p>
+                <p className=" font-semibold">Lead Stage</p>
+                <p className=" font-semibold">Last Activity</p>
+                <p className=" font-semibold">Activity History</p>
               </div>
 
               <div
                 className={
-                  closedDeals?.length >= 4 ? "h-52 overflow-y-scroll" : ""
+                  closedDeals?.length >= 4
+                    ? "h-52 overflow-y-scroll pl-4 w-full"
+                    : " pl-4 w-full"
                 }
               >
                 {closedDeals &&
@@ -445,119 +365,31 @@ const Deals = ({ data, type }: any) => {
                       key={index}
                       className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5"
                     >
-                      <div className="text-[14px] py-[5px] text-[#8A9099] leading-[21px] flex justify-between items-center bg-[#ffffff] rounded-xl px-2">
-                        <div className="w-[140px]">
+                      <div className="text-[14px] py-[10px] text-[#8A9099] text-center leading-[21px] flex justify-between items-center bg-[#ffffff] rounded-xl px-2">
+                        <div className="">
                           <p className="text-[#3F434A]">
                             {deal?.leadId || "-"}
                           </p>
                         </div>
-                        <div className="w-[180px]">
+                        <div className="">
                           <p>
                             {deal?.product_category
                               ? deal?.product_category
                               : "-"}{" "}
                           </p>
                         </div>
-                        <div className="w-[160px]">
+                        <div className="">
                           <p>{deal?.leadStage ? deal?.leadStage : "-"}</p>
                         </div>
-                        <div className="w-[200px]">
+                        <div className="">
                           <p>
-                            {deal?.lastActivity?.subject
-                              ? deal?.leadData?.subject
-                              : "-"}
-                          </p>
-                          <p>
-                            {deal?.lastActivity?.createdAt
-                              ? deal?.leadData?.createdAt
-                              : "-"}
+                            {deal?.activityId?.createdAt.split("T")[0] ?? "-"}
                           </p>
                         </div>
-                        <div className="flex items-start gap-[5px] w-[200px] text-[#3F434A]">
-                          <QuickActions
-                            width={200}
-                            notes={() => {
-                              AddLead(1, 0);
-                            }}
-                            events={() => {
-                              AddLead(1, 1);
-                            }}
-                            emails={() => {
-                              AddLead(1, 3);
-                            }}
-                            messages={() => {
-                              AddLead(1, 5);
-                            }}
-                            call={() => {
-                              AddLead(1, 6);
-                            }}
-                          />
+                        <div className="flex items-start gap-[5px] text-[#3F434A]">
+                          <QuickActions width={""} />
                         </div>
-                        {/* <div>
-              <Image
-                src={getBasicIcon("More")}
-                className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
-                alt=""
-                width={17}
-                height={17}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-            </div> */}
                       </div>
-
-                      {notes && (
-                        <Backdrop bool={bool}>
-                          <Notes
-                            cancel={cancelNotes}
-                            //  leadid={id}
-                          />
-                        </Backdrop>
-                      )}
-                      {events && (
-                        <Backdrop bool={bool} pad={"50px 0"}>
-                          <Events
-                            cancel={cancelEvents}
-                            // leadid={id}
-                          />
-                        </Backdrop>
-                      )}
-                      {emails && (
-                        <Backdrop bool={bool} pad={"50px 0"}>
-                          <EmailPage
-                            // refresh={UpdateData}
-                            //  data={LeadData}
-                            cancel={cancelEmails}
-                            refresh={function (e: any) {
-                              throw new Error("Function not implemented.");
-                            }}
-                          />
-                        </Backdrop>
-                      )}
-                      {notes1 && (
-                        <Backdrop bool={bool} pad={"50px 0"}>
-                          {/* note={LeadData?.notes} */}
-                          <Notes1 cancel={cancelNotes1} />
-                        </Backdrop>
-                      )}
-                      {messages && (
-                        <Backdrop bool={bool} pad={"50px 0"}>
-                          <Messages cancel={cancelMessages} />
-                        </Backdrop>
-                      )}
-                      {call && (
-                        <Backdrop bool={bool} pad={"50px 0"}>
-                          <ActiveCall
-                            cancel={cancelCall}
-                            // id={LeadData._id}
-                            // lead={LeadData}
-                            // companyId={LeadData.companyId._id}
-                            // companyName={LeadData.companyId.company_name}
-                            // customerId={LeadData.customerId._id}
-                          />
-                        </Backdrop>
-                      )}
                     </div>
                   ))}
               </div>

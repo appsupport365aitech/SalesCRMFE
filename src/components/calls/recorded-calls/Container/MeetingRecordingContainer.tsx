@@ -17,40 +17,6 @@ import { baseUrl } from "@/utils/baseUrl";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const MeetingRecordingContainer = ({ dummy1, data }: any) => {
-  const [callTypeOps, setCallTypeOps] = useState([
-    {
-      title: "Choose Type",
-      val: "Choose Type",
-    },
-    {
-      title: "Discovery",
-      val: "Discovery",
-    },
-    {
-      title: "Product Demo",
-      val: "Product Demo",
-    },
-    {
-      title: "Solution Design",
-      val: "Solution Design",
-    },
-    {
-      title: "Consultation",
-      val: "Consultation",
-    },
-    {
-      title: "Pricing Discussion",
-      val: "Pricing Discussion",
-    },
-    {
-      title: "Negotiation",
-      val: "Negotiation",
-    },
-    {
-      title: "Follow-Up",
-      val: "Follow-Up",
-    },
-  ]);
   const [ownerOps, setOwnerOps] = useState([]);
   const [companyOps, setCompanyOps] = useState([]);
 
@@ -74,7 +40,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
 
   useEffect(() => {
     try {
-      if (window !== undefined) {
+      if (window !== undefined && accessToken) {
         axios
           .get(`${baseUrl}api/master-users/find-all`, {
             headers: {
@@ -137,34 +103,9 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
     return queryStr;
   };
 
-  const getData = async () => {
-    try {
-      const payload = {
-        companyName,
-        product,
-        callOwner,
-        callType,
-        search,
-        callDisposition,
-        location,
-        date: {
-          from: startDate,
-          to: endDate,
-        },
-      };
-
-      const response = await axios.post(
-        `${baseUrl}api/leads/find-all?leadStatus=Close`,
-        payload,
-        { headers: { Authorization: accessToken } }
-      );
-      dummy1 = { ...response.data };
-    } catch (error) {}
-  };
   const ref: any = useRef();
 
   useEffect(() => {
-    // getData();
     getQueryStr();
   }, [
     product,
@@ -309,52 +250,6 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
                 >
                   1 crore cover
                 </option>
-                {/* <option selected={product === "P1"} value="P1">
-                  P1
-                </option>
-                <option selected={product === "P2"} value="P2">
-                  P2
-                </option>
-                <option selected={product === "P3"} value="P3">
-                  P3
-                </option>
-                <option selected={product === "Product A"} value="Product A">
-                  Product A
-                </option>
-                <option selected={product === "Product B"} value="Product B">
-                  Product B
-                </option>
-                <option selected={product === "Product C"} value="Product C">
-                  Product C
-                </option>
-                <option selected={product === "Product D"} value="Product D">
-                  Product D
-                </option>
-                <option selected={product === "Technology"} value="Technology">
-                  Technology
-                </option>
-                <option selected={product === "Healthcare"} value="Healthcare">
-                  Healthcare
-                </option>
-                <option selected={product === "Finance"} value="Finance">
-                  Finance
-                </option>
-                <option selected={product === "Education"} value="Education">
-                  Education
-                </option>
-                <option
-                  selected={product === "Hospitality"}
-                  value="Hospitality"
-                >
-                  Hospitality
-                </option>
-                <option
-                  selected={product === "Real Estate"}
-                  value=" Real Estate"
-                >
-                  {" "}
-                  Real Estate
-                </option> */}
               </select>
             </div>
             <div
@@ -405,7 +300,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
                 </option>
               </select>
             </div>
-            <div
+            {/* <div
               className={`flex gap-2 w-fit items-center justify-between bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
                 callDisposition !== ""
                   ? "border border-red-500"
@@ -426,7 +321,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
                   Follow-up Required
                 </option>
               </select>
-            </div>
+            </div> */}
 
             <DatePicker
               startDate={startDate}
@@ -436,14 +331,6 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
             />
           </div>
         </div>
-        {/* <ButtonDropDown
-          light={true}
-          text={"Actions"}
-          border={true}
-          id={1}
-          dropdown={true}
-          list={[]}
-        /> */}
       </div>
       <Suspense fallback={<Spinner />}>
         <CallsTable

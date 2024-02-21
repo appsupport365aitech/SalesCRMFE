@@ -87,7 +87,7 @@ const AudioProfileContainer = ({
         }]  bg-[#ffe3e170] rounded-xl p-[25px] px-[35px] pt-[30px]`}
       >
         {data1 && (
-          <div className="w-[90%] flex justify-around">
+          <div className="w-[100%] items-center font-normal flex gap-2 justify-around">
             {data1?.companyId?.company_name && (
               <div className="flex gap-2 text-[black]">
                 <Image
@@ -96,10 +96,10 @@ const AudioProfileContainer = ({
                     zIndex: 10,
                   }}
                   alt=""
-                  width={25}
-                  height={25}
+                  width={20}
+                  height={20}
                 />
-                {data1?.companyId?.company_name}
+                <p className="text-sm">{data1?.companyId?.company_name}</p>
               </div>
             )}
             <div className="flex gap-2 text-[black]">
@@ -109,10 +109,12 @@ const AudioProfileContainer = ({
                   zIndex: 10,
                 }}
                 alt=""
-                width={25}
-                height={25}
+                width={20}
+                height={20}
               />
-              {new Date(data1.createdAt).toDateString()}
+              <p className="text-sm">
+                {new Date(data1.createdAt).toDateString()}
+              </p>
             </div>
             <div className="flex gap-2 text-[black]">
               <Image
@@ -121,10 +123,10 @@ const AudioProfileContainer = ({
                   zIndex: 10,
                 }}
                 alt=""
-                width={25}
-                height={25}
+                width={20}
+                height={20}
               />
-              {getTime(data1?.createdAt)}
+              <p className="text-sm">{getTime(data1?.createdAt)}</p>
             </div>
             {!loading && (
               <div className="flex gap-2 text-[black] items-center">
@@ -135,10 +137,10 @@ const AudioProfileContainer = ({
                     zIndex: 10,
                   }}
                   alt=""
-                  width={25}
-                  height={25}
+                  width={20}
+                  height={20}
                 />
-                {callDuration}
+                <p className="text-sm">{callDuration}</p>
               </div>
             )}
           </div>

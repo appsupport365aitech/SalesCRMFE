@@ -46,12 +46,7 @@ const Search = ({ change, handleSerachBar }: any) => {
   );
 };
 
-const NavbarWithButton = ({
-  mainTitle,
-  title,
-  buttons,
-  src,
-}: any) => {
+const NavbarWithButton = ({ mainTitle, title, buttons, src }: any) => {
   const { menuOpen } = useUI();
   const [view, setView] = React.useState(false);
   const dispatch = useAppDispatch();
@@ -86,11 +81,11 @@ const NavbarWithButton = ({
           height={40}
         />
         <div className="flex gap-2">
-          <h1 className="text-lg font-semibold text-[black]">{mainTitle}</h1>
+          <h1 className="text-lg font-normal text-[black]">{mainTitle}</h1>
           {title && (
             <div className="flex gap-2">
-              <h1 className="text-lg font-semibold text-[black]">{">"}</h1>
-              <h1 className="text-lg font-semibold capitalize text-bg-red">
+              <h1 className="text-lg font-normal text-[black]">{">"}</h1>
+              <h1 className="text-lg font-normal capitalize text-bg-red">
                 {title}
               </h1>
             </div>

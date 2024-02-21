@@ -38,7 +38,10 @@ const Calls = () => {
   };
 
   useEffect(() => {
-    getData();
+    if (!accessToken) return;
+    else {
+      getData();
+    }
   }, [accessToken]);
 
   useEffect(() => {
