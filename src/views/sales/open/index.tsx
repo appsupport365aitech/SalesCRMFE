@@ -56,7 +56,7 @@ const Dummy = [
 
 const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
   const state = useSelector((state: any) => state.auth);
-  const [view, setView] = React.useState(false);
+  const [view, setView] = React.useState(true);
   const [reload, setReload] = useState(false);
 
   const viewButtinClick = (prev: Number, current: Number) => {
