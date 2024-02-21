@@ -819,23 +819,13 @@ const Indicator = () => {
   };
 
   const handleEditIndicatorCategoryData = (payload: any) => {
-    const { key, value, typeValue, scoreValue } = payload;
-    if (!payload.type) {
-      setEditIndicatorCategory({
-        open: true,
-        payload: {
-          value: value,
-        },
-      });
-    } else {
-      setEditIndicatorCategory({
-        open: false,
-        payload: {
-          value: typeValue,
-          score: scoreValue,
-        },
-      });
-    }
+    const { key, value } = payload;
+    setEditIndicatorCategory({
+      open: true,
+      payload: {
+        value: value,
+      },
+    });
 
     if (value) {
       setIndicatorTypes((currIndicatorTypes: any) => {
@@ -863,9 +853,9 @@ const Indicator = () => {
         });
       });
     } else {
-      setIndicatorTypes((currIndicatorTypes: any) => {
+      setIndicatorCategory((currIndicatorTypes: any) => {
         return currIndicatorTypes?.map((currTypeItem: any, typeIdx: number) => {
-          if (typeIdx === currIndicatorType) {
+          if (typeIdx === currIndicatorCategory) {
             return {
               ...currTypeItem,
               categories: currTypeItem.categories?.map(
