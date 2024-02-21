@@ -581,11 +581,11 @@ const CallsPage = () => {
             { text: item?.callData[0]?.call_type || "-", id: item?._id }, // call type
             { text: item?.score || "Not Scored", id: item?._id }, // call score
             currTab != 0 && {
-              text: item?.allocatedTo[0]?.name || "-",
+              text: formatDateToCustomFormat(item?.qaFeedbackReqAt) || "-",
               id: item?._id,
             }, // feedback requestd on
             currTab != 0 && {
-              text: item?.allocatedBy[0]?.name || "-",
+              text: item?.manager[0]?.name || "-",
               id: item?._id,
             }, // feedback requestd by
             // { text: item?.callId || "NA", id: item?._id }, // on time review

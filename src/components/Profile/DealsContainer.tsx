@@ -20,6 +20,11 @@ const QuickActions = ({
   emails,
   messages,
   call,
+  phoneCount,
+  mailCount,
+  calendarCount,
+  tasksCount,
+  chatCount,
 }: any) => {
   return (
     <div
@@ -29,7 +34,7 @@ const QuickActions = ({
       <Image
         src={getBasicIcon("Phone")}
         alt=""
-        className="mr-[4px] cursor-pointer"
+        className="cursor-pointer"
         width={25}
         height={25}
         onClick={() => {
@@ -39,6 +44,9 @@ const QuickActions = ({
           objectFit: "contain",
         }}
       />
+      <p className="mr-[4px] flex items-center font-semibold text-gray-600">
+        {phoneCount}
+      </p>
       <Image
         src={getBasicIcon("Mail")}
         alt=""
@@ -50,12 +58,15 @@ const QuickActions = ({
         style={{
           objectFit: "contain",
         }}
-        className="mr-[4px] cursor-pointer"
+        className="cursor-pointer"
       />
+      <p className="mr-[4px] flex items-center font-semibold text-gray-600">
+        {mailCount}
+      </p>
       <Image
         src={getBasicIcon("Calendar")}
         alt=""
-        className="mr-[4px] cursor-pointer"
+        className="cursor-pointer"
         width={25}
         height={25}
         onClick={() => {
@@ -65,10 +76,13 @@ const QuickActions = ({
           objectFit: "contain",
         }}
       />
+      <p className="mr-[4px]  flex items-center font-semibold text-gray-600">
+        {calendarCount}
+      </p>
       <Image
         src={getBasicIcon("Tasks")}
         alt=""
-        className="mr-[4px] cursor-pointer"
+        className="cursor-pointer"
         width={25}
         height={25}
         onClick={() => {
@@ -78,10 +92,13 @@ const QuickActions = ({
           objectFit: "contain",
         }}
       />
+      <p className="flex items-center font-semibold text-gray-600 mr-[4px] ">
+        {tasksCount}
+      </p>
       <Image
         src={getBasicIcon("Chat")}
         alt=""
-        className="mr-[4px] cursor-pointer"
+        className="cursor-pointer"
         width={25}
         height={25}
         style={{
@@ -91,6 +108,9 @@ const QuickActions = ({
           messages();
         }}
       />
+      <p className="mr-[4px]  flex items-center font-semibold text-gray-600">
+        {chatCount}
+      </p>
     </div>
   );
 };
@@ -219,7 +239,41 @@ const Deals = ({ data, type }: any) => {
       })
       .catch((error) => console.error("Error fetching data: ", error));
   }, [accessToken, data]);
+  function getTypeCounts(activityData: any) {
+    let phoneCount = 0;
+    let smsCount = 0;
+    let emailCount = 0;
+    let noteCount = 0;
 
+    activityData?.length > 0 &&
+      activityData?.forEach((entry: any) => {
+        switch (entry.type || entry.callId) {
+          case entry.callId:
+            phoneCount++;
+            break;
+          case "sms":
+            smsCount++;
+            break;
+          case "email":
+            emailCount++;
+            break;
+          case "note":
+            noteCount++;
+            break;
+        }
+      });
+
+    const typeCounts = {
+      phoneCount,
+      smsCount,
+      emailCount,
+      noteCount,
+    };
+
+    return typeCounts;
+  }
+
+  const counts = getTypeCounts(openDeals?.[0]?.activityId?.history);
   return (
     <div className="">
       <Navigator
@@ -264,10 +318,10 @@ const Deals = ({ data, type }: any) => {
                           </p>
                         </div>
                         <div className="">
-                          <p className="w-[180px]">{deal?.product_category}</p>
+                          <p className="w-[180px] ">{deal?.product_category}</p>
                         </div>
                         <div className="">
-                          <p className="w-[160px]">
+                          <p className="w-[160px] ">
                             {deal?.leadStage ? deal?.leadStage : "-"}
                           </p>
                         </div>
@@ -276,8 +330,13 @@ const Deals = ({ data, type }: any) => {
                             {deal?.activityId?.createdAt.split("T")[0] ?? "-"}
                           </p>
                         </div>
-                        <div className=" flex items-start gap-[5px] text-[#3F434A]">
+                        <div className="justify-center flex items-start gap-[5px] text-[#3F434A]">
                           <QuickActions
+                            phoneCount={counts.phoneCount}
+                            mailCount={counts.emailCount}
+                            calendarCount={0}
+                            tasksCount={0}
+                            chatCount={counts.smsCount}
                             width={""}
                             notes={() => {
                               AddLead(1, 0);

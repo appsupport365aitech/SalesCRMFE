@@ -85,7 +85,7 @@ const Activityhistory = ({ data, accessToken }: any) => {
     } else if (item?.type?.toLowerCase() == "sms") {
       return "SMS sent";
     } else if (item?.type?.toLowerCase() == "note") {
-      return "Note sent";
+      return "Note added";
     } else {
       return "NA";
     }
