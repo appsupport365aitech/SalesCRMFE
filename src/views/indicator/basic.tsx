@@ -1817,22 +1817,15 @@ const Indicator = () => {
               <div key={index}>
                 <div className=" w-[99%] flex items-center justify-between">
                   <div className=" h-[auto] flex justify-between items-center w-[80%] py-4">
-                    <h4 className="text-gray-600 font-semibold">
-                      {data?.value}
-                    </h4>
-                    <div className="flex flex-col gap-3">
+                    <h4 className="text-gray-600 w-[100px]">{data?.value}</h4>
+                    <div className=" w-[200px]">
                       {formatString(data?.alternative)?.map((item: any) => (
-                        <h4
-                          key={item.id}
-                          className="text-gray-600 font-semibold"
-                        >
+                        <h4 key={item.id} className="text-gray-600  pl-8">
                           {item}
                         </h4>
                       ))}
                     </div>
-                    <h4 className="text-gray-600 font-semibold">
-                      {data.score}
-                    </h4>
+                    <h4 className="text-gray-600">{data.score}</h4>
                   </div>
                   <div className="flex mt-6 gap-4 w-[10%] h-[62px]">
                     <button
