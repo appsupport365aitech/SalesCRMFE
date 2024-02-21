@@ -62,26 +62,26 @@ const ScriptBuilding = ({ script }: any) => {
       </div>
       <ChartContainer>
         {/* percent={`${script.closing}%`} */}
-        <Chart title={"Opening"} percent={`${script?.opening}%`} />
+        <Chart title={"Opening"} percent={`${script?.Opening}%`} />
         <Chart
           title={"Lead Qualififcation"}
-          percent={`${script?.["lead Qualification"]}%`}
+          percent={`${script?.["Lead Qualification"]}%`}
         />
         <Chart
           title={"Need Discovery"}
-          percent={`${script?.["need Discovery"]}%`}
+          percent={`${script?.["Need Discovery"]}%`}
         />
         <Chart
           title={"Key Value Proposition"}
-          percent={`${script?.["key Value Proposition"]}%`}
+          percent={`${script?.["Key Value Proposition"]}%`}
         />
         <Chart
           title={"Product Knowledge"}
-          percent={`${script?.["product Knowledge"]}%`}
+          percent={`${script?.["Product Knowledge"]}%`}
         />
         <Chart
           title={"Price Discussion"}
-          percent={`${script?.["price Discussion"]}%`}
+          percent={`${script?.["Price Discussion"]}%`}
         />
         <Chart title={"Closing"} percent={`${script?.closing}%`} />
       </ChartContainer>
@@ -430,7 +430,6 @@ const Coaching = ({ data, refresh }: any) => {
       });
     });
   };
-  console.log("sdr", scoreQuestions);
 
   // useEffect(() => {
   //   try {
@@ -528,6 +527,8 @@ const Coaching = ({ data, refresh }: any) => {
       );
     }
   };
+
+  console.log(sellingSkillsData, "arijit");
 
   return (
     <div className="w-[100%]">
