@@ -66,7 +66,7 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
         <p
           className={`tracking-wider ${
             check ? "text-[#3F434A]" : "text-white"
-          }  ml-[0px] font-medium text-[14px] poppins`}
+          }  ml-[0px] font-medium text-[14px] inter`}
           onClick={() => {
             push(currentRoute);
           }}
@@ -120,7 +120,7 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
                   <p
                     className={`tracking-wider ${
                       curr1 ? "text-[#3F434A]" : "text-white"
-                    } font-medium text-[14px] poppins whitespace-nowrap`}
+                    } font-medium text-[14px] inter whitespace-nowrap`}
                     onClick={() => {
                       push(`/${route}/${list[i].route}`);
                     }}

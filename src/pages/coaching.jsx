@@ -53,7 +53,7 @@ const Coaching = () => {
           },
         ]}
       />
-      <h1 className="text-[40px] poppins text-black">Coaching</h1>
+      <h1 className="text-[40px] inter text-black">Coaching</h1>
     </div>
   );
 };
