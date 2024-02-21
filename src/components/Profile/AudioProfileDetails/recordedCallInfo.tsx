@@ -82,7 +82,7 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
 
       <div className="pl-[30px]">
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Call Id -{" "}
+          CALL ID -{" "}
           {type === "MEETING"
             ? String(convertDatetimeToCustomFormat(data?.activeCall?._id)) ||
               "-"
@@ -93,7 +93,7 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
                 .slice(-4) || "-"}
         </p>
         <div className="text-[#8A9099] flex  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium w-[50%] mr-4">LEAD ID</p>
+          <p className="text-sm font-medium w-[50%] mr-4">Lead ID</p>
           <p className="text-sm font-semibold text-black w-[50%]">
             {data1?.leadId || "-"}
           </p>
@@ -161,7 +161,7 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
           </p>
           <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
             <p className="text-sm font-medium w-[50%] mr-4">Call Owner</p>
-            <p className="text-sm font-semibold text-black">
+            <p className="text-sm font-semibold text-black capitalize">
               {data?.activeCall?.owner?.name ?? "-"}
             </p>
           </div>

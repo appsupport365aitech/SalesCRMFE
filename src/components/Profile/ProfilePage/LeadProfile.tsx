@@ -416,6 +416,20 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
                 />
                 <p className="text-black">{counts.noteCount}</p>
               </div>
+
+              <div className="flex mr-[8px]">
+                <Image
+                  src={getBasicIcon("Attachment")}
+                  className={`w-[18px] svg-red ml-1 mr-[3px]`}
+                  alt=""
+                  width={15}
+                  height={15}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+                <p className="text-black ">{data?.attachments.length}</p>
+              </div>
             </div>
           </div>
         </div>
