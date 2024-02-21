@@ -74,6 +74,64 @@ const ChartContainer = ({ children }: any) => {
     </div>
   );
 };
+
+const DualChart = ({ title, percent1, percent2 }: any) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      className="w-[10px] h-[100%] flex flex-col items-center relative"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="flex h-[100%] gap-1 mb-[15px]">
+        <div className="w-[16px] h-[100%]  bg-[#FFF8F8] rounded-t-[19px] relative overflow-hidden flex">
+          <div
+            className="w-[100%] bg-bg-red bottom-0 absolute rounded-t-[19px] cursor-pointer"
+            style={{ height: percent1 }}
+          ></div>
+        </div>
+        <div className="w-[16px] h-[100%] bg-[#FFF8F8] rounded-t-[19px] relative overflow-hidden flex">
+          <div
+            className="w-[100%] bg-[#FFB839] bottom-0 absolute rounded-t-[19px] cursor-pointer"
+            style={{ height: percent2 }}
+          ></div>
+        </div>
+      </div>
+      {/* {hovered && (
+        <p className="w-[100%] text-[14px] leading-[13px] min-h-[200px] left-7 flex items-center justify-center font-medium text-[#8A9099] text-center absolute bottom-[-25px]">
+          {percent1}
+          {percent2}
+        </p>
+      )} */}
+      <p
+        className={`min-h-[40px] flex items-center justify-center font-medium text-[#8A9099] text-center absolute ${
+          title?.length > 5
+            ? "w-[85px] text-[10px]  bottom-[-30px]"
+            : "text-[12px] w-[40px]  bottom-[-25px]"
+        }`}
+      >
+        {title}
+      </p>
+    </div>
+  );
+};
+
+const DualChartContainer = ({ children }: any) => {
+  return (
+    <div className="w-full h-[220px] mt-[40px] flex">
+      <div className="w-[4%] h-[100%] flex flex-col justify-between items-center text-[#8A9099]">
+        <p>30</p>
+        <p>20</p>
+        <p>10</p>
+        <p className="mb-[20px]">0</p>
+      </div>
+      <div className="w-full h-[100%] flex justify-between pr-[30px] pl-[30px]">
+        {children}
+      </div>
+    </div>
+  );
+};
 const CommunicationInteraction = ({
   tabData,
   pitchData,
@@ -367,7 +425,7 @@ const CommunicationInteraction = ({
                 <Chart title="Day 7" percent={`${avgCallScore["day_7"]}%`} />
               </ChartContainer>
             </div>
-            <NoOfInterruptionsChart
+            {/* <NoOfInterruptionsChart
               title="Number of Interruptions"
               template={NoOfInterruptions}
               data={noOfInterruptions}
@@ -378,7 +436,34 @@ const CommunicationInteraction = ({
                 { key: "", label: "Diana J." },
                 { key: "", label: "Jacob Wilson" },
               ]}
-            />
+            /> */}
+            <div className="w-[100%] p-6 h-[400px] bg-[#fff] rounded-md shrink-0  py-[19px] shadow-md">
+              <div className="w-[100%] flex items-center justify-between">
+                <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
+                  Number of Interruptions
+                </h1>
+              </div>
+              <div className="flex gap-6 justify-start items-center">
+                <div className="flex gap-2 justify-start items-center text-black">
+                  <div className="w-4 h-4 rounded-full bg-[#FE5143]"></div>
+                  SDR/BDM
+                </div>
+                <div className="flex gap-2 justify-start items-center text-black">
+                  <div className="w-4 h-4 rounded-full bg-[#FFB839]"></div>
+                  Prospect
+                </div>
+              </div>
+              <DualChartContainer>
+                {noOfInterruptions?.map((item: any) => (
+                  <DualChart
+                    key={item.day}
+                    title={item.day}
+                    percent1={item.SDR * 7}
+                    percent2={item.prospect * 7}
+                  />
+                ))}
+              </DualChartContainer>
+            </div>
             {/* <BarChartVertical
               title="Number of Switches"
               template={NoOfSwitches}
@@ -701,11 +786,38 @@ const CommunicationInteraction = ({
                 <Chart title="Day 7" percent={`${avgCallScore["day_7"]}%`} />
               </ChartContainer>
             </div>
-            <NoOfInterruptionsChart
+            {/* <NoOfInterruptionsChart
               title="Number of Interruptions"
               template={NoOfInterruptions}
               data={noOfInterruptions}
-            />
+            /> */}
+            <div className="w-[100%] p-6 h-[400px] bg-[#fff] rounded-md shrink-0  py-[19px] shadow-md">
+              <div className="w-[100%] flex items-center justify-between">
+                <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
+                  Number of Interruptions
+                </h1>
+              </div>
+              <div className="flex gap-6 justify-start items-center">
+                <div className="flex gap-2 justify-start items-center text-black">
+                  <div className="w-4 h-4 rounded-full bg-[#FE5143]"></div>
+                  SDR/BDM
+                </div>
+                <div className="flex gap-2 justify-start items-center text-black">
+                  <div className="w-4 h-4 rounded-full bg-[#FFB839]"></div>
+                  Prospect
+                </div>
+              </div>
+              <DualChartContainer>
+                {noOfInterruptions?.map((item: any) => (
+                  <DualChart
+                    key={item.day}
+                    title={item.day}
+                    percent1={item.SDR * 7}
+                    percent2={item.prospect * 7}
+                  />
+                ))}
+              </DualChartContainer>
+            </div>
             {/* <BarChartVertical
               title="Number of Switches"
               template={NoOfSwitches}

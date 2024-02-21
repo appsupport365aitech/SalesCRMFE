@@ -356,6 +356,7 @@ const Dashboard = ({ data }: any) => {
         break;
     }
   };
+  console.log(noOfInterruptions, "raju");
 
   const renderTab0 = () => {
     if (role === "QA Analyst") {

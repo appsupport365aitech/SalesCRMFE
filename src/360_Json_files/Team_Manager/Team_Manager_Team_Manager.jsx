@@ -159,7 +159,7 @@ export const Team_Manger_Team = {
               type: PAGES_365,
               Pageslist: [
                 {
-          type: CONTAINER,
+                  type: CONTAINER,
                   name: "Team Trends",
                   children: [
                     {
@@ -307,20 +307,15 @@ export const Team_Manger_Team = {
           ],
         },
 
-
-
-
-
-
         //third
         {
           name: "Talking Point",
           children: [
             {
               type: PAGES_365,
-              Pageslist:  [
+              Pageslist: [
                 {
-          type: CONTAINER,
+                  type: CONTAINER,
                   name: "Overall Talking Points Duration",
                   children: [
                     {
@@ -333,7 +328,10 @@ export const Team_Manger_Team = {
                         value: "productDiscussion",
                       },
                       options: [
-                        { label: "Product Discussion", value: "productDiscussion" },
+                        {
+                          label: "Product Discussion",
+                          value: "productDiscussion",
+                        },
                       ],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
@@ -343,7 +341,10 @@ export const Team_Manger_Team = {
                       className: "select-call-date-button",
                       sliceName: "filter",
                       name: "Call Date",
-                      defaultValue: { label: "2020/12/13", value: "2020/12/13" },
+                      defaultValue: {
+                        label: "2020/12/13",
+                        value: "2020/12/13",
+                      },
                       options: [{ label: "2020/12/13", value: "2020/12/13" }],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
@@ -383,8 +384,13 @@ export const Team_Manger_Team = {
                       className: "select-call-type-button",
                       sliceName: "filter",
                       name: "Call Type",
-                      defaultValue: { label: "Product Demo", value: "productDemo" },
-                      options: [{ label: "Product Demo", value: "productDemo" }],
+                      defaultValue: {
+                        label: "Product Demo",
+                        value: "productDemo",
+                      },
+                      options: [
+                        { label: "Product Demo", value: "productDemo" },
+                      ],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
                     },
@@ -397,7 +403,9 @@ export const Team_Manger_Team = {
                         label: "Follow-up required",
                         value: "followUp",
                       },
-                      options: [{ label: "Follow-up required", value: "followUp" }],
+                      options: [
+                        { label: "Follow-up required", value: "followUp" },
+                      ],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
                     },
@@ -428,18 +436,20 @@ export const Team_Manger_Team = {
                                 "Call Owner": "callOwner",
                                 "Call Participants": "callParticipants",
                               },
-        
+
                               fieldConst: "newPropertyConst",
                               editApi:
                                 "ALTER_OVERALL_TALKING_POINTS_DURATION_LIST_DATA",
                               deleteApi:
                                 "DELETE_OVERALL_TALKING_POINTS_DURATION_LIST_DATA",
-                              getDataApi: "GET_OVERALL_TALKING_POINTS_DURATION_LIST",
+                              getDataApi:
+                                "GET_OVERALL_TALKING_POINTS_DURATION_LIST",
                               approveApi:
                                 "APPROVE_OVERALL_TALKING_POINTS_DURATION_LIST_DATA",
                               endpoint:
                                 "API_ENDPOINTS[GET_OVERALL_TALKING_POINTS_DURATION_LIST]",
-                              dataPoint: "GET_OVERALL_TALKING_POINTS_DURATION_LIST",
+                              dataPoint:
+                                "GET_OVERALL_TALKING_POINTS_DURATION_LIST",
                               onRefreshApiType: POST,
                               disableRowModal: true,
                               showPreviewButton: true,
@@ -471,13 +481,14 @@ export const Team_Manger_Team = {
                                 "Total Duration": "totalDuration",
                                 "Average Duration": "averageDuration",
                               },
-        
+
                               fieldConst: "newPropertyConst",
                               editApi: "ALTER_OVERALL_TALKING_POINTS_DATA",
                               deleteApi: "DELETE_OVERALL_TALKING_POINTS_DATA",
                               getDataApi: "GET_OVERALL_TALKING_POINTS",
                               approveApi: "APPROVE_OVERALL_TALKING_POINTS_DATA",
-                              endpoint: "API_ENDPOINTS[GET_OVERALL_TALKING_POINTS]",
+                              endpoint:
+                                "API_ENDPOINTS[GET_OVERALL_TALKING_POINTS]",
                               dataPoint: "GET_OVERALL_TALKING_POINTS",
                               onRefreshApiType: POST,
                               disableRowModal: true,
@@ -497,7 +508,10 @@ export const Team_Manger_Team = {
                       className: "select-call-date-button",
                       sliceName: "filter",
                       name: "Call Date",
-                      defaultValue: { label: "2020/12/13", value: "2020/12/13" },
+                      defaultValue: {
+                        label: "2020/12/13",
+                        value: "2020/12/13",
+                      },
                       options: [{ label: "2020/12/13", value: "2020/12/13" }],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
@@ -537,8 +551,13 @@ export const Team_Manger_Team = {
                       className: "select-call-type-button",
                       sliceName: "filter",
                       name: "Call Type",
-                      defaultValue: { label: "Product Demo", value: "productDemo" },
-                      options: [{ label: "Product Demo", value: "productDemo" }],
+                      defaultValue: {
+                        label: "Product Demo",
+                        value: "productDemo",
+                      },
+                      options: [
+                        { label: "Product Demo", value: "productDemo" },
+                      ],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
                     },
@@ -551,7 +570,9 @@ export const Team_Manger_Team = {
                         label: "Follow-up required",
                         value: "followUp",
                       },
-                      options: [{ label: "Follow-up required", value: "followUp" }],
+                      options: [
+                        { label: "Follow-up required", value: "followUp" },
+                      ],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
                     },
@@ -565,7 +586,10 @@ export const Team_Manger_Team = {
                         value: "productDiscussion",
                       },
                       options: [
-                        { label: "Product Discussion", value: "productDiscussion" },
+                        {
+                          label: "Product Discussion",
+                          value: "productDiscussion",
+                        },
                       ],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
@@ -606,13 +630,16 @@ export const Team_Manger_Team = {
                                 "Total Time": "totalTime",
                                 "Average Duration": "averageDuration",
                               },
-        
+
                               fieldConst: "newPropertyConst",
                               editApi: "ALTER_PARTICULAR_TALKING_POINTS_DATA",
-                              deleteApi: "DELETE_PARTICULAR_TALKING_POINTS_DATA",
+                              deleteApi:
+                                "DELETE_PARTICULAR_TALKING_POINTS_DATA",
                               getDataApi: "GET_PARTICULAR_TALKING_POINTS",
-                              approveApi: "APPROVE_PARTICULAR_TALKING_POINTS_DATA",
-                              endpoint: "API_ENDPOINTS[GET_PARTICULAR_TALKING_POINTS]",
+                              approveApi:
+                                "APPROVE_PARTICULAR_TALKING_POINTS_DATA",
+                              endpoint:
+                                "API_ENDPOINTS[GET_PARTICULAR_TALKING_POINTS]",
                               dataPoint: "GET_PARTICULAR_TALKING_POINTS",
                               onRefreshApiType: POST,
                               disableRowModal: true,
@@ -632,7 +659,10 @@ export const Team_Manger_Team = {
                       className: "select-call-date-button",
                       sliceName: "filter",
                       name: "Call Date",
-                      defaultValue: { label: "2020/12/13", value: "2020/12/13" },
+                      defaultValue: {
+                        label: "2020/12/13",
+                        value: "2020/12/13",
+                      },
                       options: [{ label: "2020/12/13", value: "2020/12/13" }],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
@@ -672,8 +702,13 @@ export const Team_Manger_Team = {
                       className: "select-call-type-button",
                       sliceName: "filter",
                       name: "Call Type",
-                      defaultValue: { label: "Product Demo", value: "productDemo" },
-                      options: [{ label: "Product Demo", value: "productDemo" }],
+                      defaultValue: {
+                        label: "Product Demo",
+                        value: "productDemo",
+                      },
+                      options: [
+                        { label: "Product Demo", value: "productDemo" },
+                      ],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
                     },
@@ -686,7 +721,9 @@ export const Team_Manger_Team = {
                         label: "Follow-up required",
                         value: "followUp",
                       },
-                      options: [{ label: "Follow-up required", value: "followUp" }],
+                      options: [
+                        { label: "Follow-up required", value: "followUp" },
+                      ],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
                     },
@@ -700,7 +737,10 @@ export const Team_Manger_Team = {
                         value: "productDiscussion",
                       },
                       options: [
-                        { label: "Product Discussion", value: "productDiscussion" },
+                        {
+                          label: "Product Discussion",
+                          value: "productDiscussion",
+                        },
                       ],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
@@ -728,7 +768,7 @@ export const Team_Manger_Team = {
                                 "Total Time": "totalTime",
                                 "Average Duration": "averageDuration",
                               },
-        
+
                               fieldConst: "newPropertyConst",
                               editApi: "ALTER_TEAM_DISCUSSION_DATA",
                               deleteApi: "DELETE_TEAM_DISCUSSION_DATA",
@@ -754,7 +794,10 @@ export const Team_Manger_Team = {
                       className: "select-call-date-button",
                       sliceName: "filter",
                       name: "Call Date",
-                      defaultValue: { label: "2020/12/13", value: "2020/12/13" },
+                      defaultValue: {
+                        label: "2020/12/13",
+                        value: "2020/12/13",
+                      },
                       options: [{ label: "2020/12/13", value: "2020/12/13" }],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
@@ -794,8 +837,13 @@ export const Team_Manger_Team = {
                       className: "select-call-type-button",
                       sliceName: "filter",
                       name: "Call Type",
-                      defaultValue: { label: "Product Demo", value: "productDemo" },
-                      options: [{ label: "Product Demo", value: "productDemo" }],
+                      defaultValue: {
+                        label: "Product Demo",
+                        value: "productDemo",
+                      },
+                      options: [
+                        { label: "Product Demo", value: "productDemo" },
+                      ],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
                     },
@@ -808,7 +856,9 @@ export const Team_Manger_Team = {
                         label: "Follow-up required",
                         value: "followUp",
                       },
-                      options: [{ label: "Follow-up required", value: "followUp" }],
+                      options: [
+                        { label: "Follow-up required", value: "followUp" },
+                      ],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
                     },
@@ -822,7 +872,10 @@ export const Team_Manger_Team = {
                         value: "productDiscussion",
                       },
                       options: [
-                        { label: "Product Discussion", value: "productDiscussion" },
+                        {
+                          label: "Product Discussion",
+                          value: "productDiscussion",
+                        },
                       ],
                       onClickApi: "API_ENDPOINTS[GET_SEARCH_RESULT]",
                       onClickApiMethod: "POST",
@@ -860,13 +913,14 @@ export const Team_Manger_Team = {
                                 "Total Time": "totalTime",
                                 "Average Duration": "averageDuration",
                               },
-        
+
                               fieldConst: "newPropertyConst",
                               editApi: "ALTER_INDIVIDUAL_DISCUSSION_DATA",
                               deleteApi: "DELETE_INDIVIDUAL_DISCUSSION_DATA",
                               getDataApi: "GET_INDIVIDUAL_DISCUSSION",
                               approveApi: "APPROVE_INDIVIDUAL_DISCUSSION_DATA",
-                              endpoint: "API_ENDPOINTS[GET_INDIVIDUAL_DISCUSSION]",
+                              endpoint:
+                                "API_ENDPOINTS[GET_INDIVIDUAL_DISCUSSION]",
                               dataPoint: "GET_INDIVIDUAL_DISCUSSION",
                               onRefreshApiType: POST,
                               disableRowModal: true,
@@ -883,8 +937,6 @@ export const Team_Manger_Team = {
           ],
         },
 
-
-
         //forth
         {
           name: "Indicators",
@@ -893,7 +945,7 @@ export const Team_Manger_Team = {
               type: PAGES_365,
               Pageslist: [
                 {
-          type: CONTAINER,
+                  type: CONTAINER,
                   name: "Overall Indicators Use",
                   children: [
                     {
@@ -933,7 +985,7 @@ export const Team_Manger_Team = {
                   ],
                 },
                 {
-          type: CONTAINER,
+                  type: CONTAINER,
                   name: "Particular Indicators Use",
                   children: [
                     {
@@ -982,7 +1034,7 @@ export const Team_Manger_Team = {
                   ],
                 },
                 {
-          type: CONTAINER,
+                  type: CONTAINER,
                   name: "Teams Discussion",
                   children: [
                     {
@@ -1022,7 +1074,7 @@ export const Team_Manger_Team = {
                   ],
                 },
                 {
-          type: CONTAINER,
+                  type: CONTAINER,
                   name: "Individual Discussion",
                   children: [
                     {
@@ -1078,5 +1130,3 @@ export const Team_Manger_Team = {
     },
   ],
 };
-
-

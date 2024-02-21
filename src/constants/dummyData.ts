@@ -100,23 +100,33 @@ export const talkingSpeed = [{
     {title:"Harry J.", score: 45,
 }];
 
-export const noOfParticipants = {
-    sdr: {
-        day_1: 23,
-        day_2: 23.9,
-        day_3: 56.7,
-        day_4: 87,
-        day_5: 45,
-        day_6: 23,
-        day_7: 77.5,
-    },
-    prospect: {
-        day_1: 56,
-        day_2: 20,
-        day_3: 6.99,
-        day_4: 88,
-        day_5: 48,
-        day_6: 39,
-        day_7: 91,
-    }
-};
+// export const noOfParticipants = {
+//     sdr: {
+//         day_1: 23,
+//         day_2: 23.9,
+//         day_3: 56.7,
+//         day_4: 87,
+//         day_5: 45,
+//         day_6: 23,
+//         day_7: 77.5,
+//     },
+//     prospect: {
+//         day_1: 56,
+//         day_2: 20,
+//         day_3: 6.99,
+//         day_4: 88,
+//         day_5: 48,
+//         day_6: 39,
+//         day_7: 91,
+//     }
+// };
+
+export const noOfParticipants = [
+    {day: "Day 1",SDR:23,prospect:56},
+    {day: "Day 2",SDR:23.9,prospect:20},
+    {day: "Day 3",SDR:56.7,prospect:6.99},
+    {day: "Day 4",SDR:87,prospect:88},
+    {day: "Day 5",SDR:45,prospect:48},
+    {day: "Day 6",SDR:23,prospect:39},
+    {day: "Day 7",SDR:77.5,prospect:91}
+]
