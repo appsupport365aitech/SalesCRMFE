@@ -175,9 +175,6 @@ const Loader = () => {
 };
 
 const Coaching = ({ data, refresh }: any) => {
-  const [userId, setUserId] = useState(
-    window !== undefined ? localStorage.getItem("user-id") : ""
-  );
   const [userRole, setUserRole] = useState(
     window !== undefined ? localStorage.getItem("user-role") : ""
   );
@@ -191,21 +188,16 @@ const Coaching = ({ data, refresh }: any) => {
   }, []);
 
   const [loading, setLoading] = React.useState(false);
-  const [checked, setChecked] = React.useState(true);
   const [scriptBuildingData, setScriptBuildingData] = useState({});
   const [sellingSkillsData, setSellingSkillsData] = useState({});
   const [emotionData, setEmotionData] = useState({});
-
-  const router = useRouter();
-
-  const { id } = router.query;
 
   const getScriptBuildingData = () => {
     try {
       setLoading(true);
       axios
         .get(
-          `${baseUrl}api/dashboard/indicator/scriptBuildingBlocks?leadId=${id}`,
+          `${baseUrl}api/dashboard/indicator/scriptBuildingBlocks?transcriptId=${data?.transcriptId}`,
           {
             headers: {
               Authorization: accessToken,
@@ -227,8 +219,7 @@ const Coaching = ({ data, refresh }: any) => {
       setLoading(true);
       axios
         .get(
-          `${baseUrl}api/dashboard/indicator/sellingSkills?leadId=${id}`,
-          // `https://api.npoint.io/a45d554c4fc28dd86987`,
+          `${baseUrl}api/dashboard/indicator/sellingSkills?transcriptId=${data?.transcriptId}`,
           {
             headers: {
               Authorization: accessToken,
@@ -242,13 +233,13 @@ const Coaching = ({ data, refresh }: any) => {
       setLoading(false);
     } catch (error) {}
   };
+
   const getEmotionData = () => {
     try {
       setLoading(true);
       axios
         .get(
-          `${baseUrl}api/dashboard/indicator/emotionAnalysis?leadId=${id}`,
-          // `https://api.npoint.io/94de79c89a6c5d6b56ca`,
+          `${baseUrl}api/dashboard/indicator/emotionAnalysis?transcriptId=${data?.transcriptId}`,
           {
             headers: {
               Authorization: accessToken,
@@ -264,7 +255,7 @@ const Coaching = ({ data, refresh }: any) => {
   };
 
   useEffect(() => {
-    if (!accessToken) return;
+    if (!accessToken || !data?.transcriptId) return;
     else {
       if (userRole == "SDR" || userRole == "Manager") {
         getScriptBuildingData();
@@ -272,7 +263,7 @@ const Coaching = ({ data, refresh }: any) => {
         getEmotionData();
       }
     }
-  }, [accessToken]);
+  }, [data, accessToken]);
 
   const appDispatch = useAppDispatch();
   const [tab, setTab] = useState<any>(0);
@@ -431,25 +422,6 @@ const Coaching = ({ data, refresh }: any) => {
     });
   };
 
-  // useEffect(() => {
-  //   try {
-  //     if (checked) {
-  //       axios
-  //         .get(`${baseUrl}api/indicator/getIndicatorValues?userId=${userId}`, {
-  //           headers: {
-  //             Authorization: accessToken,
-  //           },
-  //         })
-  //         .then((e) => {
-  //           setData(e.data);
-  //           setLoading(false);
-  //         })
-  //         .catch((e) => {});
-  //       setChecked(false);
-  //     }
-  //   } catch (error) {}
-  // }, [accessToken]);
-
   const handleCallback = (payload: any) => {
     setTab(payload);
   };
@@ -527,8 +499,6 @@ const Coaching = ({ data, refresh }: any) => {
       );
     }
   };
-
-  console.log(sellingSkillsData, "arijit");
 
   return (
     <div className="w-[100%]">
