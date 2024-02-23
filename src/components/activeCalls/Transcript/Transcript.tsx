@@ -161,8 +161,7 @@ const Transcript = ({
                     {id == "65d748fdc978b3566a3cb198" ? (
                       <>
                         {item.title == "A"
-                          ? data?.activeCall?.participants?.customer_name ??
-                            data?.leadId?.customer_name
+                          ? data?.activeCall?.participants?.customer_name
                           : item.title == "B"
                           ? data?.activeCall?.owner?.name
                           : ""}
@@ -172,8 +171,7 @@ const Transcript = ({
                         {item.title == "A"
                           ? data?.activeCall?.owner?.name
                           : item.title == "B"
-                          ? data?.activeCall?.participants?.customer_name ??
-                            data?.leadId?.customer_name
+                          ? data?.activeCall?.participants?.customer_name
                           : ""}
                       </>
                     )}

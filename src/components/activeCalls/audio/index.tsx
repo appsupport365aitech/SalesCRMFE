@@ -577,7 +577,6 @@ const Audio = ({ data, data1, data2 }: any) => {
 
     currentTimeForCustomar = segment.end / 100;
   });
-  console.log(callData, "arijit");
 
   return (
     <>
@@ -622,8 +621,7 @@ const Audio = ({ data, data1, data2 }: any) => {
                 <p className="text-gray-600 flex gap-2 items-center w-full text-[14px]">
                   Participant:{" "}
                   <p className="">
-                    {data?.leadId?.customer_name ??
-                      data?.activeCall?.participants?.customer_name}
+                    {data?.activeCall?.participants?.customer_name}
                   </p>
                 </p>
               </div>
@@ -635,10 +633,7 @@ const Audio = ({ data, data1, data2 }: any) => {
               color={"#4091FF"}
             />
             <Tracker
-              title={
-                data?.activeCall?.participants?.customer_name ??
-                data?.leadId?.customer_name
-              }
+              title={data?.activeCall?.participants?.customer_name}
               list={callParticipentsDuration}
               color={"#FE5143"}
             />
