@@ -622,8 +622,8 @@ const Audio = ({ data, data1, data2 }: any) => {
                 <p className="text-gray-600 flex gap-2 items-center w-full text-[14px]">
                   Participant:{" "}
                   <p className="">
-                    {data?.activeCall?.participants?.customer_name ??
-                      data?.leadId?.customer_name}
+                    {data?.leadId?.customer_name ??
+                      data?.activeCall?.participants?.customer_name}
                   </p>
                 </p>
               </div>

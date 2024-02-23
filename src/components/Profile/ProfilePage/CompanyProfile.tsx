@@ -142,7 +142,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
         {data?.result?.companyId?.company_socialMedia1 ||
         data?.result?.companyId?.company_socialMedia2 ? (
           <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-            <p className="text-sm font-medium mr-4 w-[50%]"> Social Media</p>
+            <p className="text-sm font-medium mr-4 w-[60%]"> Social Media</p>
             <p className="text-sm font-semibold text-black flex w-[50%]">
               {data?.result?.companyId?.company_socialMedia1 && (
                 <a href={data?.result?.companyId?.company_socialMedia1Url}>

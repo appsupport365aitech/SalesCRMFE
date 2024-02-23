@@ -276,12 +276,14 @@ const Deals = ({ data, type }: any) => {
           {/* <p className="text-center text-[#000]">-</p> */}
           {openDeals?.length > 0 ? (
             <div>
-              <div className="mt-[20px] flex text-[#8A9099] text-[14px] leading-[21px] items-center justify-between text-center">
+              <div className="mt-[20px] mx-[13px] flex text-[#8A9099] text-[14px] leading-[21px] items-center justify-between text-center">
                 <p className="w-[140px] font-semibold">Lead Id</p>
                 <p className="w-[180px] font-semibold">Product/Service</p>
-                <p className="w-[160px] font-semibold">Lead Stage</p>
+                <p className="w-[160px] font-semibold pl-4">Lead Stage</p>
                 <p className="w-[200px] font-semibold">Last Activity</p>
-                <p className="w-[200px] font-semibold">Activity History</p>
+                <p className="w-[200px] font-semibold pr-10">
+                  Activity History
+                </p>
               </div>
               <div
                 className={
@@ -298,24 +300,26 @@ const Deals = ({ data, type }: any) => {
                     >
                       <div className="text-[14px] py-[10px] text-[#8A9099] leading-[21px] flex justify-between items-center bg-[#ffffff] rounded-xl px-2 ">
                         <div className="">
-                          <p className="text-[#3F434A] w-[130px]">
+                          <p className="text-[#3F434A] w-[100px] text-center">
                             {deal?.leadId || "-"}
                           </p>
                         </div>
                         <div className="">
-                          <p className="w-[180px] ">{deal?.product_category}</p>
+                          <p className="w-[180px] text-center">
+                            {deal?.product_category}
+                          </p>
                         </div>
                         <div className="">
-                          <p className="w-[160px] ">
+                          <p className="w-[160px] text-center">
                             {deal?.leadStage ? deal?.leadStage : "-"}
                           </p>
                         </div>
                         <div className="">
-                          <p className="w-[160px]">
+                          <p className="w-[160px] text-center">
                             {deal?.activityId?.createdAt.split("T")[0] ?? "-"}
                           </p>
                         </div>
-                        <div className="justify-center flex items-start gap-[5px] pr-10 text-[#3F434A]">
+                        <div className="justify-center flex items-start gap-[5px] text-[#3F434A] text-center">
                           <QuickActions
                             phoneCount={counts.phoneCount}
                             mailCount={counts.emailCount}
@@ -344,12 +348,14 @@ const Deals = ({ data, type }: any) => {
           {/* <p className="text-center text-[#000]">-</p> */}
           {closedDeals?.length > 0 ? (
             <div>
-              <div className="mt-[20px] pl-4 flex text-[#8A9099] text-[14px] leading-[21px] items-center justify-between text-center">
-                <p className=" font-semibold">Lead Id</p>
-                <p className=" font-semibold">Product/Service</p>
-                <p className=" font-semibold">Lead Stage</p>
-                <p className=" font-semibold">Last Activity</p>
-                <p className=" font-semibold">Activity History</p>
+              <div className="mt-[20px] mx-[13px] flex text-[#8A9099] text-[14px] leading-[21px] items-center justify-between text-center">
+                <p className="w-[140px] font-semibold">Lead Id</p>
+                <p className="w-[180px] font-semibold">Product/Service</p>
+                <p className="w-[160px] font-semibold pl-4">Lead Stage</p>
+                <p className="w-[200px] font-semibold">Last Activity</p>
+                <p className="w-[200px] font-semibold pr-10">
+                  Activity History
+                </p>
               </div>
 
               <div
@@ -363,31 +369,40 @@ const Deals = ({ data, type }: any) => {
                   closedDeals.map((deal: any, index: number) => (
                     <div
                       key={index}
-                      className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5"
+                      className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5 "
                     >
-                      <div className="text-[14px] py-[10px] text-[#8A9099] text-center leading-[21px] flex justify-between items-center bg-[#ffffff] rounded-xl px-2">
+                      <div className="text-[14px] py-[10px] text-[#8A9099] leading-[21px] flex justify-between items-center bg-[#ffffff] rounded-xl px-2 ">
                         <div className="">
-                          <p className="text-[#3F434A]">
+                          <p className="text-[#3F434A] w-[100px] text-center">
                             {deal?.leadId || "-"}
                           </p>
                         </div>
                         <div className="">
-                          <p>
+                          <p className="w-[180px] text-center">
                             {deal?.product_category
                               ? deal?.product_category
                               : "-"}{" "}
                           </p>
                         </div>
                         <div className="">
-                          <p>{deal?.leadStage ? deal?.leadStage : "-"}</p>
+                          <p className="w-[160px] text-center">
+                            {deal?.leadStage ? deal?.leadStage : "-"}
+                          </p>
                         </div>
-                        <div className="">
+                        <div className="w-[160px] text-center">
                           <p>
                             {deal?.activityId?.createdAt.split("T")[0] ?? "-"}
                           </p>
                         </div>
-                        <div className="flex items-start gap-[5px] text-[#3F434A]">
-                          <QuickActions width={""} />
+                        <div className="justify-center flex items-start gap-[5px] text-[#3F434A] text-center">
+                          <QuickActions
+                            phoneCount={counts.phoneCount}
+                            mailCount={counts.emailCount}
+                            calendarCount={0}
+                            tasksCount={0}
+                            chatCount={counts.smsCount}
+                            width={""}
+                          />
                         </div>
                       </div>
                     </div>
@@ -406,7 +421,7 @@ const Deals = ({ data, type }: any) => {
           {/* <p className="text-center text-[#000]">-</p> */}
           {interest?.length > 0 ? (
             <div>
-              <div className="mt-[20px] flex text-[#8A9099] text-[14px] leading-[21px] items-center justify-between text-center">
+              <div className="mt-[20px] flex text-[#8A9099] text-[14px] leading-[21px] items-center justify-between text-center pr-8">
                 <p className="w-[180px] font-semibold">Product/Service</p>
                 <p className="w-[140px] font-semibold">Lead Id</p>
                 <p className="w-[200px] font-semibold">Last Activity</p>
