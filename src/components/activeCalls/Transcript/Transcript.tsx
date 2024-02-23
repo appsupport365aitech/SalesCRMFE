@@ -54,7 +54,6 @@ const Transcript = ({
 }) => {
   const router = useRouter();
   const { id } = router.query;
-  console.log(id, "arijit");
 
   const [superArr, setSuperArr] = useState<any>([]);
   const [Arrr, setArr] = useState<any>([]);
