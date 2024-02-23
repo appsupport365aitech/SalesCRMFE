@@ -415,7 +415,7 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
       </div>
       <Suspense fallback={<Spinner />}>
         <CallsTable
-          totalRecords={dummy1.totalRecords}
+          totalRecords={data.totalRecords}
           search={search}
           queryStr={queryStr}
         />

@@ -2,6 +2,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const Search = ({ input, change }: any) => {
@@ -51,14 +52,9 @@ const Transcript = ({
   text: any;
   utterances: any;
 }) => {
-  // url = `${baseUrl}api/audio-transcript/create/by-audio-url`
-  // method = post
-  // body = {
-  //     "audio_url":"",
-  //     "leadId":"21345678778678687",
-  //     "callId":"34567890876546788"
-  // }
-  // console.log('+++++++++ Transcript +++++++++', utterances);
+  const router = useRouter();
+  const { id } = router.query;
+  console.log(id, "arijit");
 
   const [superArr, setSuperArr] = useState<any>([]);
   const [Arrr, setArr] = useState<any>([]);
@@ -86,27 +82,6 @@ const Transcript = ({
   }, [Arrr]);
 
   const [input, setInput] = useState("");
-
-  // const transcriptUpdate = async () => {
-  //   const res = await axios.post(
-  //     `${baseUrl}api/audio-transcript/create/by-audio-url`,
-  //     {
-  //       audio_url: src,
-  //       leadId: data.leadId._id,
-  //       callId: data._id,
-  //     }
-  //   );
-
-  //   setArr([{ title: "speaker 1", message: res.data.result.text }]);
-  // };
-
-  // React.useEffect(() => {
-  //   if (Arrr) {
-  //     if (Arrr.length === 0) {
-  //       transcriptUpdate();
-  //     }
-  //   }
-  // });
 
   function convertMilliseconds(milliseconds: any) {
     let seconds = Math.floor(milliseconds / 1000) % 60;
@@ -183,12 +158,25 @@ const Transcript = ({
                     //   }:`,
                     // }}
                   >
-                    {item.title == "A"
-                      ? data?.activeCall?.owner?.name
-                      : item.title == "B"
-                      ? data?.leadId?.customer_name ??
-                        data?.activeCall?.participants?.customer_name
-                      : ""}
+                    {id == "65d748fdc978b3566a3cb198" ? (
+                      <>
+                        {item.title == "A"
+                          ? data?.activeCall?.participants?.customer_name ??
+                            data?.leadId?.customer_name
+                          : item.title == "B"
+                          ? data?.activeCall?.owner?.name
+                          : ""}
+                      </>
+                    ) : (
+                      <>
+                        {item.title == "A"
+                          ? data?.activeCall?.owner?.name
+                          : item.title == "B"
+                          ? data?.activeCall?.participants?.customer_name ??
+                            data?.leadId?.customer_name
+                          : ""}
+                      </>
+                    )}
                   </p>
                   <p
                     className=" text-gray-600 tracking-wide font-medium text-[15px]"

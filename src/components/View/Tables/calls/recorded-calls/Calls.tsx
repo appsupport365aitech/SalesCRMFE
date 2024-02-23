@@ -18,9 +18,9 @@ import { baseUrl } from "@/utils/baseUrl";
 const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
-  const [limit, setLimit]: any = useState(10);
+  const [limit, setLimit]: any = useState(20);
   const [items, setItems]: any = useState([]);
-  const [totalLeads, settotalLeads]: any = useState(totalRecords);
+  const [totalLeads, settotalLeads]: any = useState(0);
   const [selectAll, setSelectAll] = useState(false);
   const [accessToken, setAccessToken] = useState<any>("");
 
@@ -89,7 +89,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
         if (pageNumber >= count && pageCount != 0) setpageNumber(0);
         const getItems = async () => {
           const res = await axios.get(
-            `${baseUrl}api/recording/find-all?${queryStr}`,
+            `${baseUrl}api/recording/find-all?${queryStr}&page=0&limit=20`,
             {
               headers: {
                 Authorization: accessToken,
@@ -279,6 +279,9 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
     }
   };
 
+  console.log(totalLeads, "arijit");
+  console.log(pageCount, "arijit");
+
   return (
     <>
       <div className="mt-[0px] w-[100%] min-h-[340px] overflow-y-hidden overflow-x-auto custom-scroll pb-[0px]">
@@ -465,49 +468,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
           </div>
         </div>
       )}
-
-      {/* <div className="flex h-[80px] items-center justify-between ">
-        <div className="flex items-center">
-          <ButtonDropDown
-            width={80}
-            text={"10"}
-            id={1}
-            light={true}
-            dropdown={true}
-            list={[
-              { title: 10 },
-              { title: 11 },
-              { title: 12 },
-              { title: 13},
-              { title: 14},
-              { title: 15 },
-              { title: 16 },
-              { title: 17},
-              { title: 18 },
-              { title: 19 },
-              { title: 20 },
-            ]}
-            border={true}
-            height={40}
-            dropDirection={true}
-            tight={true}
-          />
-          <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
-            Showing 1-10 of 100
-          </p>
-        </div>
-        <div className="flex mr-[10%]">
-          <SmallButton leftDblIcon={true} theme={2} left={10} />
-          <SmallButton leftIcon={true} theme={2} left={10} />
-          <SmallButton text={"1"} theme={1} left={10} />
-          <SmallButton text={"2"} theme={3} />
-          <SmallButton text={"3"} theme={3} />
-          <SmallButton text={"..."} theme={3} />
-          <SmallButton text={"5"} theme={3} />
-          <SmallButton RightDblIcon={true} theme={4} left={10} />
-          <SmallButton RightIcon={true} theme={4} left={10} />
-        </div>
-      </div> */}
       <div className="h-[10px] w-full"></div>
     </>
   );

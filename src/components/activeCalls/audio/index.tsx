@@ -533,8 +533,6 @@ const list = [
 ];
 
 const Audio = ({ data, data1, data2 }: any) => {
-  const [check, setCheck] = useState(true);
-
   const [callData, setCallData] = useState<any>(data2);
   const [accessToken, setAccessToken] = useState<string>("");
 
@@ -547,33 +545,6 @@ const Audio = ({ data, data1, data2 }: any) => {
   useEffect(() => {
     setCallData(data2);
   }, [data2]);
-
-  // const callit = () => {
-  //   const url = `https://sales365.trainright.fit/api/calling/call-status`;
-  //   if (data.leadId?._id) {
-  //     axios
-  //       .post(
-  //         url,
-  //         {
-  //           sid: data.Sid,
-  //           leadId: data.leadId._id,
-  //         },
-  //         { headers: { Authorization: accessToken } }
-  //       )
-  //       .then((e) => {
-  //         setCallData(e.data.result);
-  //         // console.log('--------------- setCallData --------------', e.data.result);
-  //         setCheck(false);
-  //       })
-  //       .catch((e: any) => {});
-  //   }
-  // };
-
-  React.useEffect(() => {
-    if (check) {
-      // callit();
-    }
-  }, []);
 
   const callOwnerDuration: any = [];
   const callParticipentsDuration: any = [];
@@ -606,6 +577,7 @@ const Audio = ({ data, data1, data2 }: any) => {
 
     currentTimeForCustomar = segment.end / 100;
   });
+  console.log(callData, "arijit");
 
   return (
     <>
@@ -650,8 +622,8 @@ const Audio = ({ data, data1, data2 }: any) => {
                 <p className="text-gray-600 flex gap-2 items-center w-full text-[14px]">
                   Participant:{" "}
                   <p className="">
-                    {data?.leadId?.customer_name ??
-                      data?.activeCall?.participants?.customer_name}
+                    {data?.activeCall?.participants?.customer_name ??
+                      data?.leadId?.customer_name}
                   </p>
                 </p>
               </div>
@@ -664,8 +636,8 @@ const Audio = ({ data, data1, data2 }: any) => {
             />
             <Tracker
               title={
-                data?.leadId?.customer_name ??
-                data?.activeCall?.participants?.customer_name
+                data?.activeCall?.participants?.customer_name ??
+                data?.leadId?.customer_name
               }
               list={callParticipentsDuration}
               color={"#FE5143"}

@@ -24,7 +24,7 @@ const Calls = () => {
 
   const getData = () => {
     const apiEndpoint = recodedCalls
-      ? `${baseUrl}api/recording/find-all`
+      ? `${baseUrl}api/recording/find-all?page=0&limit=20`
       : `${baseUrl}api/event/findAllRecordedMeetings`;
     try {
       axios
