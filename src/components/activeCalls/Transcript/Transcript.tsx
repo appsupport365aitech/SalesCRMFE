@@ -145,7 +145,9 @@ const Transcript = ({
                   </p>
                   <p
                     className={`text-[#304FFD] ${
-                      item.title == "A" ? "uppercase" : "capitalize"
+                      id != "65d859fa52dd6db03823f53f" && item.title == "A"
+                        ? "uppercase"
+                        : "capitalize"
                     }  shrink-0 w-28 font-medium text-[15px] tracking-wide`}
                     style={{
                       color: item.title === "A" ? "#4091FF" : "#FE5143",
@@ -157,7 +159,7 @@ const Transcript = ({
                     //   }:`,
                     // }}
                   >
-                    {id == "65d748fdc978b3566a3cb198" ? (
+                    {id == "65d859fa52dd6db03823f53f" ? (
                       <>
                         {item.title == "A"
                           ? data?.activeCall?.participants?.customer_name

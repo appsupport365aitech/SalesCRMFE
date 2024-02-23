@@ -279,9 +279,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
     }
   };
 
-  console.log(totalLeads, "arijit");
-  console.log(pageCount, "arijit");
-
   return (
     <>
       <div className="mt-[0px] w-[100%] min-h-[340px] overflow-y-hidden overflow-x-auto custom-scroll pb-[0px]">
