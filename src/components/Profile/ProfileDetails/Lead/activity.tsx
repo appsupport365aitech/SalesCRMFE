@@ -126,7 +126,7 @@ const Activityhistory = ({ data }: { data: any }) => {
                       </div>
                       <div className="w-[21%] capitalize">
                         <p className="font-semibold text-gray-600">
-                          {data.owners[0].name}
+                          {data?.owners[0]?.name}
                         </p>
                         <p>{data.customerId.customer_name}</p>
                       </div>
